@@ -44,7 +44,7 @@ public class OreBushNether extends AbstractModBushBlock {
             level.setBlock(pos, state.setValue(AGE, 1), 2);
             return InteractionResult.sidedSuccess(level.isClientSide);
         }
-        return null;
+        return InteractionResult.PASS;
     }
 
     @Override
@@ -60,5 +60,10 @@ public class OreBushNether extends AbstractModBushBlock {
         stackHashMap.put(1, Items.QUARTZ.getDefaultInstance());
         stackHashMap.put(2, Items.GLOWSTONE_DUST.getDefaultInstance());
         return stackHashMap.get(ItemKey);
+    }
+
+    @Override
+    protected boolean mayPlaceOn(BlockState state, BlockGetter getter, BlockPos pos) {
+        return state.is(Blocks.NETHERRACK) || state.is(Blocks.SOUL_SAND) || state.is(Blocks.SOUL_SOIL);
     }
 }

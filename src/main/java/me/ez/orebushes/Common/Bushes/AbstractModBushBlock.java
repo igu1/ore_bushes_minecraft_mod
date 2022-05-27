@@ -75,13 +75,18 @@ public abstract class AbstractModBushBlock extends BushBlock {
     }
 
 
-    @Override
-    public abstract ItemStack getCloneItemStack(BlockState state, HitResult target, BlockGetter level, BlockPos pos, Player player);
+    //Abstract methods
 
     @Override
-    public abstract InteractionResult use(BlockState state, Level level, BlockPos pos, Player player, InteractionHand interactionHand, BlockHitResult hitResult);
+    public abstract InteractionResult use(BlockState p_60503_, Level p_60504_, BlockPos p_60505_, Player p_60506_, InteractionHand p_60507_, BlockHitResult p_60508_);
+
+    @Override
+    public abstract ItemStack getCloneItemStack(BlockState state, HitResult target, BlockGetter level, BlockPos pos, Player player);
 
     public abstract ItemStack getItem(int ItemKey);
 
     public abstract ItemStack getDropItem(int ItemKey);
+
+    @Override
+    protected abstract boolean mayPlaceOn(BlockState state, BlockGetter getter, BlockPos pos);
 }

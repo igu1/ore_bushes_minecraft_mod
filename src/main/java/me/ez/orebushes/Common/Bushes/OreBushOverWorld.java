@@ -32,7 +32,6 @@ public class OreBushOverWorld extends AbstractModBushBlock {
     public ItemStack getCloneItemStack(BlockState state, HitResult target, BlockGetter level, BlockPos pos, Player player) {
         return getItem(getItemByKey);
     }
-
     @Override
     public InteractionResult use(BlockState state, Level level, BlockPos pos, Player player, InteractionHand interactionHand, BlockHitResult hitResult) {
         int i = state.getValue(AGE);
@@ -44,7 +43,7 @@ public class OreBushOverWorld extends AbstractModBushBlock {
             level.setBlock(pos, state.setValue(AGE, 1), 2);
             return InteractionResult.sidedSuccess(level.isClientSide);
         }
-        return null;
+        return InteractionResult.PASS;
     }
 
     @Override
@@ -71,5 +70,10 @@ public class OreBushOverWorld extends AbstractModBushBlock {
         stackHashMap.put(6, Items.LAPIS_LAZULI.getDefaultInstance());
         stackHashMap.put(7, Init.DIAMOND_NUGGET.get().getDefaultInstance());
         return stackHashMap.get(ItemKey);
+    }
+
+    @Override
+    protected boolean mayPlaceOn(BlockState state, BlockGetter getter, BlockPos pos) {
+        return state.is(Blocks.GRASS_BLOCK) || state.is(Blocks.FARMLAND);
     }
 }
