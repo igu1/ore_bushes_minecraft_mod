@@ -24,11 +24,16 @@ public class ItemModelProvider extends net.minecraftforge.client.model.generator
         simpleItem(Init.REDSTONE_BUSH_ITEM.get());
         simpleItem(Init.LAPIS_BUSH_ITEM.get());
         simpleItem(Init.DIAMOND_BUSH_ITEM.get());
+        simpleItem(Init.COPPER_BUSH_ITEM.get());
+
         simpleItem(Init.QUARTZ_BUSH_ITEM.get());
         simpleItem(Init.GLOWSTONE_BUSH_ITEM.get());
+        simpleItem(Init.NETHERITE_BUSH_ITEM.get());
 
         simpleItem(Init.DIAMOND_NUGGET.get());
         simpleItem(Init.EMERALD_NUGGET.get());
+        simpleItem(Init.COPPER_NUGGET.get());
+        simpleItem(Init.NETHERITE_NUGGET.get());
     }
 
     private ItemModelBuilder simpleItem(Item item){

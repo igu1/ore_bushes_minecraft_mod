@@ -62,7 +62,8 @@ public class Main
             ItemBlockRenderTypes.setRenderLayer(Init.QUARTZ_BUSH.get(), RenderType.cutout());
             ItemBlockRenderTypes.setRenderLayer(Init.GLOWSTONE_BUSH.get(), RenderType.cutout());
             ItemBlockRenderTypes.setRenderLayer(Init.DIAMOND_BUSH.get(), RenderType.cutout());
-
+            ItemBlockRenderTypes.setRenderLayer(Init.COPPER_BUSH.get(), RenderType.cutout());
+            ItemBlockRenderTypes.setRenderLayer(Init.NETHERITE_BUSH.get(), RenderType.cutout());
         }
     }
 }

@@ -34,8 +34,12 @@ public class BlockLootTable extends BlockLoot {
         addBushLootTable(Init.DIAMOND_BUSH.get(), Init.DIAMOND_NUGGET.get());
         addBushLootTable(Init.REDSTONE_BUSH.get(), Items.REDSTONE);
         addBushLootTable(Init.LAPIS_BUSH.get(), Items.LAPIS_LAZULI);
+        addBushLootTable(Init.COPPER_BUSH.get(), Init.COPPER_NUGGET.get());
+
         addBushLootTable(Init.QUARTZ_BUSH.get(), Items.QUARTZ);
         addBushLootTable(Init.GLOWSTONE_BUSH.get(), Items.GLOWSTONE_DUST);
+        addBushLootTable(Init.NETHERITE_BUSH.get(), Init.NETHERITE_NUGGET.get());
+
     }
 
     private void addBushLootTable(BushBlock bushblock, ItemLike itemLike){

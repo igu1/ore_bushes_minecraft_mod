@@ -94,6 +94,29 @@ public class RecipeProvider extends net.minecraft.data.recipes.RecipeProvider {
                 .save(recipeConsumer);
 
         ShapedRecipeBuilder
+                .shaped(Init.COPPER_BUSH_ITEM.get(), 2)
+                .define('B', Items.COPPER_BLOCK)
+                .define('S', Items.WHEAT_SEEDS)
+                .pattern(" B ")
+                .pattern(" S ")
+                .pattern(" B ")
+                .unlockedBy("has_copper_block",
+                        has(Items.COPPER_BLOCK))
+                .save(recipeConsumer);
+
+
+        ShapedRecipeBuilder
+                .shaped(Init.NETHERITE_BUSH_ITEM.get(), 2)
+                .define('B', Items.NETHERITE_BLOCK)
+                .define('S', Items.WHEAT_SEEDS)
+                .pattern(" B ")
+                .pattern(" S ")
+                .pattern(" B ")
+                .unlockedBy("has_netherite_block",
+                        has(Items.NETHERITE_BLOCK))
+                .save(recipeConsumer);
+
+        ShapedRecipeBuilder
                 .shaped(Init.GLOWSTONE_BUSH_ITEM.get(), 2)
                 .define('B', Items.GLOWSTONE)
                 .define('S', Items.WHEAT_SEEDS)
@@ -125,6 +148,26 @@ public class RecipeProvider extends net.minecraft.data.recipes.RecipeProvider {
                 .pattern("###")
                 .unlockedBy("has_diamond_nugget",
                         has(Init.DIAMOND_NUGGET.get()))
+                .save(recipeConsumer);
+
+        ShapedRecipeBuilder
+                .shaped(Items.NETHERITE_INGOT)
+                .define('#', Init.NETHERITE_NUGGET.get())
+                .pattern("###")
+                .pattern("###")
+                .pattern("###")
+                .unlockedBy("has_netherite_nugget",
+                        has(Init.NETHERITE_NUGGET.get()))
+                .save(recipeConsumer);
+
+        ShapedRecipeBuilder
+                .shaped(Items.COPPER_INGOT)
+                .define('#', Init.COPPER_NUGGET.get())
+                .pattern("###")
+                .pattern("###")
+                .pattern("###")
+                .unlockedBy("has_copper_nugget",
+                        has(Init.COPPER_NUGGET.get()))
                 .save(recipeConsumer);
 
         ShapedRecipeBuilder

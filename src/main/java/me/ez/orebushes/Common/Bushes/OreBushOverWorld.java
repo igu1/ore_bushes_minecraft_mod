@@ -57,6 +57,7 @@ public class OreBushOverWorld extends AbstractModBushBlock {
         stackHashMap.put(5, Init.REDSTONE_BUSH_ITEM.get().getDefaultInstance());
         stackHashMap.put(6, Init.LAPIS_BUSH_ITEM.get().getDefaultInstance());
         stackHashMap.put(7, Init.DIAMOND_BUSH_ITEM.get().getDefaultInstance());
+        stackHashMap.put(8, Init.COPPER_BUSH_ITEM.get().getDefaultInstance());
         return stackHashMap.get(ItemKey);
     }
 
@@ -70,6 +71,7 @@ public class OreBushOverWorld extends AbstractModBushBlock {
         stackHashMap.put(5, Items.REDSTONE.getDefaultInstance());
         stackHashMap.put(6, Items.LAPIS_LAZULI.getDefaultInstance());
         stackHashMap.put(7, Init.DIAMOND_NUGGET.get().getDefaultInstance());
+        stackHashMap.put(8, Init.COPPER_NUGGET.get().getDefaultInstance());
         return stackHashMap.get(ItemKey);
     }
 

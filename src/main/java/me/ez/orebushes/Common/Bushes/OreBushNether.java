@@ -53,6 +53,8 @@ public class OreBushNether extends AbstractModBushBlock {
         HashMap<Integer, ItemStack> stackHashMap = new HashMap<>();
         stackHashMap.put(1, Init.QUARTZ_BUSH_ITEM.get().getDefaultInstance());
         stackHashMap.put(2, Init.GLOWSTONE_BUSH_ITEM.get().getDefaultInstance());
+        stackHashMap.put(3, Init.NETHERITE_BUSH_ITEM.get().getDefaultInstance());
+
         return stackHashMap.get(ItemKey);
     }
     @Override
@@ -60,6 +62,7 @@ public class OreBushNether extends AbstractModBushBlock {
         HashMap<Integer, ItemStack> stackHashMap = new HashMap<>();
         stackHashMap.put(1, Items.QUARTZ.getDefaultInstance());
         stackHashMap.put(2, Items.GLOWSTONE_DUST.getDefaultInstance());
+        stackHashMap.put(3, Init.NETHERITE_NUGGET.get().getDefaultInstance());
         return stackHashMap.get(ItemKey);
     }
 
@@ -71,6 +74,6 @@ public class OreBushNether extends AbstractModBushBlock {
 
     @Override
     protected boolean mayPlaceOn(BlockState state, BlockGetter getter, BlockPos pos) {
-        return state.is(Blocks.NETHERRACK);
+        return state.is(Blocks.NETHERRACK) || super.mayPlaceOn(state, getter, pos);
     }
 }

@@ -22,15 +22,23 @@ public class Init {
     public static final RegistryObject<BushBlockItem> REDSTONE_BUSH_ITEM =ITEMS.register("redstone_bush", () -> new BushBlockItem(Init.REDSTONE_BUSH.get()));
     public static final RegistryObject<BushBlockItem> LAPIS_BUSH_ITEM =ITEMS.register("lapis_bush", () -> new BushBlockItem(Init.LAPIS_BUSH.get()));
     public static final RegistryObject<BushBlockItem> DIAMOND_BUSH_ITEM =ITEMS.register("diamond_bush", () -> new BushBlockItem(Init.DIAMOND_BUSH.get()));
+    public static final RegistryObject<BushBlockItem> COPPER_BUSH_ITEM =ITEMS.register("copper_bush", () -> new BushBlockItem(Init.COPPER_BUSH.get()));
     //Nether
     public static final RegistryObject<BushBlockItem> QUARTZ_BUSH_ITEM =ITEMS.register("quartz_bush", () -> new BushBlockItem(Init.QUARTZ_BUSH.get()));
     public static final RegistryObject<BushBlockItem> GLOWSTONE_BUSH_ITEM =ITEMS.register("glowstone_bush", () -> new BushBlockItem(Init.GLOWSTONE_BUSH.get()));
+    public static final RegistryObject<BushBlockItem> NETHERITE_BUSH_ITEM =ITEMS.register("netherite_bush", () -> new BushBlockItem(Init.NETHERITE_BUSH.get()));
 
     //Drops
     public static final RegistryObject<Item> EMERALD_NUGGET =ITEMS.register("emerald_nugget",
             () -> new Item(new Item.Properties().tab(CreativeModeTab.TAB_MATERIALS)));
 
     public static final RegistryObject<Item> DIAMOND_NUGGET =ITEMS.register("diamond_nugget",
+            () -> new Item(new Item.Properties().tab(CreativeModeTab.TAB_MATERIALS)));
+
+    public static final RegistryObject<Item> NETHERITE_NUGGET =ITEMS.register("netherite_nugget",
+            () -> new Item(new Item.Properties().tab(CreativeModeTab.TAB_MATERIALS)));
+
+    public static final RegistryObject<Item> COPPER_NUGGET =ITEMS.register("copper_nugget",
             () -> new Item(new Item.Properties().tab(CreativeModeTab.TAB_MATERIALS)));
 
 
@@ -48,9 +56,12 @@ public class Init {
     public static final RegistryObject<OreBushOverWorld> REDSTONE_BUSH = BLOCKS.register("redstone_bush_stage",() -> new OreBushOverWorld(5));
     public static final RegistryObject<OreBushOverWorld> LAPIS_BUSH = BLOCKS.register("lapis_bush_stage", () -> new OreBushOverWorld(6));
     public static final RegistryObject<OreBushOverWorld> DIAMOND_BUSH = BLOCKS.register("diamond_bush_stage",() -> new OreBushOverWorld(7));
+    public static final RegistryObject<OreBushOverWorld> COPPER_BUSH = BLOCKS.register("copper_bush_stage",() -> new OreBushOverWorld(8));
+
     //Nether
     public static final RegistryObject<OreBushNether> QUARTZ_BUSH = BLOCKS.register("quartz_bush_stage", () ->  new OreBushNether(1));
     public static final RegistryObject<OreBushNether> GLOWSTONE_BUSH = BLOCKS.register("glowstone_bush_stage", () -> new OreBushNether(2));
+    public static final RegistryObject<OreBushNether> NETHERITE_BUSH = BLOCKS.register("netherite_bush_stage", () ->  new OreBushNether(3));
 
 
 
