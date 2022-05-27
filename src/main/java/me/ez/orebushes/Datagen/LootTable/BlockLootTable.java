@@ -28,14 +28,14 @@ public class BlockLootTable extends BlockLoot {
     @Override
     protected void addTables() {
         addBushLootTable(Init.COAL_BUSH.get(), Items.COAL);
-        addBushLootTable(Init.IRON_BUSH.get(), Items.COAL);
-        addBushLootTable(Init.GOLD_BUSH.get(), Items.COAL);
-        addBushLootTable(Init.EMERALD_BUSH.get(), Items.COAL);
-        addBushLootTable(Init.DIAMOND_BUSH.get(), Items.COAL);
-        addBushLootTable(Init.REDSTONE_BUSH.get(), Items.COAL);
-        addBushLootTable(Init.LAPIS_BUSH.get(), Items.COAL);
-        addBushLootTable(Init.QUARTZ_BUSH.get(), Items.COAL);
-        addBushLootTable(Init.GLOWSTONE_BUSH.get(), Items.COAL);
+        addBushLootTable(Init.IRON_BUSH.get(), Items.IRON_NUGGET);
+        addBushLootTable(Init.GOLD_BUSH.get(), Items.GOLD_NUGGET);
+        addBushLootTable(Init.EMERALD_BUSH.get(), Init.EMERALD_NUGGET.get());
+        addBushLootTable(Init.DIAMOND_BUSH.get(), Init.DIAMOND_NUGGET.get());
+        addBushLootTable(Init.REDSTONE_BUSH.get(), Items.REDSTONE);
+        addBushLootTable(Init.LAPIS_BUSH.get(), Items.LAPIS_LAZULI);
+        addBushLootTable(Init.QUARTZ_BUSH.get(), Items.QUARTZ);
+        addBushLootTable(Init.GLOWSTONE_BUSH.get(), Items.GLOWSTONE_DUST);
     }
 
     private void addBushLootTable(BushBlock bushblock, ItemLike itemLike){

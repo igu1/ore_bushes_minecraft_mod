@@ -14,6 +14,7 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.material.FluidState;
 import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.HitResult;
 
@@ -70,6 +71,14 @@ public class OreBushOverWorld extends AbstractModBushBlock {
         stackHashMap.put(6, Items.LAPIS_LAZULI.getDefaultInstance());
         stackHashMap.put(7, Init.DIAMOND_NUGGET.get().getDefaultInstance());
         return stackHashMap.get(ItemKey);
+    }
+
+    @Override
+    public boolean onDestroyedByPlayer(BlockState state, Level level, BlockPos pos, Player player, boolean willHarvest, FluidState fluid) {
+        if (!player.getAbilities().instabuild) {
+            popResource(level, pos, getItem(getItemByKey));
+        }
+        return super.onDestroyedByPlayer(state, level, pos, player, willHarvest, fluid);
     }
 
     @Override

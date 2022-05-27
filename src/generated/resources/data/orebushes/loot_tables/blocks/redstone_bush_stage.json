@@ -7,7 +7,7 @@
       "entries": [
         {
           "type": "minecraft:item",
-          "name": "minecraft:coal"
+          "name": "minecraft:redstone"
         }
       ],
       "conditions": [
@@ -37,7 +37,7 @@
       "entries": [
         {
           "type": "minecraft:item",
-          "name": "minecraft:coal"
+          "name": "minecraft:redstone"
         }
       ],
       "conditions": [
