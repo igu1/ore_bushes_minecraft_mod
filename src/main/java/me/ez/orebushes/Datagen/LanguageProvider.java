@@ -21,9 +21,16 @@ public class LanguageProvider extends net.minecraftforge.common.data.LanguagePro
         add(Init.DIAMOND_BUSH_ITEM.get(), "Diamond Seed");
         add(Init.QUARTZ_BUSH_ITEM.get(), "Quartz Seed");
         add(Init.GLOWSTONE_BUSH_ITEM.get(), "Glowstone Seed");
+        add(Init.COPPER_BUSH_ITEM.get(), "Copper Seed");
+        add(Init.NETHERITE_BUSH_ITEM.get(), "Netherite Seed");
+
 
         add(Init.EMERALD_NUGGET.get(), "Emerald Nugget");
         add(Init.DIAMOND_NUGGET.get(), "Diamond Nugget");
+        add(Init.NETHERITE_NUGGET.get(), "Netherite Nugget");
+        add(Init.COPPER_NUGGET.get(), "Copper Nugget");
+
+
 
     }
 }

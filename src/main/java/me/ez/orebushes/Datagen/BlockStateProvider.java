@@ -27,8 +27,11 @@ public class BlockStateProvider extends net.minecraftforge.client.model.generato
         makeBush(Init.REDSTONE_BUSH.get(), "redstone_bush_stage", "redstone_bush_stage");
         makeBush(Init.LAPIS_BUSH.get(), "lapis_bush_stage", "lapis_bush_stage");
         makeBush(Init.DIAMOND_BUSH.get(), "diamond_bush_stage", "diamond_bush_stage");
+
+        makeBush(Init.COPPER_BUSH.get(), "copper_bush_stage", "copper_bush_stage");
         makeBush(Init.GLOWSTONE_BUSH.get(), "glowstone_bush_stage", "glowstone_bush_stage");
         makeBush(Init.QUARTZ_BUSH.get(), "quartz_bush_stage", "quartz_bush_stage");
+        makeBush(Init.NETHERITE_BUSH.get(), "netherite_bush_stage", "netherite_bush_stage");
 
 
     }
