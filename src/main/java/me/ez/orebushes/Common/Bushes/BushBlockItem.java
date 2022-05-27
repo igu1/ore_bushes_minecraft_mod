@@ -7,7 +7,7 @@ import net.minecraft.world.level.block.Block;
 
 public class BushBlockItem extends BlockItem {
 
-    public BushBlockItem(Block p_40565_) {
-        super(p_40565_, new Item.Properties().tab(CreativeModeTab.TAB_MISC));
+    public BushBlockItem(Block block) {
+        super(block, new Item.Properties().tab(CreativeModeTab.TAB_MISC));
     }
 }
