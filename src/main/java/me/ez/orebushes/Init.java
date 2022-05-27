@@ -1,6 +1,7 @@
 package me.ez.orebushes;
 
 import me.ez.orebushes.Common.Bushes.BushBlockItem;
+import me.ez.orebushes.Common.Bushes.OreBushNether;
 import me.ez.orebushes.Common.Bushes.OreBushOverWorld;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.Item;
@@ -17,7 +18,7 @@ public class Init {
     public static final RegistryObject<BushBlockItem> GOLD_BUSH_ITEM =ITEMS.register("gold_bush", () -> new BushBlockItem(Init.GOLD_BUSH.get()));
     public static final RegistryObject<BushBlockItem> EMERALD_BUSH_ITEM =ITEMS.register("emerald_bush", () -> new BushBlockItem(Init.EMERALD_BUSH.get()));
     public static final RegistryObject<BushBlockItem> REDSTONE_BUSH_ITEM =ITEMS.register("redstone_bush", () -> new BushBlockItem(Init.REDSTONE_BUSH.get()));
-    public static final RegistryObject<BushBlockItem> LAPIZ_BUSH_ITEM =ITEMS.register("lapiz_bush", () -> new BushBlockItem(Init.LAPIS_BUSH.get()));
+    public static final RegistryObject<BushBlockItem> LAPIS_BUSH_ITEM =ITEMS.register("lapis_bush", () -> new BushBlockItem(Init.LAPIS_BUSH.get()));
     public static final RegistryObject<BushBlockItem> DIAMOND_BUSH_ITEM =ITEMS.register("diamond_bush", () -> new BushBlockItem(Init.DIAMOND_BUSH.get()));
 
     public static final RegistryObject<BushBlockItem> QUARTZ_BUSH_ITEM =ITEMS.register("quartz_bush", () -> new BushBlockItem(Init.QUARTZ_BUSH.get()));
@@ -34,8 +35,8 @@ public class Init {
     public static final RegistryObject<OreBushOverWorld> LAPIS_BUSH = BLOCKS.register("lapis_bush_stage", OreBushOverWorld::new);
     public static final RegistryObject<OreBushOverWorld> DIAMOND_BUSH = BLOCKS.register("diamond_bush_stage", OreBushOverWorld::new);
 
-    public static final RegistryObject<OreBushOverWorld> QUARTZ_BUSH = BLOCKS.register("quartz_bush_stage", OreBushOverWorld::new);
-    public static final RegistryObject<OreBushOverWorld> GLOWSTONE_BUSH = BLOCKS.register("glowstone_bush_stage", OreBushOverWorld::new);
+    public static final RegistryObject<OreBushNether> QUARTZ_BUSH = BLOCKS.register("quartz_bush_stage", OreBushNether::new);
+    public static final RegistryObject<OreBushNether> GLOWSTONE_BUSH = BLOCKS.register("glowstone_bush_stage", OreBushNether::new);
 
 
 
