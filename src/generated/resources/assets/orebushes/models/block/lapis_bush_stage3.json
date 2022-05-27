@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:block/cross",
+  "textures": {
+    "cross": "orebushes:block/lapis_bush_stage3"
+  }
+}

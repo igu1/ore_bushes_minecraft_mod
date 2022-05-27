@@ -87,6 +87,4 @@ public abstract class AbstractModBushBlock extends BushBlock {
 
     public abstract ItemStack getDropItem(int ItemKey);
 
-    @Override
-    protected abstract boolean mayPlaceOn(BlockState state, BlockGetter getter, BlockPos pos);
 }

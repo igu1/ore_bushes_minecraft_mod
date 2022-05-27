@@ -1,0 +1,13 @@
+{
+  "block.orebushes.coal_bush_stage": "Coal Seed",
+  "block.orebushes.diamond_bush_stage": "Diamond Seed",
+  "block.orebushes.emerald_bush_stage": "Emerald Seed",
+  "block.orebushes.glowstone_bush_stage": "Glowstone Seed",
+  "block.orebushes.gold_bush_stage": "Gold Seed",
+  "block.orebushes.iron_bush_stage": "Iron Seed",
+  "block.orebushes.lapis_bush_stage": "Lapis Lazuli Seed",
+  "block.orebushes.quartz_bush_stage": "Quartz Seed",
+  "block.orebushes.redstone_bush_stage": "Redstone Seed",
+  "item.orebushes.diamond_nugget": "Diamond Nugget",
+  "item.orebushes.emerald_nugget": "Emerald Nugget"
+}

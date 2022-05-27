@@ -27,9 +27,6 @@ public class Init {
     public static final RegistryObject<BushBlockItem> GLOWSTONE_BUSH_ITEM =ITEMS.register("glowstone_bush", () -> new BushBlockItem(Init.GLOWSTONE_BUSH.get()));
 
     //Drops
-    public static final RegistryObject<Item> COAL_NUGGET =ITEMS.register("coal_nugget",
-            () -> new Item(new Item.Properties().tab(CreativeModeTab.TAB_MATERIALS)));
-
     public static final RegistryObject<Item> EMERALD_NUGGET =ITEMS.register("emerald_nugget",
             () -> new Item(new Item.Properties().tab(CreativeModeTab.TAB_MATERIALS)));
 

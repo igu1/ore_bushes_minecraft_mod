@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:block/cross",
+  "textures": {
+    "cross": "orebushes:block/redstone_bush_stage1"
+  }
+}

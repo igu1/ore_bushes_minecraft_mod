@@ -62,7 +62,7 @@ public class OreBushOverWorld extends AbstractModBushBlock {
     @Override
     public ItemStack getDropItem(int ItemKey) {
         HashMap<Integer, ItemStack> stackHashMap = new HashMap<>();
-        stackHashMap.put(1, Init.COAL_NUGGET.get().getDefaultInstance());
+        stackHashMap.put(1, Items.COAL.getDefaultInstance());
         stackHashMap.put(2, Items.IRON_NUGGET.getDefaultInstance());
         stackHashMap.put(3, Items.GOLD_NUGGET.getDefaultInstance());
         stackHashMap.put(4, Init.EMERALD_NUGGET.get().getDefaultInstance());
