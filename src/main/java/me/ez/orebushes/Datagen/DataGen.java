@@ -19,5 +19,6 @@ public class DataGen {
         generator.addProvider(new BlockStateProvider(generator, helper));
         generator.addProvider(new LanguageProvider(generator, "en_us"));
         generator.addProvider(new RecipeProvider(generator));
+        generator.addProvider(new LootTableProvider(generator));
     }
 }
