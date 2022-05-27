@@ -33,7 +33,7 @@ public class Init {
     public static final RegistryObject<Item> EMERALD_NUGGET =ITEMS.register("emerald_nugget",
             () -> new Item(new Item.Properties().tab(CreativeModeTab.TAB_MATERIALS)));
 
-    public static final RegistryObject<Item> DIAMOND_NUGGET =ITEMS.register("coal_nugget",
+    public static final RegistryObject<Item> DIAMOND_NUGGET =ITEMS.register("diamond_nugget",
             () -> new Item(new Item.Properties().tab(CreativeModeTab.TAB_MATERIALS)));
 
 
