@@ -4,6 +4,7 @@ import me.ez.orebushes.Init;
 import net.minecraft.data.DataGenerator;
 import net.minecraft.data.recipes.FinishedRecipe;
 import net.minecraft.data.recipes.ShapedRecipeBuilder;
+import net.minecraft.data.recipes.ShapelessRecipeBuilder;
 import net.minecraft.world.item.Items;
 
 import java.util.function.Consumer;
@@ -180,7 +181,33 @@ public class RecipeProvider extends net.minecraft.data.recipes.RecipeProvider {
                         has(Init.EMERALD_NUGGET.get()))
                 .save(recipeConsumer);
 
+        //Ingots To Nuggets
+        ShapelessRecipeBuilder
+                .shapeless(Init.EMERALD_NUGGET.get(), 9)
+                .requires(Items.EMERALD)
+                .unlockedBy("has_emerald",
+                        has(Items.EMERALD))
+                .save(recipeConsumer);
 
+        ShapelessRecipeBuilder
+                .shapeless(Init.DIAMOND_NUGGET.get(), 9)
+                .requires(Items.DIAMOND)
+                .unlockedBy("has_diamond",
+                        has(Items.DIAMOND))
+                .save(recipeConsumer);
 
+        ShapelessRecipeBuilder
+                .shapeless(Init.COPPER_NUGGET.get(), 9)
+                .requires(Items.COPPER_INGOT)
+                .unlockedBy("has_copper_ingot",
+                        has(Items.DIAMOND))
+                .save(recipeConsumer);
+
+        ShapelessRecipeBuilder
+                .shapeless(Init.NETHERITE_NUGGET.get(), 9)
+                .requires(Items.NETHERITE_INGOT)
+                .unlockedBy("has_netherite_ingot",
+                        has(Items.NETHERITE_INGOT))
+                .save(recipeConsumer);
     }
 }

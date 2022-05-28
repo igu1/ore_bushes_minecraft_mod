@@ -68,8 +68,10 @@ public class OreBushNether extends AbstractModBushBlock {
 
     @Override
     public boolean onDestroyedByPlayer(BlockState state, Level level, BlockPos pos, Player player, boolean willHarvest, FluidState fluid) {
-        popResource(level, pos, getItem(getItemByKey));
-        return super.onDestroyedByPlayer(state, level, pos, player, willHarvest, fluid);
+        if (!player.getAbilities().instabuild) {
+            popResource(level, pos, getItem(getItemByKey));
+        }
+            return super.onDestroyedByPlayer(state, level, pos, player, willHarvest, fluid);
     }
 
     @Override
