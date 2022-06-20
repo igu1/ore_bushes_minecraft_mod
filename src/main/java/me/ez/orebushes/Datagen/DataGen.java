@@ -15,10 +15,10 @@ public class DataGen {
         DataGenerator generator = e.getGenerator();
         ExistingFileHelper helper = e.getExistingFileHelper();
 
-        generator.addProvider(new ItemModelProvider(generator, helper));
-        generator.addProvider(new BlockStateProvider(generator, helper));
-        generator.addProvider(new LanguageProvider(generator, "en_us"));
-        generator.addProvider(new RecipeProvider(generator));
-        generator.addProvider(new LootTableProvider(generator));
+        generator.addProvider(true, new ItemModelProvider(generator, helper));
+        generator.addProvider(true, new BlockStateProvider(generator, helper));
+        generator.addProvider(true, new LanguageProvider(generator, "en_us"));
+        generator.addProvider(true, new RecipeProvider(generator));
+        generator.addProvider(true, new LootTableProvider(generator));
     }
 }

@@ -4,6 +4,7 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
+import net.minecraft.util.RandomSource;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.Entity;
@@ -55,7 +56,7 @@ public abstract class AbstractModBushBlock extends BushBlock {
     }
 
     @Override
-    public void randomTick(BlockState state, ServerLevel level, BlockPos pos, Random p_60554_) {
+    public void randomTick(BlockState state, ServerLevel level, BlockPos pos, RandomSource p_60554_) {
         int BUSH_AGE = state.getValue(AGE);
         if (BUSH_AGE < 3){
             level.setBlock(pos, state.setValue(AGE, BUSH_AGE + 1), 2);
