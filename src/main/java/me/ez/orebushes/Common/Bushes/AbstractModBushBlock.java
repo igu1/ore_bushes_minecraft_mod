@@ -76,6 +76,8 @@ public abstract class AbstractModBushBlock extends BushBlock {
         builder.add(AGE);
     }
 
+    @Override
+    public abstract void onRemove(BlockState state, Level level, BlockPos pos, BlockState state1, boolean b);
 
     //Abstract methods
 
@@ -87,6 +89,6 @@ public abstract class AbstractModBushBlock extends BushBlock {
 
     public abstract ItemStack getItem(int ItemKey);
 
-    public abstract ItemStack getDropItem(int ItemKey);
+    public abstract ItemStack getDropItem(int ItemKey, int amount);
 
 }

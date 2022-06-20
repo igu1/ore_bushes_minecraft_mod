@@ -40,7 +40,7 @@ public class OreBushNether extends AbstractModBushBlock {
         boolean flag = i == 3;
         if (i > 1){
             int j = 1 + level.random.nextInt(2);
-            popResource(level, pos, new ItemStack(getDropItem(getItemByKey).getItem(), j + (flag ? 1 : 0)));
+            popResource(level, pos, getDropItem(getItemByKey, j + (flag ? 1 : 0)));
             level.playSound(null, pos, SoundEvents.SWEET_BERRY_BUSH_PICK_BERRIES, SoundSource.BLOCKS, 1.0F, 0.8F + level.random.nextFloat() * 0.4F);
             level.setBlock(pos, state.setValue(AGE, 1), 2);
             return InteractionResult.sidedSuccess(level.isClientSide);
@@ -57,21 +57,20 @@ public class OreBushNether extends AbstractModBushBlock {
 
         return stackHashMap.get(ItemKey);
     }
+
     @Override
-    public ItemStack getDropItem(int ItemKey) {
+    public ItemStack getDropItem(int ItemKey, int amount) {
         HashMap<Integer, ItemStack> stackHashMap = new HashMap<>();
-        stackHashMap.put(1, Items.QUARTZ.getDefaultInstance());
-        stackHashMap.put(2, Items.GLOWSTONE_DUST.getDefaultInstance());
-        stackHashMap.put(3, Init.NETHERITE_NUGGET.get().getDefaultInstance());
+        stackHashMap.put(1, new ItemStack(Items.QUARTZ, amount));
+        stackHashMap.put(2, new ItemStack(Items.GLOWSTONE_DUST, amount));
+        stackHashMap.put(3, new ItemStack(Init.NETHERITE_NUGGET.get(), amount));
         return stackHashMap.get(ItemKey);
     }
 
     @Override
-    public boolean onDestroyedByPlayer(BlockState state, Level level, BlockPos pos, Player player, boolean willHarvest, FluidState fluid) {
-        if (!player.getAbilities().instabuild) {
-            popResource(level, pos, getItem(getItemByKey));
-        }
-            return super.onDestroyedByPlayer(state, level, pos, player, willHarvest, fluid);
+    public void onRemove(BlockState state, Level level, BlockPos pos, BlockState state1, boolean b) {
+        popResource(level, pos, getItem(getItemByKey));
+
     }
 
     @Override
