@@ -45,24 +45,26 @@ public class Init {
     //--------------------------------------------------------------------------------
 
 
-    public static final DeferredRegister<Block> BLOCKS = DeferredRegister.create(ForgeRegistries.BLOCKS, Main.MOD_ID);
+    public static final DeferredRegister<Block> BUSHES = DeferredRegister.create(ForgeRegistries.BLOCKS, Main.MOD_ID);
     //Blocks
 
     //OverWorld
-    public static final RegistryObject<OreBushOverWorld> COAL_BUSH = BLOCKS.register("coal_bush_stage", () -> new OreBushOverWorld(1));
-    public static final RegistryObject<OreBushOverWorld> IRON_BUSH = BLOCKS.register("iron_bush_stage", () -> new OreBushOverWorld(2));
-    public static final RegistryObject<OreBushOverWorld> GOLD_BUSH = BLOCKS.register("gold_bush_stage",() -> new OreBushOverWorld(3));
-    public static final RegistryObject<OreBushOverWorld> EMERALD_BUSH = BLOCKS.register("emerald_bush_stage",() -> new OreBushOverWorld(4));
-    public static final RegistryObject<OreBushOverWorld> REDSTONE_BUSH = BLOCKS.register("redstone_bush_stage",() -> new OreBushOverWorld(5));
-    public static final RegistryObject<OreBushOverWorld> LAPIS_BUSH = BLOCKS.register("lapis_bush_stage", () -> new OreBushOverWorld(6));
-    public static final RegistryObject<OreBushOverWorld> DIAMOND_BUSH = BLOCKS.register("diamond_bush_stage",() -> new OreBushOverWorld(7));
-    public static final RegistryObject<OreBushOverWorld> COPPER_BUSH = BLOCKS.register("copper_bush_stage",() -> new OreBushOverWorld(8));
+    public static final RegistryObject<OreBushOverWorld> COAL_BUSH = BUSHES.register("coal_bush_stage", () -> new OreBushOverWorld(1));
+    public static final RegistryObject<OreBushOverWorld> IRON_BUSH = BUSHES.register("iron_bush_stage", () -> new OreBushOverWorld(2));
+    public static final RegistryObject<OreBushOverWorld> GOLD_BUSH = BUSHES.register("gold_bush_stage",() -> new OreBushOverWorld(3));
+    public static final RegistryObject<OreBushOverWorld> EMERALD_BUSH = BUSHES.register("emerald_bush_stage",() -> new OreBushOverWorld(4));
+    public static final RegistryObject<OreBushOverWorld> REDSTONE_BUSH = BUSHES.register("redstone_bush_stage",() -> new OreBushOverWorld(5));
+    public static final RegistryObject<OreBushOverWorld> LAPIS_BUSH = BUSHES.register("lapis_bush_stage", () -> new OreBushOverWorld(6));
+    public static final RegistryObject<OreBushOverWorld> DIAMOND_BUSH = BUSHES.register("diamond_bush_stage",() -> new OreBushOverWorld(7));
+    public static final RegistryObject<OreBushOverWorld> COPPER_BUSH = BUSHES.register("copper_bush_stage",() -> new OreBushOverWorld(8));
 
     //Nether
-    public static final RegistryObject<OreBushNether> QUARTZ_BUSH = BLOCKS.register("quartz_bush_stage", () ->  new OreBushNether(1));
-    public static final RegistryObject<OreBushNether> GLOWSTONE_BUSH = BLOCKS.register("glowstone_bush_stage", () -> new OreBushNether(2));
-    public static final RegistryObject<OreBushNether> NETHERITE_BUSH = BLOCKS.register("netherite_bush_stage", () ->  new OreBushNether(3));
+    public static final RegistryObject<OreBushNether> QUARTZ_BUSH = BUSHES.register("quartz_bush_stage", () ->  new OreBushNether(1));
+    public static final RegistryObject<OreBushNether> GLOWSTONE_BUSH = BUSHES.register("glowstone_bush_stage", () -> new OreBushNether(2));
+    public static final RegistryObject<OreBushNether> NETHERITE_BUSH = BUSHES.register("netherite_bush_stage", () ->  new OreBushNether(3));
 
+
+    public static final DeferredRegister<Block> BLOCKS = DeferredRegister.create(ForgeRegistries.BLOCKS, Main.MOD_ID);
 
 
 }

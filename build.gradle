@@ -14,7 +14,7 @@ plugins {
 apply plugin: 'net.minecraftforge.gradle'
 
 
-version = '1.2'
+version = '2.0'
 group = 'me.ez.orebushes' // http://maven.apache.org/guides/mini/guide-naming-conventions.html
 archivesBaseName = 'orebushes'
 

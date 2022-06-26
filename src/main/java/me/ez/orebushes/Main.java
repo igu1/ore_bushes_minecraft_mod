@@ -17,6 +17,7 @@ public class Main
     public Main()
     {
         Init.ITEMS.register(FMLJavaModLoadingContext.get().getModEventBus());
+        Init.BUSHES.register(FMLJavaModLoadingContext.get().getModEventBus());
         Init.BLOCKS.register(FMLJavaModLoadingContext.get().getModEventBus());
         MinecraftForge.EVENT_BUS.register(this);
     }
@@ -27,17 +28,9 @@ public class Main
     {
         @SubscribeEvent
         public static void SetupClient(FMLClientSetupEvent e){
-            ItemBlockRenderTypes.setRenderLayer(Init.COAL_BUSH.get(), RenderType.cutout());
-            ItemBlockRenderTypes.setRenderLayer(Init.IRON_BUSH.get(), RenderType.cutout());
-            ItemBlockRenderTypes.setRenderLayer(Init.GOLD_BUSH.get(), RenderType.cutout());
-            ItemBlockRenderTypes.setRenderLayer(Init.REDSTONE_BUSH.get(), RenderType.cutout());
-            ItemBlockRenderTypes.setRenderLayer(Init.EMERALD_BUSH.get(), RenderType.cutout());
-            ItemBlockRenderTypes.setRenderLayer(Init.LAPIS_BUSH.get(), RenderType.cutout());
-            ItemBlockRenderTypes.setRenderLayer(Init.QUARTZ_BUSH.get(), RenderType.cutout());
-            ItemBlockRenderTypes.setRenderLayer(Init.GLOWSTONE_BUSH.get(), RenderType.cutout());
-            ItemBlockRenderTypes.setRenderLayer(Init.DIAMOND_BUSH.get(), RenderType.cutout());
-            ItemBlockRenderTypes.setRenderLayer(Init.COPPER_BUSH.get(), RenderType.cutout());
-            ItemBlockRenderTypes.setRenderLayer(Init.NETHERITE_BUSH.get(), RenderType.cutout());
+            Init.BUSHES.getEntries().forEach(bushes -> {
+                ItemBlockRenderTypes.setRenderLayer(bushes.get(), RenderType.cutout());
+            });
         }
     }
 }

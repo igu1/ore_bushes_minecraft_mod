@@ -22,7 +22,7 @@ public class BlockLootTable extends BlockLoot {
 
     @Override
     protected @NotNull Iterable<Block> getKnownBlocks() {
-        return Init.BLOCKS.getEntries().stream().map(RegistryObject::get)::iterator;
+        return Init.BUSHES.getEntries().stream().map(RegistryObject::get)::iterator;
     }
 
     @Override
