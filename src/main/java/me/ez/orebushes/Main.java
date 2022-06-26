@@ -19,6 +19,8 @@ public class Main
         Init.ITEMS.register(FMLJavaModLoadingContext.get().getModEventBus());
         Init.BUSHES.register(FMLJavaModLoadingContext.get().getModEventBus());
         Init.BLOCKS.register(FMLJavaModLoadingContext.get().getModEventBus());
+        Init.BLOCK_ENTITY.register(FMLJavaModLoadingContext.get().getModEventBus());
+
         MinecraftForge.EVENT_BUS.register(this);
     }
 
