@@ -76,9 +76,6 @@ public abstract class AbstractModBushBlock extends BushBlock {
         builder.add(AGE);
     }
 
-    @Override
-    public abstract void onRemove(BlockState state, Level level, BlockPos pos, BlockState state1, boolean b);
-
     //Abstract methods
 
     @Override
