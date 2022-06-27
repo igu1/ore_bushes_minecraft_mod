@@ -20,6 +20,7 @@ public class BushHarvesterBlockItem extends BlockItem {
     @Override
     public void appendHoverText(ItemStack stack, @Nullable Level level, List<Component> components, TooltipFlag flag) {
         if (Screen.hasShiftDown()) {
+            components.add(Component.translatable("Info: Place Chest Or Barrel Top Of The Harvester\n").withStyle(ChatFormatting.DARK_AQUA));
             components.add(Component.translatable("Speed:"));
             components.add(Component.translatable(" Place: \n" +
                     "  Iron Block: 30s\n" +
@@ -28,7 +29,7 @@ public class BushHarvesterBlockItem extends BlockItem {
                     "  Default: 40s").withStyle(ChatFormatting.GRAY));
             components.add(Component.translatable("""
                     Place at Y= -1 position of Harvester
-                    or under the Harvester.
+                    OR Under the Harvester.
                     """).withStyle(ChatFormatting.DARK_GRAY));
             components.add(Component.translatable("Range:"));
                     components.add(Component.translatable(" Place:\n" +
@@ -38,7 +39,7 @@ public class BushHarvesterBlockItem extends BlockItem {
                             "  Default: 2m").withStyle(ChatFormatting.GRAY));
             components.add(Component.translatable("""
                     Place at Y= -2 position of Harvester
-                    or under the block you placed for speed.
+                    OR Under the block you placed for speed.
                     """).withStyle(ChatFormatting.DARK_GRAY));
         }else {
             components.add(Component.translatable("Hold Shift For More Information").withStyle(ChatFormatting.GRAY));

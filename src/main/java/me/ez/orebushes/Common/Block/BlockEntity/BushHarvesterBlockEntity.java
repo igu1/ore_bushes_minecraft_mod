@@ -3,6 +3,8 @@ package me.ez.orebushes.Common.Block.BlockEntity;
 import me.ez.orebushes.Init;
 import me.ez.orebushes.Util.InventoryUtil;
 import net.minecraft.core.BlockPos;
+import net.minecraft.core.particles.ParticleType;
+import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
@@ -49,8 +51,8 @@ public class BushHarvesterBlockEntity extends BlockEntity {
     private <E extends BlockEntity> void work(IItemHandler handler, Level level, BlockPos pos, BlockState state, E e) {
         int RANGE = getRange(level, pos, state, (BushHarvesterBlockEntity) e);
         for (int x = -RANGE; x <= RANGE; x++) {
-            for (int y = -RANGE; y <= RANGE; y++) {
-                BlockPos position = new BlockPos(pos.getX() + x, pos.getY(), pos.getZ() + y);
+            for (int z = -RANGE; z <= RANGE; z++) {
+                BlockPos position = new BlockPos(pos.getX() + x, pos.getY(), pos.getZ() + z);
                 BlockState blockState = level.getBlockState(position);
                 if (blockState.getBlock() instanceof BushBlock bush) {
                     if (bush.defaultBlockState().hasProperty(BlockStateProperties.AGE_3)) {
@@ -59,19 +61,28 @@ public class BushHarvesterBlockEntity extends BlockEntity {
                             try {
                                 List<ItemStack> drops = blockState.getBlock().getDrops(blockState, (ServerLevel) level, position, null);
                                 drops.forEach(drop -> {
-                                    InventoryUtil.addItemToInventory(handler, drop.getItem(), drop.getCount());
+                                    if (InventoryUtil.hasSpace(handler, state, level, drop)){
+                                        BlockState changed_blockstate = blockState.setValue(BlockStateProperties.AGE_3, Integer.valueOf(1));                                level.setBlock(position, changed_blockstate, 2);
+                                        level.setBlock(position, changed_blockstate, 1);
+                                        net.minecraftforge.common.ForgeHooks.onCropsGrowPost(level, pos, blockState);
+                                        InventoryUtil.addItemToInventory(handler, drop.getItem(), drop.getCount());
+                                        makeParticle(level, pos, position);
+                                    }
                                 });
-                                BlockState changed_blockstate = blockState.setValue(BlockStateProperties.AGE_3, Integer.valueOf(1));                                level.setBlock(position, changed_blockstate, 2);
-                                level.setBlock(position, changed_blockstate, 1);
-                                net.minecraftforge.common.ForgeHooks.onCropsGrowPost(level, pos, blockState);
+                                break;
                             } catch (Exception exception){
                                 System.out.println("Error Found!");
                             }
-                            break;
                         }
                     }
                 }
             }
+        }
+    }
+
+    private void makeParticle(Level level, BlockPos pos, BlockPos bush_pos) {
+        for (int x = 0; x < 10; x++) {
+            level.addParticle(ParticleTypes.COMPOSTER, bush_pos.getX(), bush_pos.getY(), bush_pos.getZ(), 1D, 1D, 1D);
         }
     }
 

@@ -5,7 +5,9 @@ import net.minecraft.data.DataGenerator;
 import net.minecraft.data.recipes.FinishedRecipe;
 import net.minecraft.data.recipes.ShapedRecipeBuilder;
 import net.minecraft.data.recipes.ShapelessRecipeBuilder;
+import net.minecraft.tags.ItemTags;
 import net.minecraft.world.item.Items;
+import net.minecraftforge.common.Tags;
 
 import java.util.function.Consumer;
 
@@ -179,6 +181,19 @@ public class RecipeProvider extends net.minecraft.data.recipes.RecipeProvider {
                 .pattern("###")
                 .unlockedBy("has_emerald_nugget",
                         has(Init.EMERALD_NUGGET.get()))
+                .save(recipeConsumer);
+
+        //HARVESTER
+        ShapedRecipeBuilder
+                .shaped(Init.BUSH_HARVESTER_BLOCK_ITEM.get())
+                .define('G', Items.GLASS)
+                .define('I', Items.IRON_BLOCK)
+                .define('P', ItemTags.PLANKS)
+                .pattern("PPP")
+                .pattern("PGP")
+                .pattern("III")
+                .unlockedBy("has_glass",
+                        has(Items.GLASS))
                 .save(recipeConsumer);
 
         //Ingots To Nuggets

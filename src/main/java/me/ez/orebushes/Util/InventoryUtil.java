@@ -3,6 +3,8 @@ package me.ez.orebushes.Util;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.level.Level;
+import net.minecraft.world.level.block.state.BlockState;
 import net.minecraftforge.items.IItemHandler;
 
 public class InventoryUtil {
@@ -31,7 +33,19 @@ public class InventoryUtil {
         }
     }
 
-    public static boolean checkIsItemInInventory(IItemHandler h, Item item){
+    public static boolean hasSpace(IItemHandler h, BlockState state, Level level, ItemStack drop) {
+        int slots = h.getSlots();
+        for (int x = 0; x < slots; x++) {
+            if (h.getStackInSlot(x).is(drop.getItem()) || h.getStackInSlot(x).isEmpty()) {
+                if (h.getStackInSlot(x).getCount() < 64) {
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
+
+        public static boolean checkIsItemInInventory(IItemHandler h, Item item){
         boolean found = false;
         int numberOfSlots = h.getSlots();
         for (int x = 0; x < numberOfSlots; x++) {

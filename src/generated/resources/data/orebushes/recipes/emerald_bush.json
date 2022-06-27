@@ -1,10 +1,5 @@
 {
   "type": "minecraft:crafting_shaped",
-  "pattern": [
-    " B ",
-    " S ",
-    " B "
-  ],
   "key": {
     "B": {
       "item": "minecraft:emerald_block"
@@ -13,8 +8,13 @@
       "item": "minecraft:wheat_seeds"
     }
   },
+  "pattern": [
+    " B ",
+    " S ",
+    " B "
+  ],
   "result": {
-    "item": "orebushes:emerald_bush",
-    "count": 2
+    "count": 2,
+    "item": "orebushes:emerald_bush"
   }
 }
