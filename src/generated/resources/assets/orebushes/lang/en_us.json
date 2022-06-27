@@ -13,5 +13,6 @@
   "item.orebushes.copper_nugget": "Copper Nugget",
   "item.orebushes.diamond_nugget": "Diamond Nugget",
   "item.orebushes.emerald_nugget": "Emerald Nugget",
-  "item.orebushes.netherite_nugget": "Netherite Nugget"
+  "item.orebushes.netherite_nugget": "Netherite Nugget",
+  "block.orebushes.bushharvester": "Bush Harvester"
 }

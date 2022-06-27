@@ -20,7 +20,6 @@ public class Main
         Init.BUSHES.register(FMLJavaModLoadingContext.get().getModEventBus());
         Init.BLOCKS.register(FMLJavaModLoadingContext.get().getModEventBus());
         Init.BLOCK_ENTITY.register(FMLJavaModLoadingContext.get().getModEventBus());
-
         MinecraftForge.EVENT_BUS.register(this);
     }
 
@@ -33,6 +32,7 @@ public class Main
             Init.BUSHES.getEntries().forEach(bushes -> {
                 ItemBlockRenderTypes.setRenderLayer(bushes.get(), RenderType.cutout());
             });
+            ItemBlockRenderTypes.setRenderLayer(Init.BUSH_HARVESTER.get(), RenderType.translucent());
         }
     }
 }
