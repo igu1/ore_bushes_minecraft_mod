@@ -1,11 +1,16 @@
 package me.ez.orebushes;
 
+import me.ez.orebushes.Common.Block.BlockEntity.BushHarvesterBlockEntity;
+import me.ez.orebushes.Common.Block.BlockItems.BushHarvesterBlockItem;
+import me.ez.orebushes.Common.Block.BushHarvester;
 import me.ez.orebushes.Common.Bushes.BushBlockItem;
 import me.ez.orebushes.Common.Bushes.OreBushNether;
 import me.ez.orebushes.Common.Bushes.OreBushOverWorld;
+import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.RegistryObject;
@@ -64,7 +69,14 @@ public class Init {
     public static final RegistryObject<OreBushNether> NETHERITE_BUSH = BUSHES.register("netherite_bush_stage", () ->  new OreBushNether(3));
 
 
-    public static final DeferredRegister<Block> BLOCKS = DeferredRegister.create(ForgeRegistries.BLOCKS, Main.MOD_ID);
 
+
+    public static final DeferredRegister<Block> BLOCKS = DeferredRegister.create(ForgeRegistries.BLOCKS, Main.MOD_ID);
+    public static final RegistryObject<Block> BUSH_HARVESTER = BLOCKS.register("bushharvester", BushHarvester::new);
+
+    public static final RegistryObject<BushHarvesterBlockItem> BUSH_HARVESTER_BLOCK_ITEM =ITEMS.register("bushharvester", BushHarvesterBlockItem::new);
+
+    public static final DeferredRegister<BlockEntityType<?>> BLOCK_ENTITY = DeferredRegister.create(ForgeRegistries.BLOCK_ENTITIES, Main.MOD_ID);
+    public static final RegistryObject<BlockEntityType<BushHarvesterBlockEntity>> BUSH_HARVESTER_BLOCK_ENTITY = BLOCK_ENTITY.register("bushharvester", () -> BlockEntityType.Builder.of(BushHarvesterBlockEntity::new, BUSH_HARVESTER.get()).build(null));
 
 }
