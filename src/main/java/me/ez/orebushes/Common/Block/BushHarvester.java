@@ -9,6 +9,7 @@ import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.entity.BlockEntityTicker;
 import net.minecraft.world.level.block.entity.BlockEntityType;
@@ -16,33 +17,20 @@ import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.material.Material;
 import net.minecraft.world.phys.BlockHitResult;
+import net.minecraft.world.phys.shapes.BooleanOp;
 import net.minecraft.world.phys.shapes.CollisionContext;
+import net.minecraft.world.phys.shapes.Shapes;
 import net.minecraft.world.phys.shapes.VoxelShape;
 import org.jetbrains.annotations.Nullable;
+
+import java.util.stream.Stream;
 
 public class BushHarvester extends AbstractBlockEntityBlock {
 
     public BushHarvester() {
-        super(BlockBehaviour.Properties.of(Material.HEAVY_METAL).requiresCorrectToolForDrops().strength(3.5F));
+        super(BlockBehaviour.Properties.of(Material.STONE).strength(3.5F));
     }
 
-//    private static final VoxelShape SHAPE = Stream.of(
-//            Block.box(1, 6, 1, 15, 7, 15),
-//            Block.box(1, 7, 1, 2, 15, 2),
-//            Block.box(1, 7, 14, 2, 15, 15),
-//            Block.box(14, 7, 14, 15, 15, 15),
-//            Block.box(14, 7, 1, 15, 15, 2),
-//            Block.box(1, 15, 1, 15, 16, 2),
-//            Block.box(1, 15, 14, 15, 16, 15),
-//            Block.box(1, 15, 2, 2, 16, 14),
-//            Block.box(14, 15, 2, 15, 16, 14),
-//            Block.box(1, 7, 2, 2, 15, 14),
-//            Block.box(14, 7, 2, 15, 15, 14),
-//            Block.box(2, 7, 14, 14, 15, 15),
-//            Block.box(2, 7, 1, 14, 15, 2),
-//            Block.box(2, 15, 2, 14, 16, 14),
-//            Block.box(0, 0, 0, 16, 6, 16)
-//    ).reduce((v1, v2) -> VoxelShapes.join(v1, v2, BooleanBiGF.OR)).get();
 
     @Override
     public @Nullable BlockEntity newBlockEntity(BlockPos pos, BlockState state) {
@@ -61,7 +49,19 @@ public class BushHarvester extends AbstractBlockEntityBlock {
 
     @Override
     public VoxelShape getShape(BlockState state, BlockGetter getter, BlockPos pos, CollisionContext collisionContext) {
-        return super.getShape(state, getter, pos, collisionContext);
+        return Stream.of(
+                Block.box(1, 6, 1, 15, 7, 15),
+                Block.box(1, 7, 1, 2, 15, 2),
+                Block.box(1, 7, 14, 2, 15, 15),
+                Block.box(14, 7, 14, 15, 15, 15),
+                Block.box(14, 7, 1, 15, 15, 2),
+                Block.box(1, 7, 2, 2, 15, 14),
+                Block.box(14, 7, 2, 15, 15, 14),
+                Block.box(2, 7, 14, 14, 15, 15),
+                Block.box(2, 7, 1, 14, 15, 2),
+                Block.box(0, 15, 0, 16, 16, 16),
+                Block.box(0, 0, 0, 16, 6, 16)
+        ).reduce((v1, v2) -> Shapes.join(v1, v2, BooleanOp.OR)).get();
     }
 
     @Override
