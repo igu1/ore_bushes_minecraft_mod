@@ -17,6 +17,73 @@ public class RecipeProvider extends net.minecraft.data.recipes.RecipeProvider {
 
     @Override
     protected void buildCraftingRecipes(Consumer<FinishedRecipe> recipeConsumer) {
+
+        bushsSeedRecipeProvider(recipeConsumer);
+
+        //Items
+
+        ShapelessRecipeBuilder
+                .shapeless(Items.DIAMOND)
+                .requires(Init.DIAMOND_NUGGET.get(), 9)
+                .unlockedBy("has_diamond_nugget",
+                        has(Init.DIAMOND_NUGGET.get()))
+                .save(recipeConsumer);
+
+
+        ShapelessRecipeBuilder
+                .shapeless(Items.NETHERITE_INGOT)
+                .requires(Init.NETHERITE_NUGGET.get(), 9)
+                .unlockedBy("has_netherite_nugget",
+                        has(Init.NETHERITE_NUGGET.get()))
+                .save(recipeConsumer);
+
+
+        ShapelessRecipeBuilder
+                .shapeless(Items.COPPER_INGOT)
+                .requires(Init.COPPER_NUGGET.get(), 9)
+                .unlockedBy("has_copper_nugget",
+                        has(Init.COPPER_NUGGET.get()))
+                .save(recipeConsumer);
+
+
+        ShapelessRecipeBuilder
+                .shapeless(Items.EMERALD)
+                .requires(Init.EMERALD_NUGGET.get(), 9)
+                .unlockedBy("has_emerald_nugget",
+                        has(Items.EMERALD))
+                .save(recipeConsumer);
+
+        //Ingots To Nuggets
+        ShapelessRecipeBuilder
+                .shapeless(Init.EMERALD_NUGGET.get(), 9)
+                .requires(Items.EMERALD)
+                .unlockedBy("has_emerald",
+                        has(Items.EMERALD))
+                .save(recipeConsumer);
+
+        ShapelessRecipeBuilder
+                .shapeless(Init.DIAMOND_NUGGET.get(), 9)
+                .requires(Items.DIAMOND)
+                .unlockedBy("has_diamond",
+                        has(Items.DIAMOND))
+                .save(recipeConsumer);
+
+        ShapelessRecipeBuilder
+                .shapeless(Init.COPPER_NUGGET.get(), 9)
+                .requires(Items.COPPER_INGOT)
+                .unlockedBy("has_copper_ingot",
+                        has(Items.DIAMOND))
+                .save(recipeConsumer);
+
+        ShapelessRecipeBuilder
+                .shapeless(Init.NETHERITE_NUGGET.get(), 9)
+                .requires(Items.NETHERITE_INGOT)
+                .unlockedBy("has_netherite_ingot",
+                        has(Items.NETHERITE_INGOT))
+                .save(recipeConsumer);
+    }
+
+    private void bushsSeedRecipeProvider(Consumer<FinishedRecipe> recipeConsumer) {
         ShapedRecipeBuilder
                 .shaped(Init.COAL_BUSH_ITEM.get(), 2)
                 .define('B', Items.COAL_BLOCK)
@@ -139,75 +206,5 @@ public class RecipeProvider extends net.minecraft.data.recipes.RecipeProvider {
                         has(Items.QUARTZ_BLOCK))
                 .save(recipeConsumer);
 
-
-        //Items
-        ShapedRecipeBuilder
-                .shaped(Items.DIAMOND)
-                .define('#', Init.DIAMOND_NUGGET.get())
-                .pattern("###")
-                .pattern("###")
-                .pattern("###")
-                .unlockedBy("has_diamond_nugget",
-                        has(Init.DIAMOND_NUGGET.get()))
-                .save(recipeConsumer);
-
-        ShapedRecipeBuilder
-                .shaped(Items.NETHERITE_INGOT)
-                .define('#', Init.NETHERITE_NUGGET.get())
-                .pattern("###")
-                .pattern("###")
-                .pattern("###")
-                .unlockedBy("has_netherite_nugget",
-                        has(Init.NETHERITE_NUGGET.get()))
-                .save(recipeConsumer);
-
-        ShapedRecipeBuilder
-                .shaped(Items.COPPER_INGOT)
-                .define('#', Init.COPPER_NUGGET.get())
-                .pattern("###")
-                .pattern("###")
-                .pattern("###")
-                .unlockedBy("has_copper_nugget",
-                        has(Init.COPPER_NUGGET.get()))
-                .save(recipeConsumer);
-
-        ShapedRecipeBuilder
-                .shaped(Items.EMERALD)
-                .define('#', Init.EMERALD_NUGGET.get())
-                .pattern("###")
-                .pattern("###")
-                .pattern("###")
-                .unlockedBy("has_emerald_nugget",
-                        has(Init.EMERALD_NUGGET.get()))
-                .save(recipeConsumer);
-
-        //Ingots To Nuggets
-        ShapelessRecipeBuilder
-                .shapeless(Init.EMERALD_NUGGET.get(), 9)
-                .requires(Items.EMERALD)
-                .unlockedBy("has_emerald",
-                        has(Items.EMERALD))
-                .save(recipeConsumer);
-
-        ShapelessRecipeBuilder
-                .shapeless(Init.DIAMOND_NUGGET.get(), 9)
-                .requires(Items.DIAMOND)
-                .unlockedBy("has_diamond",
-                        has(Items.DIAMOND))
-                .save(recipeConsumer);
-
-        ShapelessRecipeBuilder
-                .shapeless(Init.COPPER_NUGGET.get(), 9)
-                .requires(Items.COPPER_INGOT)
-                .unlockedBy("has_copper_ingot",
-                        has(Items.DIAMOND))
-                .save(recipeConsumer);
-
-        ShapelessRecipeBuilder
-                .shapeless(Init.NETHERITE_NUGGET.get(), 9)
-                .requires(Items.NETHERITE_INGOT)
-                .unlockedBy("has_netherite_ingot",
-                        has(Items.NETHERITE_INGOT))
-                .save(recipeConsumer);
     }
 }

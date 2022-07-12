@@ -91,7 +91,7 @@ public class BushHarvesterBlockEntity extends BlockEntity {
     private static <E extends BlockEntity> int getRange(Level level, BlockPos pos, BlockState state, BushHarvesterBlockEntity e) {
         BlockPos pos1 = pos.below().below();
         if (level.getBlockState(pos1).is(Blocks.DIAMOND_BLOCK)) {
-            return 6;
+            return 8;
         }else if (level.getBlockState(pos1).is(Blocks.GOLD_BLOCK)){
             return 4;
         }else if (level.getBlockState(pos1).is(Blocks.IRON_BLOCK)){

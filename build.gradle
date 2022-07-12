@@ -14,7 +14,7 @@ plugins {
 apply plugin: 'net.minecraftforge.gradle'
 
 
-version = '2.3'
+version = '2.5-1.19'
 group = 'me.ez.orebushes' // http://maven.apache.org/guides/mini/guide-naming-conventions.html
 archivesBaseName = 'orebushes'
 
@@ -39,22 +39,8 @@ minecraft {
 
     // accessTransformer = file('src/main/resources/META-INF/accesstransformer.cfg') // Currently, this location cannot be changed from the default.
 
-    // Default run configurations.
-    // These can be tweaked, removed, or duplicated as needed.
     runs {
         client {
-            workingDirectory project.file('run')
-            property 'forge.logging.markers', 'REGISTRIES'
-            property 'forge.logging.console.level', 'debug'
-            property 'forge.enabledGameTestNamespaces', 'orebushes'
-            mods {
-                orebushes {
-                    source sourceSets.main
-                }
-            }
-        }
-
-        server {
             workingDirectory project.file('run')
             property 'forge.logging.markers', 'REGISTRIES'
             property 'forge.logging.console.level', 'debug'
@@ -99,7 +85,7 @@ repositories {
 }
 
 dependencies {
-    minecraft 'net.minecraftforge:forge:1.19-41.0.38'
+    minecraft 'net.minecraftforge:forge:1.19-41.0.64'
 
 }
 

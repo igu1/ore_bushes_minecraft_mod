@@ -20,6 +20,7 @@ public class BushHarvesterBlockItem extends BlockItem {
     @Override
     public void appendHoverText(ItemStack stack, @Nullable Level level, List<Component> components, TooltipFlag flag) {
         if (Screen.hasShiftDown()) {
+            components.add(Component.translatable("Hint: Place A Chest Top Of The Harvester").withStyle(ChatFormatting.AQUA));
             components.add(Component.translatable("Speed:"));
             components.add(Component.translatable(" Place: \n" +
                     "  Iron Block: 30s\n" +
