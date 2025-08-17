@@ -14,8 +14,8 @@ A quirky and delightful Forge mod that adds a range of **ore-bearing bushes** to
 
 ##  Features (Because Bushes Should Be Useful)
 
-- Adds a whole garden of ore bushes — from common ores to rarities. :contentReference[oaicite:1]{index=1}  
-- Forge-compatible and easy to install. :contentReference[oaicite:2]{index=2}  
+- Adds a whole garden of ore bushes — from common ores to rarities.
+- Forge-compatible and easy to install.
 - Works with Minecraft versions 1.17 through 1.19 (including 1.19 snapshot builds). 
 - A growing fanbase: **over 31,700 downloads** on CurseForge!:
 
@@ -24,7 +24,7 @@ A quirky and delightful Forge mod that adds a range of **ore-bearing bushes** to
 ##  Installation (Super Simple)
 
 1. Ensure you have **Minecraft Java Edition** and the **Forge mod loader** installed.
-2. Download the latest `orebushes-<version>.jar` from the CurseForge Files section. :contentReference[oaicite:5]{index=5}  
+2. Download the latest `orebushes-<version>.jar` from the CurseForge Files section.
 3. Drop the `.jar` into your `mods/` folder.
 4. Launch the game using the Forge profile and start collecting bush-ore!
 
