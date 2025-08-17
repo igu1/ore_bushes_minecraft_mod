@@ -1,46 +1,64 @@
+# ​ Ore Bushes Mod
 
-Source installation information for modders
--------------------------------------------
-This code follows the Minecraft Forge installation methodology. It will apply
-some small patches to the vanilla MCP source code, giving you and it access 
-to some of the data and functions you need to build a successful mod.
+*“Why mine when you can just shake a bush?”* — literally.
 
-Note also that the patches are built against "un-renamed" MCP source code (aka
-SRG Names) - this means that you will not be able to read them directly against
-normal code.
+---
 
-Setup Process:
-==============================
+##  What Is This?
 
-Step 1: Open your command-line and browse to the folder where you extracted the zip file.
+A quirky and delightful Forge mod that adds a range of **ore-bearing bushes** to Minecraft. Instead of digging deep, you can now stroll through forests (or wherever they spawn) and collect precious ores like:
 
-Step 2: You're left with a choice.
-If you prefer to use Eclipse:
-1. Run the following command: `gradlew genEclipseRuns` (`./gradlew genEclipseRuns` if you are on Mac/Linux)
-2. Open Eclipse, Import > Existing Gradle Project > Select Folder 
-   or run `gradlew eclipse` to generate the project.
+- Coal, Iron, Gold, Diamond, Redstone, Lapis, Glowstone, Emerald, Quartz, Copper, Netherite… and more! :contentReference[oaicite:0]{index=0}
 
-If you prefer to use IntelliJ:
-1. Open IDEA, and import project.
-2. Select your build.gradle file and have it import.
-3. Run the following command: `gradlew genIntellijRuns` (`./gradlew genIntellijRuns` if you are on Mac/Linux)
-4. Refresh the Gradle Project in IDEA if required.
+---
 
-If at any point you are missing libraries in your IDE, or you've run into problems you can 
-run `gradlew --refresh-dependencies` to refresh the local cache. `gradlew clean` to reset everything 
-{this does not affect your code} and then start the process again.
+##  Features (Because Bushes Should Be Useful)
 
-Mapping Names:
-=============================
-By default, the MDK is configured to use the official mapping names from Mojang for methods and fields 
-in the Minecraft codebase. These names are covered by a specific license. All modders should be aware of this
-license, if you do not agree with it you can change your mapping names to other crowdsourced names in your 
-build.gradle. For the latest license text, refer to the mapping file itself, or the reference copy here:
-https://github.com/MinecraftForge/MCPConfig/blob/master/Mojang.md
+- Adds a whole garden of ore bushes — from common ores to rarities. :contentReference[oaicite:1]{index=1}  
+- Forge-compatible and easy to install. :contentReference[oaicite:2]{index=2}  
+- Works with Minecraft versions 1.17 through 1.19 (including 1.19 snapshot builds). :contentReference[oaicite:3]{index=3}  
+- A growing fanbase: **over 31,700 downloads** on CurseForge! :contentReference[oaicite:4]{index=4}
 
-Additional Resources: 
-=========================
-Community Documentation: http://mcforge.readthedocs.io/en/latest/gettingstarted/  
-LexManos' Install Video: https://www.youtube.com/watch?v=8VEdtQLuLO0  
-Forge Forum: https://forums.minecraftforge.net/  
-Forge Discord: https://discord.gg/UvedJ9m  
+---
+
+##  Installation (Super Simple)
+
+1. Ensure you have **Minecraft Java Edition** and the **Forge mod loader** installed.
+2. Download the latest `orebushes-<version>.jar` from the CurseForge Files section. :contentReference[oaicite:5]{index=5}  
+3. Drop the `.jar` into your `mods/` folder.
+4. Launch the game using the Forge profile and start collecting bush-ore!
+
+---
+
+##  Why 30K+ Downloads?
+
+Who wouldn’t want to replace tedious mining with a touch-and-harvest bush fest?  
+Ore Bushes is the perfect blend of lazy creativity and clever convenience—just wander around and nature rewards you. Plus, the variety keeps it fresh. :contentReference[oaicite:6]{index=6}
+
+---
+
+##  A Few Bushy Caveats
+
+- These bushes generate naturally or through configs—you can’t plant or grow them manually.
+- No advanced automation or modpack-specific customization (yet) — but simplicity can be beautiful.
+
+---
+
+##  Feedback & Contributions
+
+Found a weird bug or have an idea for a new ore bush?  
+Open an issue or submit a pull request on GitHub. Help the bush garden flourish!
+
+---
+
+##  Final Thoughts
+
+Mining is overrated. Let Mother Nature (or your code) do the work.  
+Ore Bushes: bringing nuggets and smiles—one bush at a time.
+
+> “Cleaning your pickaxe one bush shake at a time.”  
+
+---
+
+Want me to also throw in a playful “Bush vs. Pickaxe” showdown table or a cheeky ASCII-art bush for comedic flair?
+::contentReference[oaicite:7]{index=7}
