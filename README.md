@@ -1,4 +1,4 @@
-# ​ Ore Bushes Mod
+# ​ Ore Bushes Mod ([text](https://www.curseforge.com/minecraft/mc-mods/ore-bushes))
 
 *“Why mine when you can just shake a bush?”* — literally.
 
@@ -8,7 +8,7 @@
 
 A quirky and delightful Forge mod that adds a range of **ore-bearing bushes** to Minecraft. Instead of digging deep, you can now stroll through forests (or wherever they spawn) and collect precious ores like:
 
-- Coal, Iron, Gold, Diamond, Redstone, Lapis, Glowstone, Emerald, Quartz, Copper, Netherite… and more! :contentReference[oaicite:0]{index=0}
+- Coal, Iron, Gold, Diamond, Redstone, Lapis, Glowstone, Emerald, Quartz, Copper, Netherite… and more!
 
 ---
 
@@ -16,8 +16,8 @@ A quirky and delightful Forge mod that adds a range of **ore-bearing bushes** to
 
 - Adds a whole garden of ore bushes — from common ores to rarities. :contentReference[oaicite:1]{index=1}  
 - Forge-compatible and easy to install. :contentReference[oaicite:2]{index=2}  
-- Works with Minecraft versions 1.17 through 1.19 (including 1.19 snapshot builds). :contentReference[oaicite:3]{index=3}  
-- A growing fanbase: **over 31,700 downloads** on CurseForge! :contentReference[oaicite:4]{index=4}
+- Works with Minecraft versions 1.17 through 1.19 (including 1.19 snapshot builds). 
+- A growing fanbase: **over 31,700 downloads** on CurseForge!:
 
 ---
 
@@ -33,7 +33,7 @@ A quirky and delightful Forge mod that adds a range of **ore-bearing bushes** to
 ##  Why 30K+ Downloads?
 
 Who wouldn’t want to replace tedious mining with a touch-and-harvest bush fest?  
-Ore Bushes is the perfect blend of lazy creativity and clever convenience—just wander around and nature rewards you. Plus, the variety keeps it fresh. :contentReference[oaicite:6]{index=6}
+Ore Bushes is the perfect blend of lazy creativity and clever convenience—just wander around and nature rewards you. Plus, the variety keeps it fresh.
 
 ---
 
@@ -58,7 +58,3 @@ Ore Bushes: bringing nuggets and smiles—one bush at a time.
 
 > “Cleaning your pickaxe one bush shake at a time.”  
 
----
-
-Want me to also throw in a playful “Bush vs. Pickaxe” showdown table or a cheeky ASCII-art bush for comedic flair?
-::contentReference[oaicite:7]{index=7}
