@@ -1,4 +1,4 @@
-# ​ Ore Bushes Mod ([text](https://www.curseforge.com/minecraft/mc-mods/ore-bushes))
+# ​ Ore Bushes Mod ([Download Orebuses Mod](https://www.curseforge.com/minecraft/mc-mods/ore-bushes))
 
 *“Why mine when you can just shake a bush?”* — literally.
 
