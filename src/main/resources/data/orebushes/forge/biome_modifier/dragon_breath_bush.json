@@ -1,0 +1,6 @@
+{
+  "type": "forge:add_features",
+  "biomes": "#minecraft:is_end",
+  "features": "orebushes:dragon_breath_bush_placed",
+  "step": "vegetal_decoration"
+}

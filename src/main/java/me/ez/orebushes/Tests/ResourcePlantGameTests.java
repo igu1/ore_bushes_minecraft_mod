@@ -1,0 +1,203 @@
+package me.ez.orebushes.Tests;
+
+import me.ez.orebushes.Common.Block.BlockEntity.BushHarvesterBlockEntity;
+import me.ez.orebushes.Common.Bushes.AbstractModBushBlock;
+import me.ez.orebushes.Common.Bushes.ResourcePlantProfile;
+import me.ez.orebushes.Config;
+import me.ez.orebushes.Init;
+import me.ez.orebushes.Main;
+import net.minecraft.core.BlockPos;
+import net.minecraft.gametest.framework.GameTest;
+import net.minecraft.gametest.framework.GameTestHelper;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.Items;
+import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.Blocks;
+import net.minecraft.world.level.block.entity.ChestBlockEntity;
+import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.phys.AABB;
+import net.minecraft.world.phys.shapes.CollisionContext;
+import net.minecraft.world.phys.shapes.VoxelShape;
+import net.minecraftforge.gametest.GameTestHolder;
+import net.minecraftforge.gametest.PrefixGameTestTemplate;
+
+@GameTestHolder(Main.MOD_ID)
+@PrefixGameTestTemplate(false)
+public class ResourcePlantGameTests {
+    @GameTest(template = "empty")
+    public static void simpleShapesForEveryPlantState(GameTestHelper helper) {
+        BlockPos pos = helper.absolutePos(new BlockPos(2, 1, 2));
+        CollisionContext context = CollisionContext.empty();
+        Init.BUSHES.getEntries().forEach(entry -> {
+            AbstractModBushBlock plant = (AbstractModBushBlock) entry.get();
+            VoxelShape spent = null;
+            double previousHeight = 0;
+            for (int age = 0; age <= AbstractModBushBlock.MAX_AGE; age++) {
+                BlockState growing = plant.defaultBlockState().setValue(AbstractModBushBlock.AGE, age);
+                VoxelShape shape = plant.getShape(growing, helper.getLevel(), pos, context);
+                AABB bounds = shape.bounds();
+                if (shape.isEmpty() || shape.toAabbs().size() > 2 || bounds.minY != 0
+                        || bounds.minX < 0 || bounds.minZ < 0 || bounds.maxX > 1 || bounds.maxZ > 1
+                        || bounds.maxY > 1 || bounds.maxY <= previousHeight)
+                    throw new IllegalStateException("Invalid/simple growth shape: " + entry.getId() + " age " + age);
+                previousHeight = bounds.maxY;
+                if (age == 3 && (bounds.minX != 0 || bounds.minZ != 0 || bounds.maxX != 1 || bounds.maxZ != 1))
+                    throw new IllegalStateException("Mature footprint is not 16x16: " + entry.getId());
+                if (!plant.getCollisionShape(growing, helper.getLevel(), pos, context).isEmpty())
+                    throw new IllegalStateException("Selection shape changed plant collision: " + entry.getId());
+                for (int used = 0; used <= ResourcePlantProfile.MAX_HARVESTS; used++) {
+                    BlockState state = growing.setValue(AbstractModBushBlock.HARVESTS, used);
+                    VoxelShape actual = plant.getShape(state, helper.getLevel(), pos, context);
+                    if (!plant.isExhausted(state) && actual != shape)
+                        throw new IllegalStateException("Harvest count changed growing outline: " + entry.getId());
+                    if (plant.isExhausted(state)) {
+                        if (spent != null && spent != actual)
+                            throw new IllegalStateException("Spent shape depends on age/count: " + entry.getId());
+                        spent = actual;
+                    }
+                }
+            }
+            if (spent == null || spent.toAabbs().size() > 2 || spent.bounds().maxY >= previousHeight)
+                throw new IllegalStateException("Missing/simple spent shape: " + entry.getId());
+        });
+        helper.succeed();
+    }
+
+    @GameTest(template = "empty")
+    public static void finiteHarvestsForEveryPlant(GameTestHelper helper) {
+        BlockPos pos = helper.absolutePos(new BlockPos(2, 1, 2));
+        Init.BUSHES.getEntries().forEach(entry -> {
+            AbstractModBushBlock plant = (AbstractModBushBlock) entry.get();
+            helper.getLevel().setBlock(pos.below(), plant.profile().substrate.defaultBlockState(), 2);
+            BlockState state = plant.defaultBlockState();
+            for (int i = 0; i < plant.profile().harvestLimit(); i++) {
+                state = state.setValue(AbstractModBushBlock.AGE, 3);
+                helper.getLevel().setBlock(pos, state, 2);
+                if (plant.harvestDrop(state).isEmpty()) throw new IllegalStateException("Premature exhaustion: " + entry.getId());
+                if (plant.profile().tier >= 3 && plant.harvestDrop(state).getCount() != 1)
+                    throw new IllegalStateException("Rare resource yield bypass");
+                plant.finishHarvest(helper.getLevel(), pos, state);
+                state = helper.getLevel().getBlockState(pos);
+                if (state.getValue(AbstractModBushBlock.AGE) != 3)
+                    throw new IllegalStateException("Harvest reset plant to stage 0: " + entry.getId());
+            }
+            if (!plant.isExhausted(state) || !plant.harvestDrop(state.setValue(AbstractModBushBlock.AGE, 3)).isEmpty())
+                throw new IllegalStateException("Finite harvest limit bypass: " + entry.getId());
+            if (plant.isRandomlyTicking(state) || plant.isValidBonemealTarget(helper.getLevel(), pos, state, false))
+                throw new IllegalStateException("Spent plant can grow");
+            int ageBefore = helper.getLevel().getBlockState(pos).getValue(AbstractModBushBlock.AGE);
+            plant.performBonemeal(helper.getLevel(), helper.getLevel().random, pos, state);
+            if (helper.getLevel().getBlockState(pos).getValue(AbstractModBushBlock.AGE) != ageBefore)
+                throw new IllegalStateException("Bone meal changed a spent plant");
+            java.util.List<ItemStack> spentDrops = Block.getDrops(state.setValue(AbstractModBushBlock.AGE, 3), helper.getLevel(), pos, null);
+            if (spentDrops.size() != 1 || !spentDrops.get(0).is(plant.asItem()))
+                throw new IllegalStateException("Spent plant should return only its starter: " + entry.getId());
+        });
+        helper.succeed();
+    }
+
+    @GameTest(template = "empty")
+    public static void growthGatesAndImmatureLoot(GameTestHelper helper) {
+        BlockPos pos = helper.absolutePos(new BlockPos(2, 1, 2));
+        AbstractModBushBlock coal = Init.COAL_BUSH.get();
+        helper.getLevel().setBlock(pos.below(), Blocks.GRASS_BLOCK.defaultBlockState(), 2);
+        if (!coal.canGrow(helper.getLevel(), pos, coal.defaultBlockState()))
+            throw new IllegalStateException("Common plant cannot grow on grass in Overworld");
+        helper.getLevel().setBlock(pos.below(), Blocks.STONE.defaultBlockState(), 2);
+        if (coal.canGrow(helper.getLevel(), pos, coal.defaultBlockState()))
+            throw new IllegalStateException("Wrong substrate accepted");
+        Init.BUSHES.getEntries().forEach(entry -> {
+            AbstractModBushBlock plant = (AbstractModBushBlock) entry.get();
+            BlockState immature = plant.defaultBlockState().setValue(AbstractModBushBlock.AGE, 2);
+            if (!plant.harvestDrop(immature).isEmpty())
+                throw new IllegalStateException("Immature harvesting: " + entry.getId());
+            java.util.List<ItemStack> immatureDrops = Block.getDrops(immature, helper.getLevel(), pos, null);
+            if (immatureDrops.size() != 1 || !immatureDrops.get(0).is(plant.asItem()))
+                throw new IllegalStateException("Breaking should return the starter: " + entry.getId());
+            if (plant.profile().tier > 1 && plant.isValidBonemealTarget(helper.getLevel(), pos, immature, false))
+                throw new IllegalStateException("Rare plant accepts bone meal");
+        });
+        helper.getLevel().setBlock(pos.below(), Blocks.END_STONE.defaultBlockState(), 2);
+        if (Init.ENDER_PEARL_BUSH.get().canGrow(helper.getLevel(), pos, Init.ENDER_PEARL_BUSH.get().defaultBlockState()))
+            throw new IllegalStateException("End plant grows in the Overworld");
+        helper.succeed();
+    }
+
+    @GameTest(template = "empty")
+    public static void automationHonorsLifetimeAndFullInventory(GameTestHelper helper) {
+        BlockPos machine = helper.absolutePos(new BlockPos(2, 1, 2));
+        BlockPos pos = machine.east();
+        helper.getLevel().setBlock(machine.below(), Blocks.STONE.defaultBlockState(), 2);
+        helper.getLevel().setBlock(machine, Init.BUSH_HARVESTER.get().defaultBlockState(), 3);
+        helper.getLevel().setBlock(pos.below(), Blocks.GRASS_BLOCK.defaultBlockState(), 2);
+        BushHarvesterBlockEntity harvester = (BushHarvesterBlockEntity) helper.getLevel().getBlockEntity(machine);
+        AbstractModBushBlock plant = Init.COAL_BUSH.get();
+        BlockState ripe = plant.defaultBlockState().setValue(AbstractModBushBlock.AGE, 3);
+        helper.getLevel().setBlock(pos, ripe, 2);
+
+        // A full internal inventory must block the harvest and select the blocked model.
+        for (int slot = 0; slot < harvester.getContainerSize(); slot++) {
+            harvester.setItem(slot, new ItemStack(Items.COBBLESTONE, 64));
+        }
+        cycle(helper, machine, harvester);
+        if (!helper.getLevel().getBlockState(pos).equals(ripe))
+            throw new IllegalStateException("Full machine storage consumed a harvest");
+        if (helper.getLevel().getBlockState(machine).getValue(me.ez.orebushes.Common.Block.BushHarvester.MODE)
+                != me.ez.orebushes.Common.Block.BushHarvester.OperatingState.BLOCKED)
+            throw new IllegalStateException("Full machine storage did not select blocked model");
+
+        // Redstone pauses the machine without altering the plant.
+        harvester.clearContent();
+        helper.getLevel().setBlock(machine.west(), Blocks.REDSTONE_BLOCK.defaultBlockState(), 3);
+        cycle(helper, machine, harvester);
+        if (!helper.getLevel().getBlockState(pos).equals(ripe)
+                || helper.getLevel().getBlockState(machine).getValue(me.ez.orebushes.Common.Block.BushHarvester.MODE)
+                != me.ez.orebushes.Common.Block.BushHarvester.OperatingState.PAUSED)
+            throw new IllegalStateException("Redstone pause/state mismatch");
+        helper.getLevel().setBlock(machine.west(), Blocks.AIR.defaultBlockState(), 3);
+
+        // Every yielded item still respects the plant's finite lifetime.
+        int expected = plant.harvestDrop(ripe).getCount() * plant.profile().harvestLimit();
+        for (int i = 0; i < plant.profile().harvestLimit(); i++) {
+            BlockState state = helper.getLevel().getBlockState(pos).setValue(AbstractModBushBlock.AGE, 3);
+            helper.getLevel().setBlock(pos, state, 2);
+            cycle(helper, machine, harvester);
+            if (helper.getLevel().getBlockState(machine).getValue(me.ez.orebushes.Common.Block.BushHarvester.MODE)
+                    != me.ez.orebushes.Common.Block.BushHarvester.OperatingState.RUNNING)
+                throw new IllegalStateException("Harvest did not select running model");
+        }
+        int count = 0;
+        for (int slot = 0; slot < harvester.getContainerSize(); slot++) count += harvester.getItem(slot).getCount();
+        if (count != expected || !plant.isExhausted(helper.getLevel().getBlockState(pos)))
+            throw new IllegalStateException("Automated harvest yield/lifetime mismatch");
+        helper.getLevel().setBlock(pos, helper.getLevel().getBlockState(pos).setValue(AbstractModBushBlock.AGE, 3), 2);
+        cycle(helper, machine, harvester);
+        int after = 0;
+        for (int slot = 0; slot < harvester.getContainerSize(); slot++) after += harvester.getItem(slot).getCount();
+        if (after != count) throw new IllegalStateException("Automation harvested a spent plant");
+        helper.succeed();
+    }
+
+    @GameTest(template = "empty")
+    public static void placementRequiresSubstrateAndDimension(GameTestHelper helper) {
+        BlockPos pos = helper.absolutePos(new BlockPos(2, 1, 2));
+        // Tier 3 emerald needs moss; grass is not its substrate.
+        helper.getLevel().setBlock(pos.below(), Blocks.GRASS_BLOCK.defaultBlockState(), 2);
+        if (Init.EMERALD_BUSH.get().defaultBlockState().canSurvive(helper.getLevel(), pos))
+            throw new IllegalStateException("Emerald accepted grass instead of moss");
+        helper.getLevel().setBlock(pos.below(), Blocks.MOSS_BLOCK.defaultBlockState(), 2);
+        if (!Init.EMERALD_BUSH.get().defaultBlockState().canSurvive(helper.getLevel(), pos))
+            throw new IllegalStateException("Emerald rejected moss in the Overworld");
+        // Nether plants need their dimension even when the soil is correct.
+        helper.getLevel().setBlock(pos.below(), Blocks.NETHERRACK.defaultBlockState(), 2);
+        if (Init.QUARTZ_BUSH.get().defaultBlockState().canSurvive(helper.getLevel(), pos))
+            throw new IllegalStateException("Nether plant accepted placement in the Overworld");
+        helper.succeed();
+    }
+
+    private static void cycle(GameTestHelper helper, BlockPos machine, BushHarvesterBlockEntity harvester) {
+        for (int tick = 0; tick <= Config.DEFAULT_SECONDS.get() * 20; tick++) {
+            BushHarvesterBlockEntity.Ticker(helper.getLevel(), machine, helper.getLevel().getBlockState(machine), harvester);
+        }
+    }
+}

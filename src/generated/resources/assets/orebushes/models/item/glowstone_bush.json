@@ -1,6 +1,3 @@
 {
-  "parent": "minecraft:item/generated",
-  "textures": {
-    "layer0": "orebushes:item/glowstone_bush"
-  }
+  "parent": "orebushes:block/plants/glowstone_v2_1"
 }

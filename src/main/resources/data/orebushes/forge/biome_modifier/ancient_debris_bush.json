@@ -1,0 +1,6 @@
+{
+  "type": "forge:add_features",
+  "biomes": "#minecraft:is_nether",
+  "features": "orebushes:ancient_debris_bush_placed",
+  "step": "vegetal_decoration"
+}

@@ -1,0 +1,35 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "item": "orebushes:emerald_nugget"
+    },
+    {
+      "item": "orebushes:emerald_nugget"
+    },
+    {
+      "item": "orebushes:emerald_nugget"
+    },
+    {
+      "item": "orebushes:emerald_nugget"
+    },
+    {
+      "item": "orebushes:emerald_nugget"
+    },
+    {
+      "item": "orebushes:emerald_nugget"
+    },
+    {
+      "item": "orebushes:emerald_nugget"
+    },
+    {
+      "item": "orebushes:emerald_nugget"
+    },
+    {
+      "item": "orebushes:emerald_nugget"
+    }
+  ],
+  "result": {
+    "item": "minecraft:emerald"
+  }
+}

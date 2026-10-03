@@ -1,20 +1,8 @@
 {
   "type": "minecraft:block",
-  "pools": [
-    {
-      "bonus_rolls": 0.0,
-      "conditions": [
-        {
-          "condition": "minecraft:survives_explosion"
-        }
-      ],
-      "entries": [
-        {
-          "type": "minecraft:item",
-          "name": "orebushes:bushharvester"
-        }
-      ],
-      "rolls": 1.0
-    }
-  ]
+  "pools": [{
+    "rolls": 1,
+    "entries": [{"type": "minecraft:item", "name": "orebushes:bushharvester"}],
+    "conditions": [{"condition": "minecraft:survives_explosion"}]
+  }]
 }

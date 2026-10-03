@@ -1,9 +1,11 @@
 package me.ez.orebushes.Datagen.LootTable;
 
 import me.ez.orebushes.Init;
+import me.ez.orebushes.Common.Bushes.AbstractModBushBlock;
 import net.minecraft.advancements.critereon.StatePropertiesPredicate;
 import net.minecraft.data.loot.BlockLoot;
 import net.minecraft.world.item.Items;
+import net.minecraft.world.item.enchantment.Enchantments;
 import net.minecraft.world.level.ItemLike;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.BushBlock;
@@ -12,6 +14,7 @@ import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import net.minecraft.world.level.storage.loot.LootPool;
 import net.minecraft.world.level.storage.loot.LootTable;
 import net.minecraft.world.level.storage.loot.entries.LootItem;
+import net.minecraft.world.level.storage.loot.functions.ApplyBonusCount;
 import net.minecraft.world.level.storage.loot.functions.SetItemCountFunction;
 import net.minecraft.world.level.storage.loot.predicates.LootItemBlockStatePropertyCondition;
 import net.minecraft.world.level.storage.loot.providers.number.UniformGenerator;
@@ -40,28 +43,38 @@ public class BlockLootTable extends BlockLoot {
         addBushLootTable(Init.GLOWSTONE_BUSH.get(), Items.GLOWSTONE_DUST);
         addBushLootTable(Init.NETHERITE_BUSH.get(), Init.NETHERITE_NUGGET.get());
 
+        addBushLootTable(Init.AMETHYST_BUSH.get(), Items.AMETHYST_SHARD);
+        addBushLootTable(Init.EXPERIENCE_BUSH.get(), Items.EXPERIENCE_BOTTLE);
+        addBushLootTable(Init.ECHO_SHARD_BUSH.get(), Items.ECHO_SHARD);
+        addBushLootTable(Init.GOLDEN_APPLE_BUSH.get(), Items.GOLDEN_APPLE);
+        addBushLootTable(Init.SUGAR_BUSH.get(), Items.SUGAR);
+
+        addBushLootTable(Init.ANCIENT_DEBRIS_BUSH.get(), Items.ANCIENT_DEBRIS);
+        addBushLootTable(Init.BLAZE_BUSH.get(), Items.BLAZE_ROD);
+
+        addBushLootTable(Init.ENDER_PEARL_BUSH.get(), Items.ENDER_PEARL);
+        addBushLootTable(Init.ENDER_EYE_BUSH.get(), Items.ENDER_EYE);
+        addBushLootTable(Init.CHORUS_BUSH.get(), Items.CHORUS_FRUIT);
+        addBushLootTable(Init.SHULKER_SHELL_BUSH.get(), Items.SHULKER_SHELL);
+        addBushLootTable(Init.DRAGON_BREATH_BUSH.get(), Items.DRAGON_BREATH);
+
     }
 
     private void addBushLootTable(BushBlock bushblock, ItemLike itemLike){
-        this.add(bushblock, (block) ->
-                applyExplosionDecay(block,
-                        LootTable.lootTable()
-                                .withPool(
-                                        LootPool.lootPool()
-                                                .when(LootItemBlockStatePropertyCondition
-                                                        .hasBlockStateProperties(bushblock)
-                                                        .setProperties(StatePropertiesPredicate.Builder.properties()
-                                                                .hasProperty(BlockStateProperties.AGE_3, 3)))
-                                                .add(LootItem.lootTableItem(itemLike))
-                                                .apply(SetItemCountFunction.setCount(UniformGenerator.between(2.0F, 3.0F))))
-
-                                .withPool(
-                                        LootPool.lootPool()
-                                                .when(LootItemBlockStatePropertyCondition
-                                                        .hasBlockStateProperties(bushblock)
-                                                        .setProperties(StatePropertiesPredicate.Builder.properties()
-                                                                .hasProperty(SweetBerryBushBlock.AGE, 2)))
-                                                .add(LootItem.lootTableItem(itemLike))
-                                                .apply(SetItemCountFunction.setCount(UniformGenerator.between(1.0F, 2.0F))))));
+        AbstractModBushBlock plant = (AbstractModBushBlock) bushblock;
+        LootTable.Builder table = LootTable.lootTable();
+        // Breaking returns the starter seed at any age or remaining harvest count.
+        table.withPool(LootPool.lootPool().add(LootItem.lootTableItem(bushblock)));
+        // Ripe, non-spent plants additionally drop their resource. Pools stop at the
+        // default lifetime so a spent state (harvests == limit) never yields a resource.
+        for (int harvests = 0; harvests < plant.profile().defaultHarvestLimit(); harvests++) {
+            table.withPool(LootPool.lootPool()
+                    .when(LootItemBlockStatePropertyCondition.hasBlockStateProperties(bushblock)
+                            .setProperties(StatePropertiesPredicate.Builder.properties()
+                                    .hasProperty(AbstractModBushBlock.AGE, 3)
+                                    .hasProperty(AbstractModBushBlock.HARVESTS, harvests)))
+                    .add(LootItem.lootTableItem(itemLike)));
+        }
+        add(bushblock, applyExplosionDecay(bushblock, table));
     }
 }

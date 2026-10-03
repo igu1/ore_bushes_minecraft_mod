@@ -23,3 +23,13 @@ run
 
 # Files from Forge MDK
 forge*changelog.txt
+
+# local editor config
+.vscode/
+
+# art sources and build tooling (not part of the shipped mod)
+art/
+tools/
+
+# generated datagen cache
+src/generated/resources/.cache/

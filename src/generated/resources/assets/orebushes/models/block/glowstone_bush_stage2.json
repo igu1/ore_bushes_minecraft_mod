@@ -1,6 +1,0 @@
-{
-  "parent": "minecraft:block/cross",
-  "textures": {
-    "cross": "orebushes:block/glowstone_bush_stage2"
-  }
-}

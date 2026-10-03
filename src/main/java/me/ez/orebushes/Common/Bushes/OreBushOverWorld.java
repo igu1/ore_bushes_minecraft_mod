@@ -1,5 +1,6 @@
 package me.ez.orebushes.Common.Bushes;
 
+import me.ez.orebushes.Config;
 import me.ez.orebushes.Init;
 import net.minecraft.core.BlockPos;
 import net.minecraft.sounds.SoundEvents;
@@ -9,6 +10,8 @@ import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
+import net.minecraft.world.item.enchantment.EnchantmentHelper;
+import net.minecraft.world.item.enchantment.Enchantments;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Blocks;
@@ -25,7 +28,9 @@ public class OreBushOverWorld extends AbstractModBushBlock {
     private final int getItemByKey;
 
     public OreBushOverWorld(int CloneItemKey) {
-        super(BlockBehaviour.Properties.copy(Blocks.SWEET_BERRY_BUSH));
+        super(BlockBehaviour.Properties.copy(Blocks.SWEET_BERRY_BUSH).lightLevel(state ->
+                state.getValue(AGE) == 3 && state.getValue(HARVESTS) < (CloneItemKey == 10 ? 6 : 10)
+                        && (CloneItemKey == 5 || CloneItemKey == 9 || CloneItemKey == 10) ? 4 : 0));
         this.getItemByKey = CloneItemKey;
     }
 
@@ -35,17 +40,11 @@ public class OreBushOverWorld extends AbstractModBushBlock {
     }
     @Override
     public InteractionResult use(BlockState state, Level level, BlockPos pos, Player player, InteractionHand interactionHand, BlockHitResult hitResult) {
-        int i = state.getValue(AGE);
-        boolean flag = i == 3;
-        if (i > 1){
-            int j = 1 + level.random.nextInt(1);
-            popResource(level, pos, getDropItem(getItemByKey, j + (flag ? 1 : 0)));
-            level.playSound(null, pos, SoundEvents.SWEET_BERRY_BUSH_PICK_BERRIES, SoundSource.BLOCKS, 1.0F, 0.8F + level.random.nextFloat() * 0.4F);
-            level.setBlock(pos, state.setValue(AGE, 1), 2);
-            return InteractionResult.sidedSuccess(level.isClientSide);
-        }
-        return InteractionResult.PASS;
+        return harvest(state, level, pos, player, interactionHand);
     }
+
+    @Override
+    protected ItemStack getDropForPlant() { return getDropItem(getItemByKey, 1); }
 
     @Override
     public ItemStack getItem(int ItemKey) {
@@ -58,6 +57,11 @@ public class OreBushOverWorld extends AbstractModBushBlock {
         stackHashMap.put(6, Init.LAPIS_BUSH_ITEM.get().getDefaultInstance());
         stackHashMap.put(7, Init.DIAMOND_BUSH_ITEM.get().getDefaultInstance());
         stackHashMap.put(8, Init.COPPER_BUSH_ITEM.get().getDefaultInstance());
+        stackHashMap.put(9, Init.AMETHYST_BUSH_ITEM.get().getDefaultInstance());
+        stackHashMap.put(10, Init.EXPERIENCE_BUSH_ITEM.get().getDefaultInstance());
+        stackHashMap.put(11, Init.ECHO_SHARD_BUSH_ITEM.get().getDefaultInstance());
+        stackHashMap.put(12, Init.GOLDEN_APPLE_BUSH_ITEM.get().getDefaultInstance());
+        stackHashMap.put(13, Init.SUGAR_BUSH_ITEM.get().getDefaultInstance());
         return stackHashMap.get(ItemKey);
     }
 
@@ -72,17 +76,18 @@ public class OreBushOverWorld extends AbstractModBushBlock {
         stackHashMap.put(6, Items.LAPIS_LAZULI.getDefaultInstance());
         stackHashMap.put(7, Init.DIAMOND_NUGGET.get().getDefaultInstance());
         stackHashMap.put(8, Init.COPPER_NUGGET.get().getDefaultInstance());
-        return stackHashMap.get(ItemKey);
+        stackHashMap.put(9, Items.AMETHYST_SHARD.getDefaultInstance());
+        stackHashMap.put(10, Items.EXPERIENCE_BOTTLE.getDefaultInstance());
+        stackHashMap.put(11, Items.ECHO_SHARD.getDefaultInstance());
+        stackHashMap.put(12, Items.GOLDEN_APPLE.getDefaultInstance());
+        stackHashMap.put(13, Items.SUGAR.getDefaultInstance());
+        ItemStack result = stackHashMap.get(ItemKey);
+        result.setCount(amount);
+        return result;
     }
 
     @Override
     public boolean onDestroyedByPlayer(BlockState state, Level level, BlockPos pos, Player player, boolean willHarvest, FluidState fluid) {
-        popResource(level, pos, getItem(getItemByKey));
         return super.onDestroyedByPlayer(state, level, pos, player, willHarvest, fluid);
-    }
-
-    @Override
-    protected boolean mayPlaceOn(BlockState state, BlockGetter getter, BlockPos pos) {
-        return state.is(Blocks.GRASS_BLOCK) || state.is(Blocks.FARMLAND);
     }
 }

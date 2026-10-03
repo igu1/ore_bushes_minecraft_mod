@@ -1,6 +1,3 @@
 {
-  "parent": "minecraft:item/generated",
-  "textures": {
-    "layer0": "orebushes:item/iron_bush"
-  }
+  "parent": "orebushes:block/plants/iron_v2_1"
 }

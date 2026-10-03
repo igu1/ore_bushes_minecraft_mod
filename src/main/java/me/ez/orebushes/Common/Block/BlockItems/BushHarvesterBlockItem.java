@@ -19,6 +19,10 @@ public class BushHarvesterBlockItem extends BlockItem {
 
     @Override
     public void appendHoverText(ItemStack stack, @Nullable Level level, List<Component> components, TooltipFlag flag) {
+        components.add(Component.literal("Right-click to open the 36-slot harvester storage.").withStyle(ChatFormatting.AQUA));
+        components.add(Component.literal("Fills its own storage, then any inventory above.").withStyle(ChatFormatting.GRAY));
+        components.add(Component.literal("Shows its harvesting radius while working. Redstone pauses.").withStyle(ChatFormatting.GRAY));
+        components.add(Component.literal("Blue idle • Green running • Red blocked • Amber paused").withStyle(ChatFormatting.DARK_GRAY));
         if (Screen.hasShiftDown()) {
             components.add(Component.translatable("Hint: Place A Chest Top Of The Harvester").withStyle(ChatFormatting.AQUA));
             components.add(Component.translatable("Speed:"));

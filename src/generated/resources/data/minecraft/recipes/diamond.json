@@ -1,0 +1,35 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "item": "orebushes:diamond_nugget"
+    },
+    {
+      "item": "orebushes:diamond_nugget"
+    },
+    {
+      "item": "orebushes:diamond_nugget"
+    },
+    {
+      "item": "orebushes:diamond_nugget"
+    },
+    {
+      "item": "orebushes:diamond_nugget"
+    },
+    {
+      "item": "orebushes:diamond_nugget"
+    },
+    {
+      "item": "orebushes:diamond_nugget"
+    },
+    {
+      "item": "orebushes:diamond_nugget"
+    },
+    {
+      "item": "orebushes:diamond_nugget"
+    }
+  ],
+  "result": {
+    "item": "minecraft:diamond"
+  }
+}

@@ -2,6 +2,7 @@ package me.ez.orebushes.Datagen;
 
 import me.ez.orebushes.Init;
 import me.ez.orebushes.Main;
+import me.ez.orebushes.Common.Bushes.AbstractModBushBlock;
 import net.minecraft.data.DataGenerator;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.level.block.BushBlock;
@@ -33,6 +34,21 @@ public class BlockStateProvider extends net.minecraftforge.client.model.generato
         makeBush(Init.QUARTZ_BUSH.get(), "quartz_bush_stage", "quartz_bush_stage");
         makeBush(Init.NETHERITE_BUSH.get(), "netherite_bush_stage", "netherite_bush_stage");
 
+        makeBush(Init.AMETHYST_BUSH.get(), "amethyst_bush_stage", "amethyst_bush_stage");
+        makeBush(Init.EXPERIENCE_BUSH.get(), "experience_bush_stage", "experience_bush_stage");
+        makeBush(Init.ECHO_SHARD_BUSH.get(), "echo_shard_bush_stage", "echo_shard_bush_stage");
+        makeBush(Init.GOLDEN_APPLE_BUSH.get(), "golden_apple_bush_stage", "golden_apple_bush_stage");
+        makeBush(Init.SUGAR_BUSH.get(), "sugar_bush_stage", "sugar_bush_stage");
+
+        makeBush(Init.ANCIENT_DEBRIS_BUSH.get(), "ancient_debris_bush_stage", "ancient_debris_bush_stage");
+        makeBush(Init.BLAZE_BUSH.get(), "blaze_bush_stage", "blaze_bush_stage");
+
+        makeBush(Init.ENDER_PEARL_BUSH.get(), "ender_pearl_bush_stage", "ender_pearl_bush_stage");
+        makeBush(Init.ENDER_EYE_BUSH.get(), "ender_eye_bush_stage", "ender_eye_bush_stage");
+        makeBush(Init.CHORUS_BUSH.get(), "chorus_bush_stage", "chorus_bush_stage");
+        makeBush(Init.SHULKER_SHELL_BUSH.get(), "shulker_shell_bush_stage", "shulker_shell_bush_stage");
+        makeBush(Init.DRAGON_BREATH_BUSH.get(), "dragon_breath_bush_stage", "dragon_breath_bush_stage");
+
 
     }
 
@@ -43,8 +59,10 @@ public class BlockStateProvider extends net.minecraftforge.client.model.generato
 
     private ConfiguredModel[] states(BlockState state, BushBlock block, String modelName, String textureName) {
         ConfiguredModel[] models = new ConfiguredModel[1];
-        models[0] = new ConfiguredModel(models().cross(modelName + state.getValue(BlockStateProperties.AGE_3),
-                new ResourceLocation(Main.MOD_ID, "block/" + textureName + state.getValue(BlockStateProperties.AGE_3))));
+        AbstractModBushBlock plant = (AbstractModBushBlock) block;
+        String stage = plant.isExhausted(state) ? "spent" : String.valueOf(state.getValue(BlockStateProperties.AGE_3));
+        models[0] = new ConfiguredModel(models().getExistingFile(
+                new ResourceLocation(Main.MOD_ID, "block/plants/" + plant.profile().id + "_v2_" + stage)));
         return models;
     }
 }

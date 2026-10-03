@@ -1,0 +1,100 @@
+{
+  "variants": {
+    "facing=north,mode=idle": {
+      "model": "orebushes:block/harvester/idle_v2",
+      "y": 0
+    },
+    "facing=east,mode=idle": {
+      "model": "orebushes:block/harvester/idle_v2",
+      "y": 90
+    },
+    "facing=south,mode=idle": {
+      "model": "orebushes:block/harvester/idle_v2",
+      "y": 180
+    },
+    "facing=west,mode=idle": {
+      "model": "orebushes:block/harvester/idle_v2",
+      "y": 270
+    },
+    "facing=up,mode=idle": {
+      "model": "orebushes:block/harvester/idle_v2",
+      "y": 0
+    },
+    "facing=down,mode=idle": {
+      "model": "orebushes:block/harvester/idle_v2",
+      "y": 0
+    },
+    "facing=north,mode=running": {
+      "model": "orebushes:block/harvester/running_v2",
+      "y": 0
+    },
+    "facing=east,mode=running": {
+      "model": "orebushes:block/harvester/running_v2",
+      "y": 90
+    },
+    "facing=south,mode=running": {
+      "model": "orebushes:block/harvester/running_v2",
+      "y": 180
+    },
+    "facing=west,mode=running": {
+      "model": "orebushes:block/harvester/running_v2",
+      "y": 270
+    },
+    "facing=up,mode=running": {
+      "model": "orebushes:block/harvester/running_v2",
+      "y": 0
+    },
+    "facing=down,mode=running": {
+      "model": "orebushes:block/harvester/running_v2",
+      "y": 0
+    },
+    "facing=north,mode=blocked": {
+      "model": "orebushes:block/harvester/blocked_v2",
+      "y": 0
+    },
+    "facing=east,mode=blocked": {
+      "model": "orebushes:block/harvester/blocked_v2",
+      "y": 90
+    },
+    "facing=south,mode=blocked": {
+      "model": "orebushes:block/harvester/blocked_v2",
+      "y": 180
+    },
+    "facing=west,mode=blocked": {
+      "model": "orebushes:block/harvester/blocked_v2",
+      "y": 270
+    },
+    "facing=up,mode=blocked": {
+      "model": "orebushes:block/harvester/blocked_v2",
+      "y": 0
+    },
+    "facing=down,mode=blocked": {
+      "model": "orebushes:block/harvester/blocked_v2",
+      "y": 0
+    },
+    "facing=north,mode=paused": {
+      "model": "orebushes:block/harvester/paused_v2",
+      "y": 0
+    },
+    "facing=east,mode=paused": {
+      "model": "orebushes:block/harvester/paused_v2",
+      "y": 90
+    },
+    "facing=south,mode=paused": {
+      "model": "orebushes:block/harvester/paused_v2",
+      "y": 180
+    },
+    "facing=west,mode=paused": {
+      "model": "orebushes:block/harvester/paused_v2",
+      "y": 270
+    },
+    "facing=up,mode=paused": {
+      "model": "orebushes:block/harvester/paused_v2",
+      "y": 0
+    },
+    "facing=down,mode=paused": {
+      "model": "orebushes:block/harvester/paused_v2",
+      "y": 0
+    }
+  }
+}

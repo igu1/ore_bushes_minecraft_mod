@@ -1,5 +1,6 @@
 package me.ez.orebushes.Common.Bushes;
 
+import me.ez.orebushes.Config;
 import me.ez.orebushes.Init;
 import net.minecraft.core.BlockPos;
 import net.minecraft.sounds.SoundEvents;
@@ -9,6 +10,8 @@ import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
+import net.minecraft.world.item.enchantment.EnchantmentHelper;
+import net.minecraft.world.item.enchantment.Enchantments;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Blocks;
@@ -25,7 +28,9 @@ public class OreBushNether extends AbstractModBushBlock {
     private final int getItemByKey;
 
     public OreBushNether(int CloneItemKey) {
-        super(BlockBehaviour.Properties.copy(Blocks.SWEET_BERRY_BUSH));
+        super(BlockBehaviour.Properties.copy(Blocks.SWEET_BERRY_BUSH).lightLevel(state ->
+                state.getValue(AGE) == 3 && state.getValue(HARVESTS) < (CloneItemKey == 2 ? 10 : 6)
+                        && (CloneItemKey == 2 || CloneItemKey == 5) ? 8 : 0));
         this.getItemByKey = CloneItemKey;
     }
 
@@ -36,17 +41,11 @@ public class OreBushNether extends AbstractModBushBlock {
 
     @Override
     public InteractionResult use(BlockState state, Level level, BlockPos pos, Player player, InteractionHand interactionHand, BlockHitResult hitResult) {
-        int i = state.getValue(AGE);
-        boolean flag = i == 3;
-        if (i > 1){
-            int j = 1 + level.random.nextInt(2);
-            popResource(level, pos, getDropItem(getItemByKey, j + (flag ? 1 : 0)));
-            level.playSound(null, pos, SoundEvents.SWEET_BERRY_BUSH_PICK_BERRIES, SoundSource.BLOCKS, 1.0F, 0.8F + level.random.nextFloat() * 0.4F);
-            level.setBlock(pos, state.setValue(AGE, 1), 2);
-            return InteractionResult.sidedSuccess(level.isClientSide);
-        }
-        return InteractionResult.PASS;
+        return harvest(state, level, pos, player, interactionHand);
     }
+
+    @Override
+    protected ItemStack getDropForPlant() { return getDropItem(getItemByKey, 1); }
 
     @Override
     public ItemStack getItem(int ItemKey) {
@@ -54,6 +53,8 @@ public class OreBushNether extends AbstractModBushBlock {
         stackHashMap.put(1, Init.QUARTZ_BUSH_ITEM.get().getDefaultInstance());
         stackHashMap.put(2, Init.GLOWSTONE_BUSH_ITEM.get().getDefaultInstance());
         stackHashMap.put(3, Init.NETHERITE_BUSH_ITEM.get().getDefaultInstance());
+        stackHashMap.put(4, Init.ANCIENT_DEBRIS_BUSH_ITEM.get().getDefaultInstance());
+        stackHashMap.put(5, Init.BLAZE_BUSH_ITEM.get().getDefaultInstance());
 
         return stackHashMap.get(ItemKey);
     }
@@ -64,17 +65,13 @@ public class OreBushNether extends AbstractModBushBlock {
         stackHashMap.put(1, new ItemStack(Items.QUARTZ, amount));
         stackHashMap.put(2, new ItemStack(Items.GLOWSTONE_DUST, amount));
         stackHashMap.put(3, new ItemStack(Init.NETHERITE_NUGGET.get(), amount));
+        stackHashMap.put(4, new ItemStack(Items.ANCIENT_DEBRIS, amount));
+        stackHashMap.put(5, new ItemStack(Items.BLAZE_ROD, amount));
         return stackHashMap.get(ItemKey);
     }
 
     @Override
     public boolean onDestroyedByPlayer(BlockState state, Level level, BlockPos pos, Player player, boolean willHarvest, FluidState fluid) {
-        popResource(level, pos, getItem(getItemByKey));
         return super.onDestroyedByPlayer(state, level, pos, player, willHarvest, fluid);
-    }
-
-    @Override
-    protected boolean mayPlaceOn(BlockState state, BlockGetter getter, BlockPos pos) {
-        return state.is(Blocks.NETHERRACK) || super.mayPlaceOn(state, getter, pos);
     }
 }

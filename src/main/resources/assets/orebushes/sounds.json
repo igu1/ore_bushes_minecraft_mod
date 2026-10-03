@@ -1,0 +1,209 @@
+{
+  "amethyst_harvest": {
+    "subtitle": "subtitles.orebushes.amethyst_harvest",
+    "sounds": [
+      {
+        "name": "orebushes:plants/amethyst_harvest",
+        "attenuation_distance": 12
+      }
+    ]
+  },
+  "ancient_debris_harvest": {
+    "subtitle": "subtitles.orebushes.ancient_debris_harvest",
+    "sounds": [
+      {
+        "name": "orebushes:plants/ancient_debris_harvest",
+        "attenuation_distance": 12
+      }
+    ]
+  },
+  "blaze_harvest": {
+    "subtitle": "subtitles.orebushes.blaze_harvest",
+    "sounds": [
+      {
+        "name": "orebushes:plants/blaze_harvest",
+        "attenuation_distance": 12
+      }
+    ]
+  },
+  "chorus_harvest": {
+    "subtitle": "subtitles.orebushes.chorus_harvest",
+    "sounds": [
+      {
+        "name": "orebushes:plants/chorus_harvest",
+        "attenuation_distance": 12
+      }
+    ]
+  },
+  "coal_harvest": {
+    "subtitle": "subtitles.orebushes.coal_harvest",
+    "sounds": [
+      {
+        "name": "orebushes:plants/coal_harvest",
+        "attenuation_distance": 12
+      }
+    ]
+  },
+  "copper_harvest": {
+    "subtitle": "subtitles.orebushes.copper_harvest",
+    "sounds": [
+      {
+        "name": "orebushes:plants/copper_harvest",
+        "attenuation_distance": 12
+      }
+    ]
+  },
+  "diamond_harvest": {
+    "subtitle": "subtitles.orebushes.diamond_harvest",
+    "sounds": [
+      {
+        "name": "orebushes:plants/diamond_harvest",
+        "attenuation_distance": 12
+      }
+    ]
+  },
+  "dragon_breath_harvest": {
+    "subtitle": "subtitles.orebushes.dragon_breath_harvest",
+    "sounds": [
+      {
+        "name": "orebushes:plants/dragon_breath_harvest",
+        "attenuation_distance": 12
+      }
+    ]
+  },
+  "echo_shard_harvest": {
+    "subtitle": "subtitles.orebushes.echo_shard_harvest",
+    "sounds": [
+      {
+        "name": "orebushes:plants/echo_shard_harvest",
+        "attenuation_distance": 12
+      }
+    ]
+  },
+  "emerald_harvest": {
+    "subtitle": "subtitles.orebushes.emerald_harvest",
+    "sounds": [
+      {
+        "name": "orebushes:plants/emerald_harvest",
+        "attenuation_distance": 12
+      }
+    ]
+  },
+  "ender_eye_harvest": {
+    "subtitle": "subtitles.orebushes.ender_eye_harvest",
+    "sounds": [
+      {
+        "name": "orebushes:plants/ender_eye_harvest",
+        "attenuation_distance": 12
+      }
+    ]
+  },
+  "ender_pearl_harvest": {
+    "subtitle": "subtitles.orebushes.ender_pearl_harvest",
+    "sounds": [
+      {
+        "name": "orebushes:plants/ender_pearl_harvest",
+        "attenuation_distance": 12
+      }
+    ]
+  },
+  "experience_harvest": {
+    "subtitle": "subtitles.orebushes.experience_harvest",
+    "sounds": [
+      {
+        "name": "orebushes:plants/experience_harvest",
+        "attenuation_distance": 12
+      }
+    ]
+  },
+  "glowstone_harvest": {
+    "subtitle": "subtitles.orebushes.glowstone_harvest",
+    "sounds": [
+      {
+        "name": "orebushes:plants/glowstone_harvest",
+        "attenuation_distance": 12
+      }
+    ]
+  },
+  "gold_harvest": {
+    "subtitle": "subtitles.orebushes.gold_harvest",
+    "sounds": [
+      {
+        "name": "orebushes:plants/gold_harvest",
+        "attenuation_distance": 12
+      }
+    ]
+  },
+  "golden_apple_harvest": {
+    "subtitle": "subtitles.orebushes.golden_apple_harvest",
+    "sounds": [
+      {
+        "name": "orebushes:plants/golden_apple_harvest",
+        "attenuation_distance": 12
+      }
+    ]
+  },
+  "iron_harvest": {
+    "subtitle": "subtitles.orebushes.iron_harvest",
+    "sounds": [
+      {
+        "name": "orebushes:plants/iron_harvest",
+        "attenuation_distance": 12
+      }
+    ]
+  },
+  "lapis_harvest": {
+    "subtitle": "subtitles.orebushes.lapis_harvest",
+    "sounds": [
+      {
+        "name": "orebushes:plants/lapis_harvest",
+        "attenuation_distance": 12
+      }
+    ]
+  },
+  "netherite_harvest": {
+    "subtitle": "subtitles.orebushes.netherite_harvest",
+    "sounds": [
+      {
+        "name": "orebushes:plants/netherite_harvest",
+        "attenuation_distance": 12
+      }
+    ]
+  },
+  "quartz_harvest": {
+    "subtitle": "subtitles.orebushes.quartz_harvest",
+    "sounds": [
+      {
+        "name": "orebushes:plants/quartz_harvest",
+        "attenuation_distance": 12
+      }
+    ]
+  },
+  "redstone_harvest": {
+    "subtitle": "subtitles.orebushes.redstone_harvest",
+    "sounds": [
+      {
+        "name": "orebushes:plants/redstone_harvest",
+        "attenuation_distance": 12
+      }
+    ]
+  },
+  "shulker_shell_harvest": {
+    "subtitle": "subtitles.orebushes.shulker_shell_harvest",
+    "sounds": [
+      {
+        "name": "orebushes:plants/shulker_shell_harvest",
+        "attenuation_distance": 12
+      }
+    ]
+  },
+  "sugar_harvest": {
+    "subtitle": "subtitles.orebushes.sugar_harvest",
+    "sounds": [
+      {
+        "name": "orebushes:plants/sugar_harvest",
+        "attenuation_distance": 12
+      }
+    ]
+  }
+}

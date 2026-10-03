@@ -1,0 +1,196 @@
+{
+  "variants": {
+    "age=0,harvests=0": {
+      "model": "orebushes:block/plants/dragon_breath_v2_0"
+    },
+    "age=0,harvests=1": {
+      "model": "orebushes:block/plants/dragon_breath_v2_0"
+    },
+    "age=0,harvests=10": {
+      "model": "orebushes:block/plants/dragon_breath_v2_spent"
+    },
+    "age=0,harvests=11": {
+      "model": "orebushes:block/plants/dragon_breath_v2_spent"
+    },
+    "age=0,harvests=12": {
+      "model": "orebushes:block/plants/dragon_breath_v2_spent"
+    },
+    "age=0,harvests=13": {
+      "model": "orebushes:block/plants/dragon_breath_v2_spent"
+    },
+    "age=0,harvests=14": {
+      "model": "orebushes:block/plants/dragon_breath_v2_spent"
+    },
+    "age=0,harvests=15": {
+      "model": "orebushes:block/plants/dragon_breath_v2_spent"
+    },
+    "age=0,harvests=2": {
+      "model": "orebushes:block/plants/dragon_breath_v2_0"
+    },
+    "age=0,harvests=3": {
+      "model": "orebushes:block/plants/dragon_breath_v2_0"
+    },
+    "age=0,harvests=4": {
+      "model": "orebushes:block/plants/dragon_breath_v2_spent"
+    },
+    "age=0,harvests=5": {
+      "model": "orebushes:block/plants/dragon_breath_v2_spent"
+    },
+    "age=0,harvests=6": {
+      "model": "orebushes:block/plants/dragon_breath_v2_spent"
+    },
+    "age=0,harvests=7": {
+      "model": "orebushes:block/plants/dragon_breath_v2_spent"
+    },
+    "age=0,harvests=8": {
+      "model": "orebushes:block/plants/dragon_breath_v2_spent"
+    },
+    "age=0,harvests=9": {
+      "model": "orebushes:block/plants/dragon_breath_v2_spent"
+    },
+    "age=1,harvests=0": {
+      "model": "orebushes:block/plants/dragon_breath_v2_1"
+    },
+    "age=1,harvests=1": {
+      "model": "orebushes:block/plants/dragon_breath_v2_1"
+    },
+    "age=1,harvests=10": {
+      "model": "orebushes:block/plants/dragon_breath_v2_spent"
+    },
+    "age=1,harvests=11": {
+      "model": "orebushes:block/plants/dragon_breath_v2_spent"
+    },
+    "age=1,harvests=12": {
+      "model": "orebushes:block/plants/dragon_breath_v2_spent"
+    },
+    "age=1,harvests=13": {
+      "model": "orebushes:block/plants/dragon_breath_v2_spent"
+    },
+    "age=1,harvests=14": {
+      "model": "orebushes:block/plants/dragon_breath_v2_spent"
+    },
+    "age=1,harvests=15": {
+      "model": "orebushes:block/plants/dragon_breath_v2_spent"
+    },
+    "age=1,harvests=2": {
+      "model": "orebushes:block/plants/dragon_breath_v2_1"
+    },
+    "age=1,harvests=3": {
+      "model": "orebushes:block/plants/dragon_breath_v2_1"
+    },
+    "age=1,harvests=4": {
+      "model": "orebushes:block/plants/dragon_breath_v2_spent"
+    },
+    "age=1,harvests=5": {
+      "model": "orebushes:block/plants/dragon_breath_v2_spent"
+    },
+    "age=1,harvests=6": {
+      "model": "orebushes:block/plants/dragon_breath_v2_spent"
+    },
+    "age=1,harvests=7": {
+      "model": "orebushes:block/plants/dragon_breath_v2_spent"
+    },
+    "age=1,harvests=8": {
+      "model": "orebushes:block/plants/dragon_breath_v2_spent"
+    },
+    "age=1,harvests=9": {
+      "model": "orebushes:block/plants/dragon_breath_v2_spent"
+    },
+    "age=2,harvests=0": {
+      "model": "orebushes:block/plants/dragon_breath_v2_2"
+    },
+    "age=2,harvests=1": {
+      "model": "orebushes:block/plants/dragon_breath_v2_2"
+    },
+    "age=2,harvests=10": {
+      "model": "orebushes:block/plants/dragon_breath_v2_spent"
+    },
+    "age=2,harvests=11": {
+      "model": "orebushes:block/plants/dragon_breath_v2_spent"
+    },
+    "age=2,harvests=12": {
+      "model": "orebushes:block/plants/dragon_breath_v2_spent"
+    },
+    "age=2,harvests=13": {
+      "model": "orebushes:block/plants/dragon_breath_v2_spent"
+    },
+    "age=2,harvests=14": {
+      "model": "orebushes:block/plants/dragon_breath_v2_spent"
+    },
+    "age=2,harvests=15": {
+      "model": "orebushes:block/plants/dragon_breath_v2_spent"
+    },
+    "age=2,harvests=2": {
+      "model": "orebushes:block/plants/dragon_breath_v2_2"
+    },
+    "age=2,harvests=3": {
+      "model": "orebushes:block/plants/dragon_breath_v2_2"
+    },
+    "age=2,harvests=4": {
+      "model": "orebushes:block/plants/dragon_breath_v2_spent"
+    },
+    "age=2,harvests=5": {
+      "model": "orebushes:block/plants/dragon_breath_v2_spent"
+    },
+    "age=2,harvests=6": {
+      "model": "orebushes:block/plants/dragon_breath_v2_spent"
+    },
+    "age=2,harvests=7": {
+      "model": "orebushes:block/plants/dragon_breath_v2_spent"
+    },
+    "age=2,harvests=8": {
+      "model": "orebushes:block/plants/dragon_breath_v2_spent"
+    },
+    "age=2,harvests=9": {
+      "model": "orebushes:block/plants/dragon_breath_v2_spent"
+    },
+    "age=3,harvests=0": {
+      "model": "orebushes:block/plants/dragon_breath_v2_3"
+    },
+    "age=3,harvests=1": {
+      "model": "orebushes:block/plants/dragon_breath_v2_3"
+    },
+    "age=3,harvests=10": {
+      "model": "orebushes:block/plants/dragon_breath_v2_spent"
+    },
+    "age=3,harvests=11": {
+      "model": "orebushes:block/plants/dragon_breath_v2_spent"
+    },
+    "age=3,harvests=12": {
+      "model": "orebushes:block/plants/dragon_breath_v2_spent"
+    },
+    "age=3,harvests=13": {
+      "model": "orebushes:block/plants/dragon_breath_v2_spent"
+    },
+    "age=3,harvests=14": {
+      "model": "orebushes:block/plants/dragon_breath_v2_spent"
+    },
+    "age=3,harvests=15": {
+      "model": "orebushes:block/plants/dragon_breath_v2_spent"
+    },
+    "age=3,harvests=2": {
+      "model": "orebushes:block/plants/dragon_breath_v2_3"
+    },
+    "age=3,harvests=3": {
+      "model": "orebushes:block/plants/dragon_breath_v2_3"
+    },
+    "age=3,harvests=4": {
+      "model": "orebushes:block/plants/dragon_breath_v2_spent"
+    },
+    "age=3,harvests=5": {
+      "model": "orebushes:block/plants/dragon_breath_v2_spent"
+    },
+    "age=3,harvests=6": {
+      "model": "orebushes:block/plants/dragon_breath_v2_spent"
+    },
+    "age=3,harvests=7": {
+      "model": "orebushes:block/plants/dragon_breath_v2_spent"
+    },
+    "age=3,harvests=8": {
+      "model": "orebushes:block/plants/dragon_breath_v2_spent"
+    },
+    "age=3,harvests=9": {
+      "model": "orebushes:block/plants/dragon_breath_v2_spent"
+    }
+  }
+}
