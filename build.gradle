@@ -121,3 +121,16 @@ publishing {
 tasks.withType(JavaCompile).configureEach {
     options.encoding = 'UTF-8'
 }
+
+// Copies the built jar into the git-ignored builds/<target>/ folder.
+// The folder is shared across version branches and never committed.
+tasks.register('collectBuild', Copy) {
+    group = 'build'
+    description = 'Collects the built Forge 1.19 jar into builds/1.19-forge/'
+    from(layout.buildDirectory.dir('libs')) {
+        include '*.jar'
+        exclude '*-sources.jar', '*-dev.jar'
+    }
+    into rootProject.file('builds/1.19-forge')
+    dependsOn 'build'
+}
