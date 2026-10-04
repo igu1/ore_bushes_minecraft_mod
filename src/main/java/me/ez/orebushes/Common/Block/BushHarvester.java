@@ -48,8 +48,13 @@ public class BushHarvester extends AbstractBlockEntityBlock {
             EnumProperty.create("mode", OperatingState.class);
 
     public BushHarvester() {
-        this(BlockBehaviour.Properties.of().strength(3.5F).sound(SoundType.METAL)
-                .lightLevel(state -> state.getValue(MODE) == OperatingState.RUNNING ? 7 : 0));
+        this(createProperties());
+    }
+
+    /** Base properties; the deferred register applies the block id. */
+    public static BlockBehaviour.Properties createProperties() {
+        return BlockBehaviour.Properties.of().strength(3.5F).sound(SoundType.METAL)
+                .lightLevel(state -> state.getValue(MODE) == OperatingState.RUNNING ? 7 : 0);
     }
 
     public BushHarvester(BlockBehaviour.Properties properties) {

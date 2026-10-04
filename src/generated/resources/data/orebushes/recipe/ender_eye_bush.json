@@ -1,0 +1,18 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "B": "minecraft:ender_eye",
+    "C": "minecraft:echo_shard",
+    "S": "minecraft:chorus_flower"
+  },
+  "pattern": [
+    " C ",
+    "SBS",
+    " C "
+  ],
+  "result": {
+    "count": 1,
+    "id": "orebushes:ender_eye_bush"
+  }
+}

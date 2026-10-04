@@ -11,12 +11,12 @@ import net.neoforged.fml.common.EventBusSubscriber;
 public class DataGen {
 
     @SubscribeEvent
-    public static void onGatherData(GatherDataEvent e){
+    public static void onGatherClientData(GatherDataEvent.Client e){
         DataGenerator generator = e.getGenerator();
         PackOutput output = generator.getPackOutput();
 
-        generator.addProvider(e.includeDev(), new LanguageProvider(output, "en_us"));
-        generator.addProvider(e.includeDev(), new ModRecipeProvider.Runner(output, e.getLookupProvider()));
-        generator.addProvider(e.includeDev(), new LootTableProvider(output, e.getLookupProvider()));
+        e.addProvider(new LanguageProvider(output, "en_us"));
+        e.addProvider(new ModRecipeProvider.Runner(output, e.getLookupProvider()));
+        e.addProvider(new LootTableProvider(output, e.getLookupProvider()));
     }
 }

@@ -1,0 +1,18 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "B": "minecraft:chorus_fruit",
+    "C": "minecraft:amethyst_shard",
+    "S": "minecraft:chorus_flower"
+  },
+  "pattern": [
+    " C ",
+    "SBS",
+    " C "
+  ],
+  "result": {
+    "count": 1,
+    "id": "orebushes:chorus_bush"
+  }
+}

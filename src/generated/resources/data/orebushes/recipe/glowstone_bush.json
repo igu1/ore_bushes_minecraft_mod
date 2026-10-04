@@ -1,0 +1,18 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "B": "minecraft:glowstone_dust",
+    "C": "minecraft:amethyst_shard",
+    "S": "minecraft:nether_wart"
+  },
+  "pattern": [
+    " C ",
+    "SBS",
+    " C "
+  ],
+  "result": {
+    "count": 1,
+    "id": "orebushes:glowstone_bush"
+  }
+}

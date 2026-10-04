@@ -1,0 +1,18 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "B": "minecraft:ender_pearl",
+    "C": "minecraft:ender_pearl",
+    "S": "minecraft:chorus_flower"
+  },
+  "pattern": [
+    " C ",
+    "SBS",
+    " C "
+  ],
+  "result": {
+    "count": 1,
+    "id": "orebushes:ender_pearl_bush"
+  }
+}

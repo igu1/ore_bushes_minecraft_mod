@@ -1,0 +1,18 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "B": "minecraft:experience_bottle",
+    "C": "minecraft:ender_pearl",
+    "S": "minecraft:wheat_seeds"
+  },
+  "pattern": [
+    " C ",
+    "SBS",
+    " C "
+  ],
+  "result": {
+    "count": 1,
+    "id": "orebushes:experience_bush"
+  }
+}
