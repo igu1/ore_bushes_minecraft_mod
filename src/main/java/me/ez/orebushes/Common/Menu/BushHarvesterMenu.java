@@ -32,7 +32,7 @@ public class BushHarvesterMenu extends AbstractContainerMenu {
 
     private static Container resolve(Inventory inventory, FriendlyByteBuf data) {
         BlockPos pos = data.readBlockPos();
-        return inventory.player.level.getBlockEntity(pos) instanceof Container container
+        return inventory.player.level().getBlockEntity(pos) instanceof Container container
                 ? container : new SimpleContainer(MACHINE_SLOTS);
     }
 

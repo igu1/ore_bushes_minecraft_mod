@@ -3,7 +3,10 @@ package me.ez.orebushes.Datagen.LootTable;
 import me.ez.orebushes.Init;
 import me.ez.orebushes.Common.Bushes.AbstractModBushBlock;
 import net.minecraft.advancements.critereon.StatePropertiesPredicate;
-import net.minecraft.data.loot.BlockLoot;
+import net.minecraft.core.HolderLookup;
+import net.minecraft.core.registries.Registries;
+import net.minecraft.data.loot.BlockLootSubProvider;
+import net.minecraft.world.flag.FeatureFlags;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.item.enchantment.Enchantments;
 import net.minecraft.world.level.ItemLike;
@@ -18,18 +21,24 @@ import net.minecraft.world.level.storage.loot.functions.ApplyBonusCount;
 import net.minecraft.world.level.storage.loot.functions.SetItemCountFunction;
 import net.minecraft.world.level.storage.loot.predicates.LootItemBlockStatePropertyCondition;
 import net.minecraft.world.level.storage.loot.providers.number.UniformGenerator;
-import net.minecraftforge.registries.RegistryObject;
+import net.neoforged.neoforge.registries.DeferredHolder;
 import org.jetbrains.annotations.NotNull;
 
-public class BlockLootTable extends BlockLoot {
+import java.util.Set;
 
-    @Override
-    protected @NotNull Iterable<Block> getKnownBlocks() {
-        return Init.BUSHES.getEntries().stream().map(RegistryObject::get)::iterator;
+public class BlockLootTable extends BlockLootSubProvider {
+
+    public BlockLootTable(HolderLookup.Provider registries) {
+        super(Set.of(), FeatureFlags.REGISTRY.allFlags(), registries);
     }
 
     @Override
-    protected void addTables() {
+    protected @NotNull Iterable<Block> getKnownBlocks() {
+        return Init.BUSHES.getEntries().stream().map(holder -> (Block) holder.get())::iterator;
+    }
+
+    @Override
+    protected void generate() {
         addBushLootTable(Init.COAL_BUSH.get(), Items.COAL);
         addBushLootTable(Init.IRON_BUSH.get(), Items.IRON_NUGGET);
         addBushLootTable(Init.GOLD_BUSH.get(), Items.GOLD_NUGGET);

@@ -1,19 +1,21 @@
 package me.ez.orebushes;
 
 import me.ez.orebushes.Common.Bushes.BushBlockItem;
+import me.ez.orebushes.Common.Block.BlockEntity.BushHarvesterBlockEntity;
 import me.ez.orebushes.Events.VillagerTradeHandler;
-import net.minecraft.client.renderer.ItemBlockRenderTypes;
-import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.gui.screens.MenuScreens;
+import net.minecraft.world.item.CreativeModeTabs;
 import net.minecraft.world.level.block.ComposterBlock;
-import net.minecraftforge.common.MinecraftForge;
-import net.minecraftforge.eventbus.api.SubscribeEvent;
-import net.minecraftforge.fml.ModLoadingContext;
-import net.minecraftforge.fml.common.Mod;
-import net.minecraftforge.fml.config.ModConfig;
-import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
-import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
-import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
+import net.neoforged.bus.api.IEventBus;
+import net.neoforged.bus.api.SubscribeEvent;
+import net.neoforged.fml.ModContainer;
+import net.neoforged.fml.common.Mod;
+import net.neoforged.fml.config.ModConfig;
+import net.neoforged.fml.event.lifecycle.FMLClientSetupEvent;
+import net.neoforged.fml.event.lifecycle.FMLCommonSetupEvent;
+import net.neoforged.fml.common.EventBusSubscriber;
+import net.neoforged.neoforge.common.NeoForge;
+import net.neoforged.neoforge.event.BuildCreativeModeTabContentsEvent;
 
 @Mod(Main.MOD_ID)
 public class Main
@@ -21,33 +23,47 @@ public class Main
 
     public static final String MOD_ID = "orebushes";
 
-    public Main()
+    public Main(IEventBus modEventBus, ModContainer modContainer)
     {
-        Init.ITEMS.register(FMLJavaModLoadingContext.get().getModEventBus());
-        Init.BUSHES.register(FMLJavaModLoadingContext.get().getModEventBus());
-        Init.BLOCKS.register(FMLJavaModLoadingContext.get().getModEventBus());
-        Init.BLOCK_ENTITY.register(FMLJavaModLoadingContext.get().getModEventBus());
-        Init.MENUS.register(FMLJavaModLoadingContext.get().getModEventBus());
-        PlantEffects.SOUNDS.register(FMLJavaModLoadingContext.get().getModEventBus());
-        PlantEffects.PARTICLES.register(FMLJavaModLoadingContext.get().getModEventBus());
-        WorldGen.CONFIGURED_FEATURES.register(FMLJavaModLoadingContext.get().getModEventBus());
-        WorldGen.PLACED_FEATURES.register(FMLJavaModLoadingContext.get().getModEventBus());
-        ModLoadingContext.get().registerConfig(ModConfig.Type.COMMON, Config.SPEC);
-        MinecraftForge.EVENT_BUS.register(this);
-        MinecraftForge.EVENT_BUS.register(VillagerTradeHandler.class);
+        Init.ITEMS.register(modEventBus);
+        Init.BUSHES.register(modEventBus);
+        Init.BLOCKS.register(modEventBus);
+        Init.BLOCK_ENTITY.register(modEventBus);
+        Init.MENUS.register(modEventBus);
+        PlantEffects.SOUNDS.register(modEventBus);
+        PlantEffects.PARTICLES.register(modEventBus);
+        WorldGen.CONFIGURED_FEATURES.register(modEventBus);
+        WorldGen.PLACED_FEATURES.register(modEventBus);
+        modEventBus.addListener(this::addCreative);
+        modEventBus.addListener(BushHarvesterBlockEntity::registerCapabilities);
+        modContainer.registerConfig(ModConfig.Type.COMMON, Config.SPEC);
+        NeoForge.EVENT_BUS.register(this);
+        NeoForge.EVENT_BUS.register(VillagerTradeHandler.class);
+    }
+
+    /** Adds the seeds and nuggets to the vanilla creative tabs (1.19.3+ style). */
+    private void addCreative(BuildCreativeModeTabContentsEvent event) {
+        if (event.getTabKey() == CreativeModeTabs.INGREDIENTS) {
+            event.accept(Init.EMERALD_NUGGET.get());
+            event.accept(Init.DIAMOND_NUGGET.get());
+            event.accept(Init.NETHERITE_NUGGET.get());
+            event.accept(Init.COPPER_NUGGET.get());
+        }
+        if (event.getTabKey() == CreativeModeTabs.NATURAL_BLOCKS) {
+            Init.BUSHES.getEntries().forEach(h -> event.accept(h.get()));
+        }
+        if (event.getTabKey() == CreativeModeTabs.FUNCTIONAL_BLOCKS) {
+            event.accept(Init.BUSH_HARVESTER_BLOCK_ITEM.get());
+        }
     }
 
 
-    @Mod.EventBusSubscriber(bus = Mod.EventBusSubscriber.Bus.MOD)
+    @EventBusSubscriber(modid = MOD_ID, bus = EventBusSubscriber.Bus.MOD)
     public static class RegistryEvents
     {
         @SubscribeEvent
-        public static void SetupClient(FMLClientSetupEvent e){
-            Init.BUSHES.getEntries().forEach(bushes -> {
-                ItemBlockRenderTypes.setRenderLayer(bushes.get(), RenderType.cutout());
-            });
-            ItemBlockRenderTypes.setRenderLayer(Init.BUSH_HARVESTER.get(), RenderType.cutout());
-            MenuScreens.register(Init.BUSH_HARVESTER_MENU.get(), me.ez.orebushes.Client.BushHarvesterScreen::new);
+        public static void registerScreens(net.neoforged.neoforge.client.event.RegisterMenuScreensEvent event) {
+            event.register(Init.BUSH_HARVESTER_MENU.get(), me.ez.orebushes.Client.BushHarvesterScreen::new);
         }
 
         @SubscribeEvent

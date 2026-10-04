@@ -2,23 +2,26 @@ package me.ez.orebushes.Datagen;
 
 import me.ez.orebushes.Main;
 import net.minecraft.data.DataGenerator;
-import net.minecraftforge.common.data.ExistingFileHelper;
-import net.minecraftforge.eventbus.api.SubscribeEvent;
-import net.minecraftforge.fml.common.Mod;
-import net.minecraftforge.forge.event.lifecycle.GatherDataEvent;
+import net.minecraft.data.PackOutput;
+import net.neoforged.neoforge.common.data.ExistingFileHelper;
+import net.neoforged.neoforge.data.event.GatherDataEvent;
+import net.neoforged.bus.api.SubscribeEvent;
+import net.neoforged.fml.common.EventBusSubscriber;
+import net.neoforged.fml.common.Mod;
 
-@Mod.EventBusSubscriber(modid = Main.MOD_ID, bus = Mod.EventBusSubscriber.Bus.MOD)
+@EventBusSubscriber(modid = Main.MOD_ID, bus = EventBusSubscriber.Bus.MOD)
 public class DataGen {
 
     @SubscribeEvent
     public static void onGatherData(GatherDataEvent e){
         DataGenerator generator = e.getGenerator();
+        PackOutput output = generator.getPackOutput();
         ExistingFileHelper helper = e.getExistingFileHelper();
 
-        generator.addProvider(true, new ItemModelProvider(generator, helper));
-        generator.addProvider(true, new BlockStateProvider(generator, helper));
-        generator.addProvider(true, new LanguageProvider(generator, "en_us"));
-        generator.addProvider(true, new RecipeProvider(generator));
-        generator.addProvider(true, new LootTableProvider(generator));
+        generator.addProvider(e.includeClient(), new ItemModelProvider(output, helper));
+        generator.addProvider(e.includeClient(), new BlockStateProvider(output, helper));
+        generator.addProvider(e.includeClient(), new LanguageProvider(output, "en_us"));
+        generator.addProvider(e.includeServer(), new ModRecipeProvider(output, e.getLookupProvider()));
+        generator.addProvider(e.includeServer(), new LootTableProvider(output, e.getLookupProvider()));
     }
 }

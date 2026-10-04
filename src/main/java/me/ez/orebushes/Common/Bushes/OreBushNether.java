@@ -28,20 +28,28 @@ public class OreBushNether extends AbstractModBushBlock {
     private final int getItemByKey;
 
     public OreBushNether(int CloneItemKey) {
-        super(BlockBehaviour.Properties.copy(Blocks.SWEET_BERRY_BUSH).lightLevel(state ->
+        super(BlockBehaviour.Properties.ofFullCopy(Blocks.SWEET_BERRY_BUSH).lightLevel(state ->
                 state.getValue(AGE) == 3 && state.getValue(HARVESTS) < (CloneItemKey == 2 ? 10 : 6)
                         && (CloneItemKey == 2 || CloneItemKey == 5) ? 8 : 0));
         this.getItemByKey = CloneItemKey;
     }
 
     @Override
-    public ItemStack getCloneItemStack(BlockState state, HitResult target, BlockGetter level, BlockPos pos, Player player) {
+    protected com.mojang.serialization.MapCodec<? extends net.minecraft.world.level.block.BushBlock> codec() {
+        return com.mojang.serialization.codecs.RecordCodecBuilder.mapCodec(instance ->
+                instance.group(com.mojang.serialization.Codec.INT.fieldOf("variant").forGetter(b -> ((OreBushNether) b).getVariant()))
+                        .apply(instance, OreBushNether::new));
+    }
+
+
+    @Override
+    public ItemStack getCloneItemStack(net.minecraft.world.level.LevelReader level, BlockPos pos, BlockState state) {
         return getItem(getItemByKey);
     }
 
     @Override
-    public InteractionResult use(BlockState state, Level level, BlockPos pos, Player player, InteractionHand interactionHand, BlockHitResult hitResult) {
-        return harvest(state, level, pos, player, interactionHand);
+    protected InteractionResult useWithoutItem(BlockState state, Level level, BlockPos pos, Player player, net.minecraft.world.phys.BlockHitResult hitResult) {
+        return harvest(state, level, pos, player, InteractionHand.MAIN_HAND);
     }
 
     @Override
@@ -74,4 +82,6 @@ public class OreBushNether extends AbstractModBushBlock {
     public boolean onDestroyedByPlayer(BlockState state, Level level, BlockPos pos, Player player, boolean willHarvest, FluidState fluid) {
         return super.onDestroyedByPlayer(state, level, pos, player, willHarvest, fluid);
     }
+
+    public int getVariant() { return getItemByKey; }
 }

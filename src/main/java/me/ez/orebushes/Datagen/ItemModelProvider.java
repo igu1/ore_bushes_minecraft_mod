@@ -3,16 +3,17 @@ package me.ez.orebushes.Datagen;
 import me.ez.orebushes.Init;
 import me.ez.orebushes.Main;
 import net.minecraft.data.DataGenerator;
+import net.minecraft.data.PackOutput;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.Item;
-import net.minecraftforge.client.model.generators.ItemModelBuilder;
-import net.minecraftforge.common.data.ExistingFileHelper;
-import net.minecraftforge.registries.RegistryObject;
+import net.neoforged.neoforge.client.model.generators.ItemModelBuilder;
+import net.neoforged.neoforge.common.data.ExistingFileHelper;
+import net.neoforged.neoforge.registries.DeferredHolder;
 
-public class ItemModelProvider extends net.minecraftforge.client.model.generators.ItemModelProvider {
+public class ItemModelProvider extends net.neoforged.neoforge.client.model.generators.ItemModelProvider {
 
-    public ItemModelProvider(DataGenerator generator, ExistingFileHelper existingFileHelper) {
-        super(generator, Main.MOD_ID, existingFileHelper);
+    public ItemModelProvider(PackOutput output, ExistingFileHelper existingFileHelper) {
+        super(output, Main.MOD_ID, existingFileHelper);
     }
 
 
@@ -51,13 +52,13 @@ public class ItemModelProvider extends net.minecraftforge.client.model.generator
         simpleItem(Init.NETHERITE_NUGGET);
     }
 
-    private <T extends Item> ItemModelBuilder simpleItem(RegistryObject<T> item){
+    private <T extends Item> ItemModelBuilder simpleItem(DeferredHolder<Item, T> item){
         if (item.get() instanceof me.ez.orebushes.Common.Bushes.BushBlockItem plant) {
             String id = me.ez.orebushes.Common.Bushes.ResourcePlantProfile.of(plant.getBlock()).id;
             return withExistingParent(item.getId().getPath(), modLoc("block/plants/" + id + "_v2_1"));
         }
         return withExistingParent(item.getId().getPath(),
-                new ResourceLocation("item/generated"))
-                .texture("layer0", new ResourceLocation(Main.MOD_ID ,"item/" + item.getId().getPath()));
+                ResourceLocation.parse("item/generated"))
+                .texture("layer0", ResourceLocation.fromNamespaceAndPath(Main.MOD_ID, "item/" + item.getId().getPath()));
     }
 }

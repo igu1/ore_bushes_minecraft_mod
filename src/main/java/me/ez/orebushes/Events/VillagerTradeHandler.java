@@ -8,9 +8,9 @@ import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.item.trading.MerchantOffer;
-import net.minecraftforge.event.village.VillagerTradesEvent;
-import net.minecraftforge.event.village.WandererTradesEvent;
-import net.minecraftforge.eventbus.api.SubscribeEvent;
+import net.neoforged.neoforge.event.village.VillagerTradesEvent;
+import net.neoforged.neoforge.event.village.WandererTradesEvent;
+import net.neoforged.bus.api.SubscribeEvent;
 
 import java.util.List;
 
@@ -63,8 +63,8 @@ public class VillagerTradeHandler {
             default -> Items.ECHO_SHARD;
         };
         return (trader, random) -> new MerchantOffer(
-                new ItemStack(Items.EMERALD, Math.min(64, emeraldCost * profile.tier)),
-                new ItemStack(catalyst, profile.tier),
+                new net.minecraft.world.item.trading.ItemCost(Items.EMERALD, Math.min(64, emeraldCost * profile.tier)),
+                java.util.Optional.of(new net.minecraft.world.item.trading.ItemCost(catalyst, profile.tier)),
                 new ItemStack(seed, 1),
                 profile.tier >= 3 ? 1 : 2,
                 xp,

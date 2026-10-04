@@ -1,35 +1,54 @@
-# NeoForge 1.21.1 port checklist
+# NeoForge 1.21.1 port
 
-This branch is **scaffolding**. The build system has been switched to
-Stonecutter + ModDevGradle, but `src/` is still the Forge 1.19 code and does not
-compile against NeoForge 1.21.1 yet. Work through the checklist, then run
-`./gradlew buildAndCollect` to drop the jar into `builds/1.21.1-neoforge/`.
+Status: **ported and building.** `./gradlew :1.21.1:buildAndCollect` produces
+`builds/1.21.1-neoforge/orebushes-2.5+1.21.1.jar`.
 
-## Build setup (done)
+## Build setup
 
-- `settings.gradle.kts` — Stonecutter 0.9.8, registers `1.21.1`.
+- Gradle wrapper **9.1.0** (Stonecutter 0.9.8 requires Gradle 9).
+- `settings.gradle.kts` — Stonecutter, registers `1.21.1`.
 - `stonecutter.gradle.kts` — activates `1.21.1`, ModDevGradle `moddev` 2.0.147.
-- `stonecutter.properties.toml` — mod metadata + NeoForge loader version.
-- `build.gradle.kts` — ModDevGradle config, Java 21, `buildAndCollect` task.
-- Gradle wrapper bumped to 8.12.
+- `stonecutter.properties.toml` — mod metadata + `deps.neo_loader = "21.1.251"`.
+- `build.gradle.kts` — ModDevGradle, Java 21, `buildAndCollect` task.
+- Mod metadata moved to `META-INF/neoforge.mods.toml` with `type="required"`.
 
-## Still to do
+## What changed vs. 1.20.1
 
-- [ ] Replace `src/main/resources/META-INF/mods.toml` with the modern
-      `src/main/resources/META-INF/neoforge.mods.toml` (renamed in 1.20.5):
-  - `loaderVersion="[1,)"`, `modId="orebushes"`, correct display name/credits.
-  - `[[dependencies.orebushes]]` for `neoforge`/`minecraft` with the `[1.21, 1.21.1]`
-    range.
-- [ ] Port the `me.ez.orebushes` sources from Forge 1.19 to NeoForge 1.21.1
-      (event bus split, `DeferredRegister`/`DeferredHolder`, registry/data-driven
-      changes, `ResourceLocation` factories, no more `net.minecraftforge.*`).
-- [ ] Move mod metadata fields the build expands (`${id}`, `${name}`, `${version}`,
-      `${minecraft}`) into the toml, or drop the expansion.
-- [ ] Re-verify assets/data (`src/main/resources`, `src/generated/resources`);
-      datapack folder names are depluralised in 1.21.
-- [ ] Confirm `annotationProcessor` mixin refmap config if mixins are added.
+1.20.5+ renamed the whole NeoForge package tree from `net.minecraftforge.*` to
+`net.neoforged.neoforge.*` and made further API changes:
+
+- **Imports/mods**: `DeferredHolder`, `ModConfigSpec`, `IMenuTypeExtension`,
+  `net.neoforged.bus.api`, `EventBusSubscriber`, `ModContainer`, `NeoForge.EVENT_BUS`.
+- **Blocks**: `codec()` is now required on every `Block`/`BaseEntityBlock`
+  (`MapCodec`, `RecordCodecBuilder`/`simpleCodec`); `use` split into
+  `useWithoutItem`/`useItemOn` returning `ItemInteractionResult`.
+- **Item tooltips**: `appendHoverText(ItemStack, Item.TooltipContext, ...)`.
+- **Bonemeal**: `isValidBonemealTarget(LevelReader, BlockPos, BlockState)` (3 args).
+- **Clone**: `getCloneItemStack(LevelReader, BlockPos, BlockState)`.
+- **Persistence**: `load` → `loadAdditional(CompoundTag, HolderLookup.Provider)`.
+- **Capabilities**: `getCapability`/`LazyOptional` → `RegisterCapabilitiesEvent`
+  + `Capabilities.ItemHandler.BLOCK` + `level.getCapability(...)`.
+- **Networking/menus**: `NetworkHooks.openScreen` → `ServerPlayer.openMenu`;
+  screens via `RegisterMenuScreensEvent`; `renderBackground(GuiGraphics,...)`.
+- **Enchantments**: data-driven; `Enchantments.FORTUNE` is a `ResourceKey` and
+  the level registry is used to resolve the `Holder` for Fortune.
+- **Crop growth**: `ForgeHooks/CommonHooks.onCropsGrowPost` removed → guard with
+  `CommonHooks.canCropGrow`.
+- **DataGen**: `RecipeProvider` now takes `(PackOutput, CompletableFuture<Provider>)`
+  and emits `RecipeOutput`; `BlockLootSubProvider` needs a `HolderLookup.Provider`;
+  loot providers come from `SubProviderEntry`.
+- **Misc**: `ResourceLocation` factory methods; `Properties.ofFullCopy`;
+  `ItemCost`/`Optional<ItemCost>` in `MerchantOffer`.
+
+## Not yet done
+
+- [ ] Game tests moved to `docs/port-backlog/ResourcePlantGameTests.java.1.21.1`
+      — re-add with the NeoForge 1.21 gametest API.
+- [ ] Run `:1.21.1:runData` to refresh `src/generated/resources` for 1.21 and
+      commit the regenerated data.
+- [ ] Verify in-game (`:1.21.1:runClient`).
 
 ## Reference
 
-- Stonecutter: <https://stonecutter.kikugie.dev/>
 - ModDevGradle: <https://docs.neoforged.net/toolchain/docs/plugins/mdg/>
+- Stonecutter: <https://stonecutter.kikugie.dev/>

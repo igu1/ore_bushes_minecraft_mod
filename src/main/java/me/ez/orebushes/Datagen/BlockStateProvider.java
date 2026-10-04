@@ -3,20 +3,20 @@ package me.ez.orebushes.Datagen;
 import me.ez.orebushes.Init;
 import me.ez.orebushes.Main;
 import me.ez.orebushes.Common.Bushes.AbstractModBushBlock;
-import net.minecraft.data.DataGenerator;
+import net.minecraft.data.PackOutput;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.level.block.BushBlock;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
-import net.minecraftforge.client.model.generators.ConfiguredModel;
-import net.minecraftforge.common.data.ExistingFileHelper;
+import net.neoforged.neoforge.client.model.generators.ConfiguredModel;
+import net.neoforged.neoforge.common.data.ExistingFileHelper;
 
 import java.util.function.Function;
 
-public class BlockStateProvider extends net.minecraftforge.client.model.generators.BlockStateProvider {
+public class BlockStateProvider extends net.neoforged.neoforge.client.model.generators.BlockStateProvider {
 
-    public BlockStateProvider(DataGenerator gen, ExistingFileHelper exFileHelper) {
-        super(gen, Main.MOD_ID, exFileHelper);
+    public BlockStateProvider(PackOutput output, ExistingFileHelper exFileHelper) {
+        super(output, Main.MOD_ID, exFileHelper);
     }
 
     @Override
@@ -62,7 +62,7 @@ public class BlockStateProvider extends net.minecraftforge.client.model.generato
         AbstractModBushBlock plant = (AbstractModBushBlock) block;
         String stage = plant.isExhausted(state) ? "spent" : String.valueOf(state.getValue(BlockStateProperties.AGE_3));
         models[0] = new ConfiguredModel(models().getExistingFile(
-                new ResourceLocation(Main.MOD_ID, "block/plants/" + plant.profile().id + "_v2_" + stage)));
+                ResourceLocation.fromNamespaceAndPath(Main.MOD_ID, "block/plants/" + plant.profile().id + "_v2_" + stage)));
         return models;
     }
 }

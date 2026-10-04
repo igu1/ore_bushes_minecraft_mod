@@ -26,7 +26,6 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import net.minecraft.world.level.block.state.properties.EnumProperty;
-import net.minecraft.world.level.material.Material;
 import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.Shapes;
@@ -49,8 +48,12 @@ public class BushHarvester extends AbstractBlockEntityBlock {
             EnumProperty.create("mode", OperatingState.class);
 
     public BushHarvester() {
-        super(BlockBehaviour.Properties.of(Material.METAL).strength(3.5F).sound(SoundType.METAL)
+        this(BlockBehaviour.Properties.of().strength(3.5F).sound(SoundType.METAL)
                 .lightLevel(state -> state.getValue(MODE) == OperatingState.RUNNING ? 7 : 0));
+    }
+
+    public BushHarvester(BlockBehaviour.Properties properties) {
+        super(properties);
         registerDefaultState(stateDefinition.any()
                 .setValue(BlockStateProperties.FACING, Direction.NORTH)
                 .setValue(MODE, OperatingState.IDLE));
@@ -78,10 +81,15 @@ public class BushHarvester extends AbstractBlockEntityBlock {
     }
 
     @Override
-    public InteractionResult use(BlockState state, Level level, BlockPos pos, Player player, InteractionHand hand, BlockHitResult hitResult) {
+    protected com.mojang.serialization.MapCodec<? extends net.minecraft.world.level.block.BaseEntityBlock> codec() {
+        return simpleCodec(BushHarvester::new);
+    }
+
+    @Override
+    protected InteractionResult useWithoutItem(BlockState state, Level level, BlockPos pos, Player player, BlockHitResult hitResult) {
         if (!level.isClientSide && level.getBlockEntity(pos) instanceof MenuProvider provider
                 && player instanceof ServerPlayer serverPlayer) {
-            net.minecraftforge.network.NetworkHooks.openGui(serverPlayer, provider, buffer -> buffer.writeBlockPos(pos));
+            serverPlayer.openMenu(provider, buffer -> buffer.writeBlockPos(pos));
         }
         return InteractionResult.sidedSuccess(level.isClientSide);
     }

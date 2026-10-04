@@ -1,0 +1,30 @@
+modLoader="javafml"
+loaderVersion="[1,)"
+license="All rights reserved"
+issueTrackerURL="https://github.com/igu1/ore_bushes_minecraft_mod/issues"
+
+[[mods]]
+modId="orebushes"
+version="${file.jarVersion}"
+displayName="Ore Bushes"
+logoFile="logo.png"
+credits="Thanks for Downloading Our New Mod OreBushes"
+authors="Love, Cheese By Ez"
+description='''
+   This Mod Add Varies Type Of Bushes That Gives You Resource Like Coal, iron, Gold etc...
+   9 Different Type Of Bushes
+'''
+
+[[dependencies.orebushes]]
+modId="neoforge"
+type="required"
+versionRange="[21.1,)"
+ordering="NONE"
+side="BOTH"
+
+[[dependencies.orebushes]]
+modId="minecraft"
+type="required"
+versionRange="[1.21,1.21.1]"
+ordering="NONE"
+side="BOTH"

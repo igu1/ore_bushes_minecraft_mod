@@ -1,41 +1,41 @@
 package me.ez.orebushes;
 
-import net.minecraftforge.common.ForgeConfigSpec;
+import net.neoforged.neoforge.common.ModConfigSpec;
 
 public class Config {
 
-    public static final ForgeConfigSpec SPEC;
+    public static final ModConfigSpec SPEC;
 
-    public static final ForgeConfigSpec.BooleanValue ENABLE_BONEMEAL;
-    public static final ForgeConfigSpec.BooleanValue ENABLE_FORTUNE_BONUS;
-    public static final ForgeConfigSpec.BooleanValue ENABLE_VILLAGER_TRADES;
-    public static final ForgeConfigSpec.BooleanValue ENABLE_COMPOSTING;
-    public static final ForgeConfigSpec.DoubleValue COMPOST_CHANCE;
+    public static final ModConfigSpec.BooleanValue ENABLE_BONEMEAL;
+    public static final ModConfigSpec.BooleanValue ENABLE_FORTUNE_BONUS;
+    public static final ModConfigSpec.BooleanValue ENABLE_VILLAGER_TRADES;
+    public static final ModConfigSpec.BooleanValue ENABLE_COMPOSTING;
+    public static final ModConfigSpec.DoubleValue COMPOST_CHANCE;
 
-    public static final ForgeConfigSpec.IntValue GROWTH_CHANCE_PERCENT;
-    public static final ForgeConfigSpec.BooleanValue REQUIRE_LIGHT;
-    public static final ForgeConfigSpec.IntValue MIN_LIGHT;
+    public static final ModConfigSpec.IntValue GROWTH_CHANCE_PERCENT;
+    public static final ModConfigSpec.BooleanValue REQUIRE_LIGHT;
+    public static final ModConfigSpec.IntValue MIN_LIGHT;
 
-    public static final ForgeConfigSpec.DoubleValue AMOUNT_MULTIPLIER;
-    public static final ForgeConfigSpec.IntValue MATURE_BONUS;
+    public static final ModConfigSpec.DoubleValue AMOUNT_MULTIPLIER;
+    public static final ModConfigSpec.IntValue MATURE_BONUS;
 
-    public static final ForgeConfigSpec.IntValue HARVESTS_TIER_1;
-    public static final ForgeConfigSpec.IntValue HARVESTS_TIER_2;
-    public static final ForgeConfigSpec.IntValue HARVESTS_TIER_3;
-    public static final ForgeConfigSpec.IntValue HARVESTS_TIER_4;
+    public static final ModConfigSpec.IntValue HARVESTS_TIER_1;
+    public static final ModConfigSpec.IntValue HARVESTS_TIER_2;
+    public static final ModConfigSpec.IntValue HARVESTS_TIER_3;
+    public static final ModConfigSpec.IntValue HARVESTS_TIER_4;
 
-    public static final ForgeConfigSpec.IntValue DIAMOND_SECONDS;
-    public static final ForgeConfigSpec.IntValue GOLD_SECONDS;
-    public static final ForgeConfigSpec.IntValue IRON_SECONDS;
-    public static final ForgeConfigSpec.IntValue DEFAULT_SECONDS;
+    public static final ModConfigSpec.IntValue DIAMOND_SECONDS;
+    public static final ModConfigSpec.IntValue GOLD_SECONDS;
+    public static final ModConfigSpec.IntValue IRON_SECONDS;
+    public static final ModConfigSpec.IntValue DEFAULT_SECONDS;
 
-    public static final ForgeConfigSpec.IntValue DIAMOND_RANGE;
-    public static final ForgeConfigSpec.IntValue GOLD_RANGE;
-    public static final ForgeConfigSpec.IntValue IRON_RANGE;
-    public static final ForgeConfigSpec.IntValue DEFAULT_RANGE;
+    public static final ModConfigSpec.IntValue DIAMOND_RANGE;
+    public static final ModConfigSpec.IntValue GOLD_RANGE;
+    public static final ModConfigSpec.IntValue IRON_RANGE;
+    public static final ModConfigSpec.IntValue DEFAULT_RANGE;
 
     static {
-        ForgeConfigSpec.Builder builder = new ForgeConfigSpec.Builder();
+        ModConfigSpec.Builder builder = new ModConfigSpec.Builder();
 
         builder.comment("General gameplay toggles").push("general");
         ENABLE_BONEMEAL = builder

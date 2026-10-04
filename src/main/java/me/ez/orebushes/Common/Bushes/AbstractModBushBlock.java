@@ -141,8 +141,11 @@ public abstract class AbstractModBushBlock extends BushBlock implements Bonemeal
         if (!level.isClientSide) {
             ItemStack drop = harvestDrop(state);
             if (profile().tier < 3 && Config.ENABLE_FORTUNE_BONUS.get()) {
+                var fortuneHolder = level.registryAccess()
+                        .registryOrThrow(net.minecraft.core.registries.Registries.ENCHANTMENT)
+                        .getHolderOrThrow(net.minecraft.world.item.enchantment.Enchantments.FORTUNE);
                 int fortune = net.minecraft.world.item.enchantment.EnchantmentHelper.getItemEnchantmentLevel(
-                        net.minecraft.world.item.enchantment.Enchantments.BLOCK_FORTUNE, player.getItemInHand(hand));
+                        fortuneHolder, player.getItemInHand(hand));
                 if (fortune > 0 && level.random.nextInt(fortune + 1) > 0) drop.setCount(Math.min(3, drop.getCount() + 1));
             }
             popResource(level, pos, drop);
@@ -189,8 +192,8 @@ public abstract class AbstractModBushBlock extends BushBlock implements Bonemeal
             return;
         }
         if (random.nextInt(profile().tier * 4) != 0) return;
+        if (!net.neoforged.neoforge.common.CommonHooks.canCropGrow(level, pos, state, true)) return;
         level.setBlock(pos, state.setValue(AGE, BUSH_AGE + 1), 2);
-        net.minecraftforge.common.ForgeHooks.onCropsGrowPost(level, pos, state);
     }
 
     @Override
@@ -208,18 +211,18 @@ public abstract class AbstractModBushBlock extends BushBlock implements Bonemeal
     //Abstract methods
 
     @Override
-    public abstract InteractionResult use(BlockState p_60503_, Level p_60504_, BlockPos p_60505_, Player p_60506_, InteractionHand p_60507_, BlockHitResult p_60508_);
-
-    @Override
-    public abstract ItemStack getCloneItemStack(BlockState state, HitResult target, BlockGetter level, BlockPos pos, Player player);
+    public abstract ItemStack getCloneItemStack(net.minecraft.world.level.LevelReader level, BlockPos pos, BlockState state);
 
     public abstract ItemStack getItem(int ItemKey);
 
     public abstract ItemStack getDropItem(int ItemKey, int amount);
 
+    @Override
+    protected abstract com.mojang.serialization.MapCodec<? extends net.minecraft.world.level.block.BushBlock> codec();
+
     // Bonemeal support
     @Override
-    public boolean isValidBonemealTarget(BlockGetter level, BlockPos pos, BlockState state, boolean isClient) {
+    public boolean isValidBonemealTarget(net.minecraft.world.level.LevelReader level, BlockPos pos, BlockState state) {
         return Config.ENABLE_BONEMEAL.get() && profile().tier == 1 && !isExhausted(state)
                 && state.getValue(AGE) < MAX_AGE && level instanceof Level world && canGrow(world, pos, state);
     }

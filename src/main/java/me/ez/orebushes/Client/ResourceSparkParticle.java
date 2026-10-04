@@ -8,13 +8,14 @@ import net.minecraft.client.particle.ParticleRenderType;
 import net.minecraft.client.particle.SpriteSet;
 import net.minecraft.client.particle.TextureSheetParticle;
 import net.minecraft.core.particles.SimpleParticleType;
-import net.minecraftforge.api.distmarker.Dist;
-import net.minecraftforge.client.event.RegisterParticleProvidersEvent;
-import net.minecraftforge.eventbus.api.SubscribeEvent;
-import net.minecraftforge.fml.common.Mod;
+import net.neoforged.api.distmarker.Dist;
+import net.neoforged.neoforge.client.event.RegisterParticleProvidersEvent;
+import net.neoforged.bus.api.SubscribeEvent;
+import net.neoforged.fml.common.EventBusSubscriber;
+import net.neoforged.fml.common.Mod;
 
 /** Client-only sprite registration: dedicated servers never load renderer classes. */
-@Mod.EventBusSubscriber(modid = Main.MOD_ID, bus = Mod.EventBusSubscriber.Bus.MOD, value = Dist.CLIENT)
+@EventBusSubscriber(modid = Main.MOD_ID, bus = EventBusSubscriber.Bus.MOD, value = Dist.CLIENT)
 public class ResourceSparkParticle extends TextureSheetParticle {
     private ResourceSparkParticle(ClientLevel level, double x, double y, double z,
                                   double vx, double vy, double vz, SpriteSet sprites) {
@@ -43,7 +44,7 @@ public class ResourceSparkParticle extends TextureSheetParticle {
 
     @SubscribeEvent
     public static void register(RegisterParticleProvidersEvent event) {
-        PlantEffects.SPARKS.values().forEach(type -> event.register(type.get(),
+        PlantEffects.SPARKS.values().forEach(type -> event.registerSpriteSet(type.get(),
                 (net.minecraft.client.particle.ParticleEngine.SpriteParticleRegistration<SimpleParticleType>)
                         sprites -> (ParticleProvider<SimpleParticleType>) (particle, level, x, y, z, vx, vy, vz) ->
                                 new ResourceSparkParticle(level, x, y, z, vx, vy, vz, sprites)));

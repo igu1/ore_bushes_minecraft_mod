@@ -24,12 +24,11 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
-import net.minecraftforge.common.capabilities.Capability;
-import net.minecraftforge.common.util.LazyOptional;
-import net.minecraftforge.items.CapabilityItemHandler;
-import net.minecraftforge.items.IItemHandler;
-import net.minecraftforge.items.ItemHandlerHelper;
-import net.minecraftforge.items.wrapper.InvWrapper;
+import net.neoforged.neoforge.capabilities.Capabilities;
+import net.neoforged.neoforge.capabilities.RegisterCapabilitiesEvent;
+import net.neoforged.neoforge.items.IItemHandler;
+import net.neoforged.neoforge.items.ItemHandlerHelper;
+import net.neoforged.neoforge.items.wrapper.InvWrapper;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import org.slf4j.Logger;
@@ -41,7 +40,7 @@ public class BushHarvesterBlockEntity extends BlockEntity implements WorldlyCont
     private static final Logger LOGGER = LogUtils.getLogger();
 
     private final NonNullList<ItemStack> items = NonNullList.withSize(SLOTS, ItemStack.EMPTY);
-    private final LazyOptional<IItemHandler> itemHandler = LazyOptional.of(() -> new InvWrapper(this));
+    final IItemHandler itemHandler = new InvWrapper(this);
 
     private int tick;
     private int activeTicks;
@@ -106,14 +105,14 @@ public class BushHarvesterBlockEntity extends BlockEntity implements WorldlyCont
 
     /** Fills the internal inventory first, then an item handler directly above as overflow. */
     private ItemStack insertOutput(Level level, BlockPos pos, ItemStack stack) {
-        ItemStack remainder = ItemHandlerHelper.insertItemStacked(new InvWrapper(this), stack.copy(), false);
+        ItemStack remainder = ItemHandlerHelper.insertItemStacked(itemHandler, stack.copy(), false);
         if (!remainder.isEmpty()) {
             BlockEntity above = level.getBlockEntity(pos.above());
             if (above != null) {
-                ItemStack overflow = remainder;
-                remainder = above.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY)
-                        .map(handler -> ItemHandlerHelper.insertItemStacked(handler, overflow, false))
-                        .orElse(overflow);
+                IItemHandler handler = level.getCapability(Capabilities.ItemHandler.BLOCK, above.getBlockPos(), null);
+                if (handler != null) {
+                    remainder = ItemHandlerHelper.insertItemStacked(handler, remainder, false);
+                }
             }
         }
         return remainder;
@@ -211,26 +210,21 @@ public class BushHarvesterBlockEntity extends BlockEntity implements WorldlyCont
     // Persistence and capability
 
     @Override
-    protected void saveAdditional(CompoundTag tag) {
-        super.saveAdditional(tag);
-        ContainerHelper.saveAllItems(tag, items);
+    protected void loadAdditional(CompoundTag tag, net.minecraft.core.HolderLookup.Provider registries) {
+        super.loadAdditional(tag, registries);
+        ContainerHelper.loadAllItems(tag, items, registries);
     }
 
     @Override
-    public void load(CompoundTag tag) {
-        super.load(tag);
-        ContainerHelper.loadAllItems(tag, items);
+    protected void saveAdditional(CompoundTag tag, net.minecraft.core.HolderLookup.Provider registries) {
+        super.saveAdditional(tag, registries);
+        ContainerHelper.saveAllItems(tag, items, registries);
     }
 
-    @Override
-    public <T> LazyOptional<T> getCapability(Capability<T> capability, @Nullable Direction side) {
-        if (capability == CapabilityItemHandler.ITEM_HANDLER_CAPABILITY) return itemHandler.cast();
-        return super.getCapability(capability, side);
-    }
+    // Capability registration (NeoForge 1.20.2+ style)
 
-    @Override
-    public void invalidateCaps() {
-        super.invalidateCaps();
-        itemHandler.invalidate();
+    public static void registerCapabilities(RegisterCapabilitiesEvent event) {
+        event.registerBlockEntity(Capabilities.ItemHandler.BLOCK, Init.BUSH_HARVESTER_BLOCK_ENTITY.get(),
+                (be, side) -> be.itemHandler);
     }
 }

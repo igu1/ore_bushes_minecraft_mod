@@ -35,7 +35,10 @@ public abstract class AbstractBlockEntityBlock extends BaseEntityBlock {
     }
 
     @Override
-    public abstract InteractionResult use(BlockState state, Level level, BlockPos pos, Player player, InteractionHand interactionHand, BlockHitResult hitResult);
+    protected abstract com.mojang.serialization.MapCodec<? extends net.minecraft.world.level.block.BaseEntityBlock> codec();
+
+    @Override
+    protected abstract InteractionResult useWithoutItem(BlockState state, Level level, BlockPos pos, Player player, net.minecraft.world.phys.BlockHitResult hitResult);
 
     @Override
     public abstract void onRemove(BlockState state, Level level, BlockPos pos, BlockState blockState, boolean b);

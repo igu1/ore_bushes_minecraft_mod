@@ -3,12 +3,12 @@ package me.ez.orebushes.Common.Bushes;
 import me.ez.orebushes.Config;
 import net.minecraft.core.particles.ParticleOptions;
 import net.minecraft.core.particles.ParticleTypes;
+import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
-import net.minecraftforge.common.ForgeConfigSpec;
-import net.minecraftforge.registries.ForgeRegistries;
+import net.neoforged.neoforge.common.ModConfigSpec;
 
 /** Presentation and progression shared by hand harvesting, automation and tooltips. */
 public enum ResourcePlantProfile {
@@ -61,7 +61,7 @@ public enum ResourcePlantProfile {
      * pre-config contexts fall back to {@link #defaultHarvestLimit()}.
      */
     public int harvestLimit() {
-        ForgeConfigSpec.IntValue value = switch (tier) {
+        ModConfigSpec.IntValue value = switch (tier) {
             case 1 -> Config.HARVESTS_TIER_1;
             case 2 -> Config.HARVESTS_TIER_2;
             case 3 -> Config.HARVESTS_TIER_3;
@@ -84,7 +84,7 @@ public enum ResourcePlantProfile {
     }
 
     public static ResourcePlantProfile of(Block block) {
-        String path = ForgeRegistries.BLOCKS.getKey(block).getPath();
+        String path = BuiltInRegistries.BLOCK.getKey(block).getPath();
         for (ResourcePlantProfile profile : values()) {
             if (path.equals(profile.id + "_bush_stage")) return profile;
         }
