@@ -15,7 +15,7 @@ import net.neoforged.fml.common.EventBusSubscriber;
 import net.neoforged.fml.common.Mod;
 
 /** Client-only sprite registration: dedicated servers never load renderer classes. */
-@EventBusSubscriber(modid = Main.MOD_ID, bus = EventBusSubscriber.Bus.MOD, value = Dist.CLIENT)
+@EventBusSubscriber(modid = Main.MOD_ID, value = Dist.CLIENT)
 public class ResourceSparkParticle extends TextureSheetParticle {
     private ResourceSparkParticle(ClientLevel level, double x, double y, double z,
                                   double vx, double vy, double vz, SpriteSet sprites) {

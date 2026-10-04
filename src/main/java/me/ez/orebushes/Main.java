@@ -58,7 +58,7 @@ public class Main
     }
 
 
-    @EventBusSubscriber(modid = MOD_ID, bus = EventBusSubscriber.Bus.MOD)
+    @EventBusSubscriber(modid = MOD_ID)
     public static class RegistryEvents
     {
         @SubscribeEvent

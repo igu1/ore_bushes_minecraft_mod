@@ -116,7 +116,7 @@ public class Init {
     public static final DeferredHolder<Item, BushHarvesterBlockItem> BUSH_HARVESTER_BLOCK_ITEM =ITEMS.register("bushharvester", BushHarvesterBlockItem::new);
 
     public static final DeferredRegister<BlockEntityType<?>> BLOCK_ENTITY = DeferredRegister.create(Registries.BLOCK_ENTITY_TYPE, Main.MOD_ID);
-    public static final DeferredHolder<BlockEntityType<?>, BlockEntityType<BushHarvesterBlockEntity>> BUSH_HARVESTER_BLOCK_ENTITY = BLOCK_ENTITY.register("bushharvester", () -> BlockEntityType.Builder.of(BushHarvesterBlockEntity::new, BUSH_HARVESTER.get()).build(null));
+    public static final DeferredHolder<BlockEntityType<?>, BlockEntityType<BushHarvesterBlockEntity>> BUSH_HARVESTER_BLOCK_ENTITY = BLOCK_ENTITY.register("bushharvester", () -> new BlockEntityType<>(BushHarvesterBlockEntity::new, BUSH_HARVESTER.get()));
 
     public static final DeferredRegister<MenuType<?>> MENUS = DeferredRegister.create(Registries.MENU, Main.MOD_ID);
     public static final DeferredHolder<MenuType<?>, MenuType<BushHarvesterMenu>> BUSH_HARVESTER_MENU =

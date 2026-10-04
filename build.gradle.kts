@@ -45,12 +45,12 @@ tasks {
 
     register<Copy>("buildAndCollect") {
         group = "build"
-        description = "Builds the NeoForge 1.21.1 jar and copies it into builds/1.21.1-neoforge/"
+        description = "Builds the NeoForge 1.21.8 jar and copies it into builds/1.21.8-neoforge/"
         from(layout.buildDirectory.dir("libs")) {
             include("*.jar")
             exclude("*-sources.jar", "*-dev.jar")
         }
-        into(rootProject.file("builds/1.21.1-neoforge"))
+        into(rootProject.file("builds/1.21.8-neoforge"))
         dependsOn("build")
     }
 }

@@ -91,7 +91,7 @@ public class BushHarvester extends AbstractBlockEntityBlock {
                 && player instanceof ServerPlayer serverPlayer) {
             serverPlayer.openMenu(provider, buffer -> buffer.writeBlockPos(pos));
         }
-        return InteractionResult.sidedSuccess(level.isClientSide);
+        return level.isClientSide ? InteractionResult.SUCCESS : InteractionResult.SUCCESS_SERVER;
     }
 
     /** Renders only the perimeter of the actual harvesting square. */
@@ -142,10 +142,8 @@ public class BushHarvester extends AbstractBlockEntityBlock {
     }
 
     @Override
-    public void onRemove(BlockState state, Level level, BlockPos pos, BlockState newState, boolean isMoving) {
-        if (!state.is(newState.getBlock()) && level.getBlockEntity(pos) instanceof net.minecraft.world.Container container) {
-            net.minecraft.world.Containers.dropContents(level, pos, container);
-        }
-        if (!state.is(newState.getBlock())) level.removeBlockEntity(pos);
+    protected void affectNeighborsAfterRemoval(BlockState state, net.minecraft.server.level.ServerLevel level, BlockPos pos, boolean isMoving) {
+        // Item drops are handled by BushHarvesterBlockEntity#preRemoveSideEffects.
+        super.affectNeighborsAfterRemoval(state, level, pos, isMoving);
     }
 }

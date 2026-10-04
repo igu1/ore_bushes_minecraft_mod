@@ -142,8 +142,8 @@ public abstract class AbstractModBushBlock extends BushBlock implements Bonemeal
             ItemStack drop = harvestDrop(state);
             if (profile().tier < 3 && Config.ENABLE_FORTUNE_BONUS.get()) {
                 var fortuneHolder = level.registryAccess()
-                        .registryOrThrow(net.minecraft.core.registries.Registries.ENCHANTMENT)
-                        .getHolderOrThrow(net.minecraft.world.item.enchantment.Enchantments.FORTUNE);
+                        .lookupOrThrow(net.minecraft.core.registries.Registries.ENCHANTMENT)
+                        .getOrThrow(net.minecraft.world.item.enchantment.Enchantments.FORTUNE);
                 int fortune = net.minecraft.world.item.enchantment.EnchantmentHelper.getItemEnchantmentLevel(
                         fortuneHolder, player.getItemInHand(hand));
                 if (fortune > 0 && level.random.nextInt(fortune + 1) > 0) drop.setCount(Math.min(3, drop.getCount() + 1));
@@ -159,7 +159,7 @@ public abstract class AbstractModBushBlock extends BushBlock implements Bonemeal
                 player.addEffect(new net.minecraft.world.effect.MobEffectInstance(net.minecraft.world.effect.MobEffects.REGENERATION, 60));
             }
         }
-        return InteractionResult.sidedSuccess(level.isClientSide);
+        return level.isClientSide ? InteractionResult.SUCCESS : InteractionResult.SUCCESS_SERVER;
     }
 
     @Override
@@ -197,7 +197,7 @@ public abstract class AbstractModBushBlock extends BushBlock implements Bonemeal
     }
 
     @Override
-    public void entityInside(BlockState state, Level level, BlockPos pos, Entity entity) {
+    protected void entityInside(BlockState state, Level level, BlockPos pos, Entity entity, net.minecraft.world.entity.InsideBlockEffectApplier applier) {
         if (entity instanceof LivingEntity){
             entity.makeStuckInBlock(state, new Vec3((double)0.8F, 0.75D, (double)0.8F));
         }
@@ -211,14 +211,14 @@ public abstract class AbstractModBushBlock extends BushBlock implements Bonemeal
     //Abstract methods
 
     @Override
-    public abstract ItemStack getCloneItemStack(net.minecraft.world.level.LevelReader level, BlockPos pos, BlockState state);
+    public abstract ItemStack getCloneItemStack(net.minecraft.world.level.LevelReader level, BlockPos pos, BlockState state, boolean includeData, Player player);
 
     public abstract ItemStack getItem(int ItemKey);
 
     public abstract ItemStack getDropItem(int ItemKey, int amount);
 
     @Override
-    protected abstract com.mojang.serialization.MapCodec<? extends net.minecraft.world.level.block.BushBlock> codec();
+    public abstract com.mojang.serialization.MapCodec<net.minecraft.world.level.block.BushBlock> codec();
 
     // Bonemeal support
     @Override

@@ -35,7 +35,8 @@ public class OreBushNether extends AbstractModBushBlock {
     }
 
     @Override
-    protected com.mojang.serialization.MapCodec<? extends net.minecraft.world.level.block.BushBlock> codec() {
+    @SuppressWarnings("unchecked")
+    public com.mojang.serialization.MapCodec<net.minecraft.world.level.block.BushBlock> codec() {
         return com.mojang.serialization.codecs.RecordCodecBuilder.mapCodec(instance ->
                 instance.group(com.mojang.serialization.Codec.INT.fieldOf("variant").forGetter(b -> ((OreBushNether) b).getVariant()))
                         .apply(instance, OreBushNether::new));
@@ -43,7 +44,7 @@ public class OreBushNether extends AbstractModBushBlock {
 
 
     @Override
-    public ItemStack getCloneItemStack(net.minecraft.world.level.LevelReader level, BlockPos pos, BlockState state) {
+    public ItemStack getCloneItemStack(net.minecraft.world.level.LevelReader level, BlockPos pos, BlockState state, boolean includeData, Player player) {
         return getItem(getItemByKey);
     }
 

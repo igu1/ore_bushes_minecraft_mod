@@ -6,6 +6,8 @@ import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.TooltipFlag;
+import net.minecraft.world.item.component.TooltipDisplay;
+import net.minecraft.world.item.Item.TooltipContext;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
 import java.util.List;
@@ -17,12 +19,12 @@ public class BushBlockItem extends BlockItem {
     }
 
     @Override
-    public void appendHoverText(ItemStack stack, Item.TooltipContext context, List<Component> tooltip, TooltipFlag flag) {
+    public void appendHoverText(ItemStack stack, TooltipContext context, TooltipDisplay display, java.util.function.Consumer<Component> adder, TooltipFlag flag) {
         ResourcePlantProfile profile = ResourcePlantProfile.of(getBlock());
-        tooltip.add(Component.literal(profile.conditions).withStyle(ChatFormatting.GRAY));
-        tooltip.add(Component.literal("Tier " + profile.tier + " • " + profile.harvestLimit() + " harvests, then spent")
+        adder.accept(Component.literal(profile.conditions).withStyle(ChatFormatting.GRAY));
+        adder.accept(Component.literal("Tier " + profile.tier + " • " + profile.harvestLimit() + " harvests, then spent")
                 .withStyle(ChatFormatting.GOLD));
-        tooltip.add(Component.literal("Harvest when ripe. Breaking returns the seed.").withStyle(ChatFormatting.DARK_GRAY));
-        if (profile.tier > 1) tooltip.add(Component.literal("Cannot be bone-mealed").withStyle(ChatFormatting.DARK_GRAY));
+        adder.accept(Component.literal("Harvest when ripe. Breaking returns the seed.").withStyle(ChatFormatting.DARK_GRAY));
+        if (profile.tier > 1) adder.accept(Component.literal("Cannot be bone-mealed").withStyle(ChatFormatting.DARK_GRAY));
     }
 }

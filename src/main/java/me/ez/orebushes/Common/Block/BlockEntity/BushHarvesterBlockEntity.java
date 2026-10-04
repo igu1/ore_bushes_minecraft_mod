@@ -210,15 +210,24 @@ public class BushHarvesterBlockEntity extends BlockEntity implements WorldlyCont
     // Persistence and capability
 
     @Override
-    protected void loadAdditional(CompoundTag tag, net.minecraft.core.HolderLookup.Provider registries) {
-        super.loadAdditional(tag, registries);
-        ContainerHelper.loadAllItems(tag, items, registries);
+    protected void loadAdditional(net.minecraft.world.level.storage.ValueInput input) {
+        super.loadAdditional(input);
+        ContainerHelper.loadAllItems(input, items);
     }
 
     @Override
-    protected void saveAdditional(CompoundTag tag, net.minecraft.core.HolderLookup.Provider registries) {
-        super.saveAdditional(tag, registries);
-        ContainerHelper.saveAllItems(tag, items, registries);
+    protected void saveAdditional(net.minecraft.world.level.storage.ValueOutput output) {
+        super.saveAdditional(output);
+        ContainerHelper.saveAllItems(output, items);
+    }
+
+    // Drops the stored items when the harvester is broken (1.21.5+ split).
+    @Override
+    public void preRemoveSideEffects(BlockPos pos, BlockState state) {
+        super.preRemoveSideEffects(pos, state);
+        if (level != null) {
+            net.minecraft.world.Containers.dropContents(level, pos, this);
+        }
     }
 
     // Capability registration (NeoForge 1.20.2+ style)

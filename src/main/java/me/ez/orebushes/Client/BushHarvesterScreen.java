@@ -1,8 +1,7 @@
 package me.ez.orebushes.Client;
 
-import com.mojang.blaze3d.systems.RenderSystem;
 import net.minecraft.client.gui.GuiGraphics;
-import net.minecraft.client.renderer.GameRenderer;
+import net.minecraft.client.renderer.RenderPipelines;
 import me.ez.orebushes.Common.Menu.BushHarvesterMenu;
 import me.ez.orebushes.Main;
 import net.minecraft.client.gui.screens.inventory.AbstractContainerScreen;
@@ -36,11 +35,9 @@ public class BushHarvesterScreen extends AbstractContainerScreen<BushHarvesterMe
 
     @Override
     protected void renderBg(GuiGraphics graphics, float partialTick, int mouseX, int mouseY) {
-        RenderSystem.setShader(GameRenderer::getPositionTexShader);
-        RenderSystem.setShaderColor(1.0F, 1.0F, 1.0F, 1.0F);
-        RenderSystem.setShaderTexture(0, TEXTURE);
         // This is a standalone image, not a 256x256 vanilla GUI atlas.
-        graphics.blit(TEXTURE, leftPos, topPos, 0, 0, imageWidth, imageHeight);
+        graphics.blit(RenderPipelines.GUI_TEXTURED, TEXTURE, leftPos, topPos, 0.0F, 0.0F,
+                imageWidth, imageHeight, imageWidth, imageHeight);
     }
 
     /** Intentionally draws nothing so the UI stays text-free. */

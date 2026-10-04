@@ -5,4 +5,4 @@ plugins {
 }
 
 // The version whose source is currently checked out in src/.
-stonecutter active "1.21.1"
+stonecutter active "1.21.8"

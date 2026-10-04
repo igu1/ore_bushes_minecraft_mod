@@ -40,9 +40,6 @@ public abstract class AbstractBlockEntityBlock extends BaseEntityBlock {
     @Override
     protected abstract InteractionResult useWithoutItem(BlockState state, Level level, BlockPos pos, Player player, net.minecraft.world.phys.BlockHitResult hitResult);
 
-    @Override
-    public abstract void onRemove(BlockState state, Level level, BlockPos pos, BlockState blockState, boolean b);
-
 
     @Override
     protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> builder) {

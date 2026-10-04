@@ -137,7 +137,7 @@ public class WorldGen {
         return CONFIGURED_FEATURES.register(name, () -> new ConfiguredFeature<>(Feature.RANDOM_PATCH,
                 FeatureUtils.simpleRandomPatchConfiguration(tries,
                         PlacementUtils.inlinePlaced(singleBush,
-                                BlockPredicateFilter.forPredicate(BlockPredicate.matchesBlocks(Direction.DOWN.getNormal(), Blocks.GRASS_BLOCK, Blocks.FARMLAND)),
+                                BlockPredicateFilter.forPredicate(BlockPredicate.matchesBlocks(Direction.DOWN.getUnitVec3i(), Blocks.GRASS_BLOCK, Blocks.FARMLAND)),
                                 BlockPredicateFilter.forPredicate(BlockPredicate.matchesBlocks(Blocks.AIR))))));
     }
 
@@ -145,7 +145,7 @@ public class WorldGen {
         return CONFIGURED_FEATURES.register(name, () -> new ConfiguredFeature<>(Feature.RANDOM_PATCH,
                 FeatureUtils.simpleRandomPatchConfiguration(tries,
                         PlacementUtils.inlinePlaced(singleBush,
-                                BlockPredicateFilter.forPredicate(BlockPredicate.matchesBlocks(Direction.DOWN.getNormal(), Blocks.NETHERRACK)),
+                                BlockPredicateFilter.forPredicate(BlockPredicate.matchesBlocks(Direction.DOWN.getUnitVec3i(), Blocks.NETHERRACK)),
                                 BlockPredicateFilter.forPredicate(BlockPredicate.matchesBlocks(Blocks.AIR))))));
     }
 
@@ -153,7 +153,7 @@ public class WorldGen {
         return CONFIGURED_FEATURES.register(name, () -> new ConfiguredFeature<>(Feature.RANDOM_PATCH,
                 FeatureUtils.simpleRandomPatchConfiguration(tries,
                         PlacementUtils.inlinePlaced(singleBush,
-                                BlockPredicateFilter.forPredicate(BlockPredicate.matchesBlocks(Direction.DOWN.getNormal(), Blocks.END_STONE)),
+                                BlockPredicateFilter.forPredicate(BlockPredicate.matchesBlocks(Direction.DOWN.getUnitVec3i(), Blocks.END_STONE)),
                                 BlockPredicateFilter.forPredicate(BlockPredicate.matchesBlocks(Blocks.AIR))))));
     }
 

@@ -21,8 +21,8 @@ stonecutter {
         // Major target for this branch. Add further NeoForge point releases here
         // (and a matching block in stonecutter.properties.toml) to build them from
         // this single codebase with Stonecutter condition comments.
-        versions("1.21.1")
-        vcsVersion = "1.21.1"
+        versions("1.21.8")
+        vcsVersion = "1.21.8"
     }
 }
 
