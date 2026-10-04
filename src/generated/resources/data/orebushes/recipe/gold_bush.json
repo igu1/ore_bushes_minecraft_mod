@@ -1,0 +1,24 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "B": {
+      "item": "minecraft:raw_gold"
+    },
+    "C": {
+      "item": "minecraft:amethyst_shard"
+    },
+    "S": {
+      "item": "minecraft:wheat_seeds"
+    }
+  },
+  "pattern": [
+    " C ",
+    "SBS",
+    " C "
+  ],
+  "result": {
+    "count": 1,
+    "id": "orebushes:gold_bush"
+  }
+}

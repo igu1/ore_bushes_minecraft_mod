@@ -9,8 +9,11 @@ import me.ez.orebushes.Common.Bushes.OreBushEnd;
 import me.ez.orebushes.Common.Bushes.OreBushNether;
 import me.ez.orebushes.Common.Bushes.OreBushOverWorld;
 import net.minecraft.core.registries.Registries;
+import net.minecraft.network.chat.Component;
 import net.minecraft.world.item.BlockItem;
+import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.Item;
+import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.inventory.MenuType;
@@ -53,19 +56,6 @@ public class Init {
     public static final DeferredHolder<Item, BushBlockItem> CHORUS_BUSH_ITEM =ITEMS.register("chorus_bush", () -> new BushBlockItem(Init.CHORUS_BUSH.get()));
     public static final DeferredHolder<Item, BushBlockItem> SHULKER_SHELL_BUSH_ITEM =ITEMS.register("shulker_shell_bush", () -> new BushBlockItem(Init.SHULKER_SHELL_BUSH.get()));
     public static final DeferredHolder<Item, BushBlockItem> DRAGON_BREATH_BUSH_ITEM =ITEMS.register("dragon_breath_bush", () -> new BushBlockItem(Init.DRAGON_BREATH_BUSH.get()));
-
-    //Drops
-    public static final DeferredHolder<Item, Item> EMERALD_NUGGET =ITEMS.register("emerald_nugget",
-            () -> new Item(new Item.Properties()));
-
-    public static final DeferredHolder<Item, Item> DIAMOND_NUGGET =ITEMS.register("diamond_nugget",
-            () -> new Item(new Item.Properties()));
-
-    public static final DeferredHolder<Item, Item> NETHERITE_NUGGET =ITEMS.register("netherite_nugget",
-            () -> new Item(new Item.Properties()));
-
-    public static final DeferredHolder<Item, Item> COPPER_NUGGET =ITEMS.register("copper_nugget",
-            () -> new Item(new Item.Properties()));
 
 
     //--------------------------------------------------------------------------------
@@ -121,5 +111,21 @@ public class Init {
     public static final DeferredRegister<MenuType<?>> MENUS = DeferredRegister.create(Registries.MENU, Main.MOD_ID);
     public static final DeferredHolder<MenuType<?>, MenuType<BushHarvesterMenu>> BUSH_HARVESTER_MENU =
             MENUS.register("bushharvester", () -> IMenuTypeExtension.create(BushHarvesterMenu::new));
+
+    public static final DeferredRegister<CreativeModeTab> CREATIVE_TABS = DeferredRegister.create(Registries.CREATIVE_MODE_TAB, Main.MOD_ID);
+    public static final DeferredHolder<CreativeModeTab, CreativeModeTab> ORE_BUSHES_TAB = CREATIVE_TABS.register("ore_bushes",
+            () -> CreativeModeTab.builder()
+                    .title(Component.translatable("itemGroup.orebushes"))
+                    .icon(() -> new ItemStack(DIAMOND_BUSH_ITEM.get()))
+                    .displayItems(Init::addTabContents)
+                    .build());
+
+    /** Fills the Ore Bushes tab with the harvester and every seed. */
+    private static void addTabContents(CreativeModeTab.ItemDisplayParameters parameters, CreativeModeTab.Output output) {
+        output.accept(BUSH_HARVESTER_BLOCK_ITEM.get());
+        ITEMS.getEntries().forEach(holder -> {
+            if (holder.get() instanceof BushBlockItem) output.accept(holder.get());
+        });
+    }
 
 }

@@ -22,7 +22,10 @@ public class BushBlockItem extends BlockItem {
         tooltip.add(Component.literal(profile.conditions).withStyle(ChatFormatting.GRAY));
         tooltip.add(Component.literal("Tier " + profile.tier + " • " + profile.harvestLimit() + " harvests, then spent")
                 .withStyle(ChatFormatting.GOLD));
-        tooltip.add(Component.literal("Harvest when ripe. Breaking returns the seed.").withStyle(ChatFormatting.DARK_GRAY));
+        tooltip.add(Component.literal("Harvest when ripe; needs its substrate in the right dimension.")
+                .withStyle(ChatFormatting.DARK_GRAY));
+        tooltip.add(Component.literal("Breaking a living plant returns the seed; a spent plant is gone.")
+                .withStyle(ChatFormatting.DARK_GRAY));
         if (profile.tier > 1) tooltip.add(Component.literal("Cannot be bone-mealed").withStyle(ChatFormatting.DARK_GRAY));
     }
 }

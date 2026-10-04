@@ -8,8 +8,6 @@ import net.minecraft.data.recipes.RecipeCategory;
 import net.minecraft.data.recipes.RecipeOutput;
 import net.minecraft.data.recipes.RecipeProvider;
 import net.minecraft.data.recipes.ShapedRecipeBuilder;
-import net.minecraft.data.recipes.ShapelessRecipeBuilder;
-import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.Items;
 
@@ -29,76 +27,70 @@ public class ModRecipeProvider extends RecipeProvider {
                 .define('C', Items.COPPER_INGOT).define('R', Items.REDSTONE)
                 .define('P', Items.PISTON).unlockedBy("has_hopper", has(Items.HOPPER)).save(output);
 
-        bushsSeedRecipeProvider(output);
-
         //Items
 
-        ShapelessRecipeBuilder.shapeless(RecipeCategory.MISC, Items.DIAMOND)
-                .requires(Init.DIAMOND_NUGGET.get(), 9)
-                .unlockedBy("has_diamond_nugget", has(Init.DIAMOND_NUGGET.get())).save(output);
-
-        ShapelessRecipeBuilder.shapeless(RecipeCategory.MISC, Items.NETHERITE_INGOT)
-                .requires(Init.NETHERITE_NUGGET.get(), 9)
-                .unlockedBy("has_netherite_nugget", has(Init.NETHERITE_NUGGET.get())).save(output);
-
-        ShapelessRecipeBuilder.shapeless(RecipeCategory.MISC, Items.COPPER_INGOT)
-                .requires(Init.COPPER_NUGGET.get(), 9)
-                .unlockedBy("has_copper_nugget", has(Init.COPPER_NUGGET.get())).save(output);
-
-        ShapelessRecipeBuilder.shapeless(RecipeCategory.MISC, Items.EMERALD)
-                .requires(Init.EMERALD_NUGGET.get(), 9)
-                .unlockedBy("has_emerald_nugget", has(Items.EMERALD)).save(output);
-
-        //Ingots To Nuggets
-        ShapelessRecipeBuilder.shapeless(RecipeCategory.MISC, Init.EMERALD_NUGGET.get(), 9)
-                .requires(Items.EMERALD)
-                .unlockedBy("has_emerald", has(Items.EMERALD)).save(output);
-
-        ShapelessRecipeBuilder.shapeless(RecipeCategory.MISC, Init.DIAMOND_NUGGET.get(), 9)
-                .requires(Items.DIAMOND)
-                .unlockedBy("has_diamond", has(Items.DIAMOND)).save(output);
-
-        ShapelessRecipeBuilder.shapeless(RecipeCategory.MISC, Init.COPPER_NUGGET.get(), 9)
-                .requires(Items.COPPER_INGOT)
-                .unlockedBy("has_copper_ingot", has(Items.DIAMOND)).save(output);
-
-        ShapelessRecipeBuilder.shapeless(RecipeCategory.MISC, Init.NETHERITE_NUGGET.get(), 9)
-                .requires(Items.NETHERITE_INGOT)
-                .unlockedBy("has_netherite_ingot", has(Items.NETHERITE_INGOT)).save(output);
+        bushsSeedRecipeProvider(output);
     }
 
-    /** Shape " B " / "SBS" / " B " where B is the resource block and S the starter seed. */
+    /**
+     * Seed recipe: shape " C " / "SBS" / " C ".
+     *
+     * <ul>
+     *   <li>{@code C} — a non-refundable rarity catalyst that scales with tier
+     *       (bone meal → amethyst shard → ender pearl → echo shard). You never get
+     *       it back, so rarer plants cost more to start.</li>
+     *   <li>{@code S} — the world root (wheat seeds / nether wart / chorus flower).</li>
+     *   <li>{@code B} — the resource itself, one item. Requiring the resource means
+     *       a bush can only sustain a resource you have already obtained, never
+     *       shortcut you to it.</li>
+     * </ul>
+     * Yields one seed: the plant then returns its seed when broken and keeps producing
+     * until its lifetime limit, so the catalyst is the only true cost.
+     */
     private void bushsSeedRecipeProvider(RecipeOutput output) {
         for (ResourcePlantProfile profile : ResourcePlantProfile.values()) {
-            Item block = resourceBlock(profile);
+            Item core = resourceCore(profile);
             Item root = rootSeed(profile);
-            if (block == null || root == null) continue;
+            Item catalyst = catalyst(profile);
+            if (core == null || root == null || catalyst == null) continue;
             me.ez.orebushes.Common.Bushes.BushBlockItem seed = seedItem(profile);
-            ShapedRecipeBuilder.shaped(RecipeCategory.MISC, seed, 2)
-                    .define('B', block)
+            ShapedRecipeBuilder.shaped(RecipeCategory.MISC, seed, 1)
+                    .define('B', core)
                     .define('S', root)
-                    .pattern(" B ")
-                    .pattern(" S ")
-                    .pattern(" B ")
-                    .unlockedBy("has_block", has(block))
+                    .define('C', catalyst)
+                    .pattern(" C ")
+                    .pattern("SBS")
+                    .pattern(" C ")
+                    .unlockedBy("has_core", has(core))
                     .save(output);
         }
     }
 
-    private static Item resourceBlock(ResourcePlantProfile profile) {
+    /** Non-refundable progression catalyst, one tier rarer for each plant tier. */
+    private static Item catalyst(ResourcePlantProfile profile) {
+        return switch (profile.tier) {
+            case 1 -> Items.BONE_MEAL;
+            case 2 -> Items.AMETHYST_SHARD;
+            case 3 -> Items.ENDER_PEARL;
+            default -> Items.ECHO_SHARD;
+        };
+    }
+
+    /** The resource the plant produces; you must already own it to craft the seed. */
+    private static Item resourceCore(ResourcePlantProfile profile) {
         return switch (profile) {
-            case COAL -> Items.COAL_BLOCK;
-            case IRON -> Items.IRON_BLOCK;
-            case GOLD -> Items.GOLD_BLOCK;
-            case EMERALD -> Items.EMERALD_BLOCK;
-            case DIAMOND -> Items.DIAMOND_BLOCK;
-            case REDSTONE -> Items.REDSTONE_BLOCK;
-            case LAPIS -> Items.LAPIS_BLOCK;
-            case COPPER -> Items.COPPER_BLOCK;
-            case NETHERITE -> Items.NETHERITE_BLOCK;
-            case GLOWSTONE -> Items.GLOWSTONE;
-            case QUARTZ -> Items.QUARTZ_BLOCK;
-            case AMETHYST -> Items.AMETHYST_BLOCK;
+            case COAL -> Items.COAL;
+            case IRON -> Items.RAW_IRON;
+            case GOLD -> Items.RAW_GOLD;
+            case EMERALD -> Items.EMERALD;
+            case DIAMOND -> Items.DIAMOND;
+            case REDSTONE -> Items.REDSTONE;
+            case LAPIS -> Items.LAPIS_LAZULI;
+            case COPPER -> Items.RAW_COPPER;
+            case NETHERITE -> Items.NETHERITE_SCRAP;
+            case GLOWSTONE -> Items.GLOWSTONE_DUST;
+            case QUARTZ -> Items.QUARTZ;
+            case AMETHYST -> Items.AMETHYST_SHARD;
             case EXPERIENCE -> Items.EXPERIENCE_BOTTLE;
             case ECHO_SHARD -> Items.ECHO_SHARD;
             case GOLDEN_APPLE -> Items.GOLDEN_APPLE;

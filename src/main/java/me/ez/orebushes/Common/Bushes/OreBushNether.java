@@ -53,7 +53,7 @@ public class OreBushNether extends AbstractModBushBlock {
     }
 
     @Override
-    protected ItemStack getDropForPlant() { return getDropItem(getItemByKey, 1); }
+    protected int getVariantKey() { return getItemByKey; }
 
     @Override
     public ItemStack getItem(int ItemKey) {
@@ -69,10 +69,11 @@ public class OreBushNether extends AbstractModBushBlock {
 
     @Override
     public ItemStack getDropItem(int ItemKey, int amount) {
+        // Strictly profitable over its lifetime; netherite converts scrap -> ingot.
         HashMap<Integer, ItemStack> stackHashMap = new HashMap<>();
-        stackHashMap.put(1, new ItemStack(Items.QUARTZ, amount));
-        stackHashMap.put(2, new ItemStack(Items.GLOWSTONE_DUST, amount));
-        stackHashMap.put(3, new ItemStack(Init.NETHERITE_NUGGET.get(), amount));
+        stackHashMap.put(1, new ItemStack(Items.QUARTZ, 2 * amount));
+        stackHashMap.put(2, new ItemStack(Items.GLOWSTONE_DUST, 2 * amount));
+        stackHashMap.put(3, new ItemStack(Items.NETHERITE_INGOT, amount));
         stackHashMap.put(4, new ItemStack(Items.ANCIENT_DEBRIS, amount));
         stackHashMap.put(5, new ItemStack(Items.BLAZE_ROD, amount));
         return stackHashMap.get(ItemKey);

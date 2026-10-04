@@ -52,7 +52,7 @@ public class OreBushEnd extends AbstractModBushBlock {
     }
 
     @Override
-    protected ItemStack getDropForPlant() { return getDropItem(getItemByKey, 1); }
+    protected int getVariantKey() { return getItemByKey; }
 
     @Override
     public ItemStack getItem(int ItemKey) {
@@ -68,10 +68,11 @@ public class OreBushEnd extends AbstractModBushBlock {
 
     @Override
     public ItemStack getDropItem(int ItemKey, int amount) {
+        // Strictly profitable over its lifetime (2x core for same-item plants).
         HashMap<Integer, ItemStack> stackHashMap = new HashMap<>();
-        stackHashMap.put(1, new ItemStack(Items.ENDER_PEARL, amount));
+        stackHashMap.put(1, new ItemStack(Items.ENDER_PEARL, 2 * amount));
         stackHashMap.put(2, new ItemStack(Items.ENDER_EYE, amount));
-        stackHashMap.put(3, new ItemStack(Items.CHORUS_FRUIT, amount));
+        stackHashMap.put(3, new ItemStack(Items.CHORUS_FRUIT, 2 * amount));
         stackHashMap.put(4, new ItemStack(Items.SHULKER_SHELL, amount));
         stackHashMap.put(5, new ItemStack(Items.DRAGON_BREATH, amount));
         return stackHashMap.get(ItemKey);

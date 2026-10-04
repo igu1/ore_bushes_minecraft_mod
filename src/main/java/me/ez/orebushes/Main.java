@@ -25,11 +25,13 @@ public class Main
 
     public Main(IEventBus modEventBus, ModContainer modContainer)
     {
-        Init.ITEMS.register(modEventBus);
+        // Blocks must register before items: the seed items wrap block DeferredHolders.
         Init.BUSHES.register(modEventBus);
         Init.BLOCKS.register(modEventBus);
         Init.BLOCK_ENTITY.register(modEventBus);
         Init.MENUS.register(modEventBus);
+        Init.CREATIVE_TABS.register(modEventBus);
+        Init.ITEMS.register(modEventBus);
         PlantEffects.SOUNDS.register(modEventBus);
         PlantEffects.PARTICLES.register(modEventBus);
         WorldGen.CONFIGURED_FEATURES.register(modEventBus);
@@ -37,18 +39,11 @@ public class Main
         modEventBus.addListener(this::addCreative);
         modEventBus.addListener(BushHarvesterBlockEntity::registerCapabilities);
         modContainer.registerConfig(ModConfig.Type.COMMON, Config.SPEC);
-        NeoForge.EVENT_BUS.register(this);
         NeoForge.EVENT_BUS.register(VillagerTradeHandler.class);
     }
 
-    /** Adds the seeds and nuggets to the vanilla creative tabs (1.19.3+ style). */
+    /** Adds the seeds and harvester to the vanilla creative tabs (1.19.3+ style). */
     private void addCreative(BuildCreativeModeTabContentsEvent event) {
-        if (event.getTabKey() == CreativeModeTabs.INGREDIENTS) {
-            event.accept(Init.EMERALD_NUGGET.get());
-            event.accept(Init.DIAMOND_NUGGET.get());
-            event.accept(Init.NETHERITE_NUGGET.get());
-            event.accept(Init.COPPER_NUGGET.get());
-        }
         if (event.getTabKey() == CreativeModeTabs.NATURAL_BLOCKS) {
             Init.BUSHES.getEntries().forEach(h -> event.accept(h.get()));
         }

@@ -1,0 +1,195 @@
+{
+  "type": "minecraft:block",
+  "functions": [
+    {
+      "function": "minecraft:explosion_decay"
+    }
+  ],
+  "pools": [
+    {
+      "bonus_rolls": 0.0,
+      "conditions": [
+        {
+          "block": "orebushes:golden_apple_bush_stage",
+          "condition": "minecraft:block_state_property",
+          "properties": {
+            "harvests": "0"
+          }
+        }
+      ],
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "name": "orebushes:golden_apple_bush"
+        }
+      ],
+      "rolls": 1.0
+    },
+    {
+      "bonus_rolls": 0.0,
+      "conditions": [
+        {
+          "block": "orebushes:golden_apple_bush_stage",
+          "condition": "minecraft:block_state_property",
+          "properties": {
+            "harvests": "1"
+          }
+        }
+      ],
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "name": "orebushes:golden_apple_bush"
+        }
+      ],
+      "rolls": 1.0
+    },
+    {
+      "bonus_rolls": 0.0,
+      "conditions": [
+        {
+          "block": "orebushes:golden_apple_bush_stage",
+          "condition": "minecraft:block_state_property",
+          "properties": {
+            "harvests": "2"
+          }
+        }
+      ],
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "name": "orebushes:golden_apple_bush"
+        }
+      ],
+      "rolls": 1.0
+    },
+    {
+      "bonus_rolls": 0.0,
+      "conditions": [
+        {
+          "block": "orebushes:golden_apple_bush_stage",
+          "condition": "minecraft:block_state_property",
+          "properties": {
+            "harvests": "3"
+          }
+        }
+      ],
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "name": "orebushes:golden_apple_bush"
+        }
+      ],
+      "rolls": 1.0
+    },
+    {
+      "bonus_rolls": 0.0,
+      "conditions": [
+        {
+          "block": "orebushes:golden_apple_bush_stage",
+          "condition": "minecraft:block_state_property",
+          "properties": {
+            "age": "3",
+            "harvests": "0"
+          }
+        }
+      ],
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "name": "minecraft:golden_apple"
+        }
+      ],
+      "functions": [
+        {
+          "add": false,
+          "count": 2.0,
+          "function": "minecraft:set_count"
+        }
+      ],
+      "rolls": 1.0
+    },
+    {
+      "bonus_rolls": 0.0,
+      "conditions": [
+        {
+          "block": "orebushes:golden_apple_bush_stage",
+          "condition": "minecraft:block_state_property",
+          "properties": {
+            "age": "3",
+            "harvests": "1"
+          }
+        }
+      ],
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "name": "minecraft:golden_apple"
+        }
+      ],
+      "functions": [
+        {
+          "add": false,
+          "count": 2.0,
+          "function": "minecraft:set_count"
+        }
+      ],
+      "rolls": 1.0
+    },
+    {
+      "bonus_rolls": 0.0,
+      "conditions": [
+        {
+          "block": "orebushes:golden_apple_bush_stage",
+          "condition": "minecraft:block_state_property",
+          "properties": {
+            "age": "3",
+            "harvests": "2"
+          }
+        }
+      ],
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "name": "minecraft:golden_apple"
+        }
+      ],
+      "functions": [
+        {
+          "add": false,
+          "count": 2.0,
+          "function": "minecraft:set_count"
+        }
+      ],
+      "rolls": 1.0
+    },
+    {
+      "bonus_rolls": 0.0,
+      "conditions": [
+        {
+          "block": "orebushes:golden_apple_bush_stage",
+          "condition": "minecraft:block_state_property",
+          "properties": {
+            "age": "3",
+            "harvests": "3"
+          }
+        }
+      ],
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "name": "minecraft:golden_apple"
+        }
+      ],
+      "functions": [
+        {
+          "add": false,
+          "count": 2.0,
+          "function": "minecraft:set_count"
+        }
+      ],
+      "rolls": 1.0
+    }
+  ],
+  "random_sequence": "orebushes:blocks/golden_apple_bush_stage"
+}

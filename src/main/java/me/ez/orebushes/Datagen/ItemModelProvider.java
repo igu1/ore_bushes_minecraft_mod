@@ -45,11 +45,6 @@ public class ItemModelProvider extends net.neoforged.neoforge.client.model.gener
         simpleItem(Init.CHORUS_BUSH_ITEM);
         simpleItem(Init.SHULKER_SHELL_BUSH_ITEM);
         simpleItem(Init.DRAGON_BREATH_BUSH_ITEM);
-
-        simpleItem(Init.DIAMOND_NUGGET);
-        simpleItem(Init.EMERALD_NUGGET);
-        simpleItem(Init.COPPER_NUGGET);
-        simpleItem(Init.NETHERITE_NUGGET);
     }
 
     private <T extends Item> ItemModelBuilder simpleItem(DeferredHolder<Item, T> item){

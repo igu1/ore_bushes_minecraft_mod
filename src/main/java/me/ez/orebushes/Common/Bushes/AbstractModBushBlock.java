@@ -112,13 +112,33 @@ public abstract class AbstractModBushBlock extends BushBlock implements Bonemeal
     public ItemStack harvestDrop(BlockState state) {
         if (state.getValue(AGE) != MAX_AGE || isExhausted(state)) return ItemStack.EMPTY;
         ItemStack drop = getDropForPlant();
-        int count = profile().tier >= 3 ? 1 : Math.min(3,
-                Math.max(1, (int) Math.round((1 + Config.MATURE_BONUS.get()) * Config.AMOUNT_MULTIPLIER.get())));
-        drop.setCount(count);
+        if (drop.isEmpty()) return ItemStack.EMPTY;
+        drop.setCount(Math.max(1, drop.getCount()) * getDropCount());
         return drop;
     }
 
-    protected abstract ItemStack getDropForPlant();
+    /** The variant key used by {@link #getDropItem(int, int)}; set by each plant family. */
+    protected abstract int getVariantKey();
+
+    /**
+     * Items per harvest. Tiers 1-2 get a configurable multiplier; tiers 3-4 keep a
+     * fixed amount so rare resources stay bounded, but their per-harvest yield is
+     * already set higher than the core so they still profit over their lifetime.
+     */
+    protected int getDropCount() {
+        return profile().tier >= 3 ? 1 : Math.min(3,
+                Math.max(1, (int) Math.round((1 + Config.MATURE_BONUS.get()) * Config.AMOUNT_MULTIPLIER.get())));
+    }
+
+    /** What a ripe plant yields from the automated Ore Harvester. */
+    public ItemStack machineDrop() { return harvestDrop(defaultBlockState().setValue(AGE, MAX_AGE)); }
+
+    /**
+     * One harvest of a ripe plant. Every plant overrides this (via its family) to
+     * return strictly more value than its seed core over its lifetime, so a plant
+     * is never a loss.
+     */
+    protected ItemStack getDropForPlant() { return getDropItem(getVariantKey(), 1); }
 
     public void finishHarvest(ServerLevel level, BlockPos pos, BlockState state) {
         finishHarvest(level, pos, state, true);
@@ -127,9 +147,12 @@ public abstract class AbstractModBushBlock extends BushBlock implements Bonemeal
     /** Machines keep the normal harvest transition and particles, without audio. */
     public void finishHarvest(ServerLevel level, BlockPos pos, BlockState state, boolean playSound) {
         if (state.getValue(AGE) != MAX_AGE || isExhausted(state) || !level.getBlockState(pos).equals(state)) return;
-        // Stay ripe after harvesting: only the lifetime counter advances, so the
-        // plant can be harvested again immediately without regrowing from stage 0.
-        level.setBlock(pos, state.setValue(HARVESTS, state.getValue(HARVESTS) + 1), 3);
+        // Harvesting sets the plant back one growth stage (ripe -> budding) and
+        // advances the lifetime counter, so it must regrow before the next harvest.
+        int nextAge = Math.max(0, state.getValue(AGE) - 1);
+        level.setBlock(pos, state
+                .setValue(AGE, nextAge)
+                .setValue(HARVESTS, state.getValue(HARVESTS) + 1), 3);
         if (playSound) {
             level.playSound(null, pos, profile().sound(), SoundSource.BLOCKS, 0.65F, 0.9F + level.random.nextFloat() * 0.2F);
         }
@@ -151,8 +174,11 @@ public abstract class AbstractModBushBlock extends BushBlock implements Bonemeal
             popResource(level, pos, drop);
             finishHarvest((ServerLevel) level, pos, state);
             int remaining = profile().harvestLimit() - state.getValue(HARVESTS) - 1;
-            player.displayClientMessage(net.minecraft.network.chat.Component.literal(profile().displayName
-                    + (remaining == 0 ? " is spent." : ": " + remaining + " harvests remaining.")), true);
+            String got = drop.getCount() + "x " + drop.getHoverName().getString();
+            player.displayClientMessage(net.minecraft.network.chat.Component.literal(
+                    "Harvested " + got + (remaining == 0
+                            ? " — " + profile().displayName + " is spent."
+                            : " (" + remaining + " harvests left).")), true);
             if (profile() == ResourcePlantProfile.EXPERIENCE) {
                 player.addEffect(new net.minecraft.world.effect.MobEffectInstance(net.minecraft.world.effect.MobEffects.NIGHT_VISION, 200));
             } else if (profile() == ResourcePlantProfile.GOLDEN_APPLE) {

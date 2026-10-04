@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_core": {
+      "conditions": {
+        "items": [
+          {
+            "items": "minecraft:ender_eye"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "orebushes:ender_eye_bush"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    }
+  },
+  "requirements": [
+    [
+      "has_the_recipe",
+      "has_core"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "orebushes:ender_eye_bush"
+    ]
+  }
+}

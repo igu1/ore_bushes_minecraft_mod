@@ -30,11 +30,20 @@ neoForge {
             gameDirectory = rootProject.file("run")
             server()
         }
-        register("data") {
+        register("clientData") {
             gameDirectory = rootProject.file("run")
             data()
+            programArguments.addAll("--mod", property("mod.id") as String, "--all",
+                    "--output", rootProject.file("src/generated/resources").absolutePath,
+                    "--existing", rootProject.file("src/main/resources").absolutePath)
         }
     }
+}
+
+// Datagen output (translations, recipes, loot tables) must ship in the jar.
+// Static assets (blockstates, models, item definitions) live in src/main/resources.
+sourceSets.main {
+    resources.srcDir("src/generated/resources")
 }
 
 tasks {

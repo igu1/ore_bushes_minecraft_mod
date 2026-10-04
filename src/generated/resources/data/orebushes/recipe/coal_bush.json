@@ -1,0 +1,24 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "B": {
+      "item": "minecraft:coal"
+    },
+    "C": {
+      "item": "minecraft:bone_meal"
+    },
+    "S": {
+      "item": "minecraft:wheat_seeds"
+    }
+  },
+  "pattern": [
+    " C ",
+    "SBS",
+    " C "
+  ],
+  "result": {
+    "count": 1,
+    "id": "orebushes:coal_bush"
+  }
+}

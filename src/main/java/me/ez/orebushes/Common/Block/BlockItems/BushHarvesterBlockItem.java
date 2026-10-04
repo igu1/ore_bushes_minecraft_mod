@@ -19,34 +19,15 @@ public class BushHarvesterBlockItem extends BlockItem {
 
     @Override
     public void appendHoverText(ItemStack stack, Item.TooltipContext context, List<Component> components, TooltipFlag flag) {
-        components.add(Component.literal("Right-click to open the 36-slot harvester storage.").withStyle(ChatFormatting.AQUA));
-        components.add(Component.literal("Fills its own storage, then any inventory above.").withStyle(ChatFormatting.GRAY));
-        components.add(Component.literal("Shows its harvesting radius while working. Redstone pauses.").withStyle(ChatFormatting.GRAY));
-        components.add(Component.literal("Blue idle • Green running • Red blocked • Amber paused").withStyle(ChatFormatting.DARK_GRAY));
-        if (Screen.hasShiftDown()) {
-            components.add(Component.translatable("Hint: Place A Chest Top Of The Harvester").withStyle(ChatFormatting.AQUA));
-            components.add(Component.translatable("Speed:"));
-            components.add(Component.translatable(" Place: \n" +
-                    "  Iron Block: 30s\n" +
-                    "  Gold Block: 20s\n" +
-                    "  Diamond Block: 1s\n" +
-                    "  Default: 40s").withStyle(ChatFormatting.GRAY));
-            components.add(Component.translatable("""
-                    Place at Y= -1 position of Harvester
-                    or under the Harvester.
-                    """).withStyle(ChatFormatting.DARK_GRAY));
-            components.add(Component.translatable("Range:"));
-                    components.add(Component.translatable(" Place:\n" +
-                            "  Iron Block: 3m\n" +
-                            "  Gold Block: 4m\n" +
-                            "  Diamond Block: 8m\n" +
-                            "  Default: 2m").withStyle(ChatFormatting.GRAY));
-            components.add(Component.translatable("""
-                    Place at Y= -2 position of Harvester
-                    or under the block you placed for speed.
-                    """).withStyle(ChatFormatting.DARK_GRAY));
-        }else {
-            components.add(Component.translatable("Hold Shift For More Information").withStyle(ChatFormatting.GRAY));
-        }
+        components.add(Component.literal("Right-click: 36-slot storage; overflow goes to the inventory above.")
+                .withStyle(ChatFormatting.AQUA));
+        components.add(Component.literal("Shows its harvest radius while running. Redstone pauses it.")
+                .withStyle(ChatFormatting.GRAY));
+        components.add(Component.literal("Blue idle • Green running • Red blocked • Amber paused")
+                .withStyle(ChatFormatting.DARK_GRAY));
+        components.add(Component.literal("Speed (block below): iron 30s • gold 20s • diamond 1s • 40s default")
+                .withStyle(ChatFormatting.GRAY));
+        components.add(Component.literal("Range (2 below): iron 3 • gold 4 • diamond 8 • 2 default")
+                .withStyle(ChatFormatting.GRAY));
     }
 }

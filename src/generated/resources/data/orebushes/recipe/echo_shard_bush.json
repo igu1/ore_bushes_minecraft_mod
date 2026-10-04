@@ -1,0 +1,24 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "B": {
+      "item": "minecraft:echo_shard"
+    },
+    "C": {
+      "item": "minecraft:echo_shard"
+    },
+    "S": {
+      "item": "minecraft:wheat_seeds"
+    }
+  },
+  "pattern": [
+    " C ",
+    "SBS",
+    " C "
+  ],
+  "result": {
+    "count": 1,
+    "id": "orebushes:echo_shard_bush"
+  }
+}

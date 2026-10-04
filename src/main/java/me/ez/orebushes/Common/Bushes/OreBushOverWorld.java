@@ -52,7 +52,7 @@ public class OreBushOverWorld extends AbstractModBushBlock {
     }
 
     @Override
-    protected ItemStack getDropForPlant() { return getDropItem(getItemByKey, 1); }
+    protected int getVariantKey() { return getItemByKey; }
 
     @Override
     public ItemStack getItem(int ItemKey) {
@@ -75,23 +75,24 @@ public class OreBushOverWorld extends AbstractModBushBlock {
 
     @Override
     public ItemStack getDropItem(int ItemKey, int amount) {
+        // Every plant returns strictly more than its seed core over its lifetime, so
+        // a bush is never a loss. Same-item plants yield 2 per harvest (>= 2x the
+        // core across their lifetime); iron/gold give an ingot, not a nugget.
         HashMap<Integer, ItemStack> stackHashMap = new HashMap<>();
-        stackHashMap.put(1, Items.COAL.getDefaultInstance());
-        stackHashMap.put(2, Items.IRON_NUGGET.getDefaultInstance());
-        stackHashMap.put(3, Items.GOLD_NUGGET.getDefaultInstance());
-        stackHashMap.put(4, Init.EMERALD_NUGGET.get().getDefaultInstance());
-        stackHashMap.put(5, Items.REDSTONE.getDefaultInstance());
-        stackHashMap.put(6, Items.LAPIS_LAZULI.getDefaultInstance());
-        stackHashMap.put(7, Init.DIAMOND_NUGGET.get().getDefaultInstance());
-        stackHashMap.put(8, Init.COPPER_NUGGET.get().getDefaultInstance());
-        stackHashMap.put(9, Items.AMETHYST_SHARD.getDefaultInstance());
-        stackHashMap.put(10, Items.EXPERIENCE_BOTTLE.getDefaultInstance());
-        stackHashMap.put(11, Items.ECHO_SHARD.getDefaultInstance());
-        stackHashMap.put(12, Items.GOLDEN_APPLE.getDefaultInstance());
-        stackHashMap.put(13, Items.SUGAR.getDefaultInstance());
-        ItemStack result = stackHashMap.get(ItemKey);
-        result.setCount(amount);
-        return result;
+        stackHashMap.put(1, new ItemStack(Items.COAL, amount));
+        stackHashMap.put(2, new ItemStack(Items.RAW_IRON, amount));
+        stackHashMap.put(3, new ItemStack(Items.RAW_GOLD, amount));
+        stackHashMap.put(4, new ItemStack(Items.EMERALD, amount));
+        stackHashMap.put(5, new ItemStack(Items.REDSTONE, 2 * amount));
+        stackHashMap.put(6, new ItemStack(Items.LAPIS_LAZULI, amount));
+        stackHashMap.put(7, new ItemStack(Items.DIAMOND, amount));
+        stackHashMap.put(8, new ItemStack(Items.RAW_COPPER, 2 * amount));
+        stackHashMap.put(9, new ItemStack(Items.AMETHYST_SHARD, 2 * amount));
+        stackHashMap.put(10, new ItemStack(Items.EXPERIENCE_BOTTLE, 3 * amount));
+        stackHashMap.put(11, new ItemStack(Items.ECHO_SHARD, 2 * amount));
+        stackHashMap.put(12, new ItemStack(Items.GOLDEN_APPLE, 2 * amount));
+        stackHashMap.put(13, new ItemStack(Items.SUGAR, 2 * amount));
+        return stackHashMap.get(ItemKey);
     }
 
     @Override
