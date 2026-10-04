@@ -87,11 +87,11 @@ public class BushHarvester extends AbstractBlockEntityBlock {
 
     @Override
     protected InteractionResult useWithoutItem(BlockState state, Level level, BlockPos pos, Player player, BlockHitResult hitResult) {
-        if (!level.isClientSide && level.getBlockEntity(pos) instanceof MenuProvider provider
+        if (!level.isClientSide() && level.getBlockEntity(pos) instanceof MenuProvider provider
                 && player instanceof ServerPlayer serverPlayer) {
             serverPlayer.openMenu(provider, buffer -> buffer.writeBlockPos(pos));
         }
-        return level.isClientSide ? InteractionResult.SUCCESS : InteractionResult.SUCCESS_SERVER;
+        return level.isClientSide() ? InteractionResult.SUCCESS : InteractionResult.SUCCESS_SERVER;
     }
 
     /** Renders only the perimeter of the actual harvesting square. */

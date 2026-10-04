@@ -4,7 +4,7 @@ import me.ez.orebushes.Common.Bushes.ResourcePlantProfile;
 import net.minecraft.core.particles.ParticleType;
 import net.minecraft.core.particles.SimpleParticleType;
 import net.minecraft.core.registries.Registries;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.sounds.SoundEvent;
 import net.neoforged.neoforge.registries.DeferredRegister;
 import net.neoforged.neoforge.registries.DeferredHolder;
@@ -21,7 +21,7 @@ public final class PlantEffects {
         for (ResourcePlantProfile profile : ResourcePlantProfile.values()) {
             String sound = profile.id + "_harvest";
             HARVEST_SOUNDS.put(profile.id, SOUNDS.register(sound,
-                    () -> SoundEvent.createVariableRangeEvent(ResourceLocation.fromNamespaceAndPath(Main.MOD_ID, sound))));
+                    () -> SoundEvent.createVariableRangeEvent(Identifier.fromNamespaceAndPath(Main.MOD_ID, sound))));
             SPARKS.put(profile.id, PARTICLES.register(profile.id + "_spark", () -> new SimpleParticleType(false)));
         }
     }

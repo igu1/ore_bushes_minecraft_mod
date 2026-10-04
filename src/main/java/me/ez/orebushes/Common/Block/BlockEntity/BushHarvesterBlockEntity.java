@@ -26,9 +26,10 @@ import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
 import net.neoforged.neoforge.capabilities.Capabilities;
 import net.neoforged.neoforge.capabilities.RegisterCapabilitiesEvent;
-import net.neoforged.neoforge.items.IItemHandler;
-import net.neoforged.neoforge.items.ItemHandlerHelper;
-import net.neoforged.neoforge.items.wrapper.InvWrapper;
+import net.neoforged.neoforge.transfer.ResourceHandler;
+import net.neoforged.neoforge.transfer.transaction.Transaction;
+import net.neoforged.neoforge.transfer.transaction.TransactionContext;
+import net.neoforged.neoforge.transfer.item.ItemResource;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import org.slf4j.Logger;
@@ -40,7 +41,7 @@ public class BushHarvesterBlockEntity extends BlockEntity implements WorldlyCont
     private static final Logger LOGGER = LogUtils.getLogger();
 
     private final NonNullList<ItemStack> items = NonNullList.withSize(SLOTS, ItemStack.EMPTY);
-    final IItemHandler itemHandler = new InvWrapper(this);
+    final ResourceHandler<ItemResource> itemHandler = new InventoryResourceHandler();
 
     private int tick;
     private int activeTicks;
@@ -50,7 +51,7 @@ public class BushHarvesterBlockEntity extends BlockEntity implements WorldlyCont
     }
 
     public static <E extends BlockEntity> void Ticker(Level level, BlockPos pos, BlockState state, E e) {
-        if (level.isClientSide) return;
+        if (level.isClientSide()) return;
         BushHarvesterBlockEntity harvester = (BushHarvesterBlockEntity) e;
 
         if (level.hasNeighborSignal(pos)) {
@@ -105,17 +106,27 @@ public class BushHarvesterBlockEntity extends BlockEntity implements WorldlyCont
 
     /** Fills the internal inventory first, then an item handler directly above as overflow. */
     private ItemStack insertOutput(Level level, BlockPos pos, ItemStack stack) {
-        ItemStack remainder = ItemHandlerHelper.insertItemStacked(itemHandler, stack.copy(), false);
-        if (!remainder.isEmpty()) {
-            BlockEntity above = level.getBlockEntity(pos.above());
-            if (above != null) {
-                IItemHandler handler = level.getCapability(Capabilities.ItemHandler.BLOCK, above.getBlockPos(), null);
-                if (handler != null) {
-                    remainder = ItemHandlerHelper.insertItemStacked(handler, remainder, false);
+        try (Transaction transaction = Transaction.openRoot()) {
+            int inserted = itemHandler.insert(ItemResource.of(stack), stack.getCount(), transaction);
+            ItemStack remainder = inserted >= stack.getCount() ? ItemStack.EMPTY : stack.copyWithCount(stack.getCount() - inserted);
+            if (!remainder.isEmpty()) {
+                BlockEntity above = level.getBlockEntity(pos.above());
+                if (above != null) {
+                    ResourceHandler<ItemResource> aboveHandler =
+                            level.getCapability(Capabilities.Item.BLOCK, above.getBlockPos(), Direction.UP);
+                    if (aboveHandler != null) {
+                        int overflowInserted = aboveHandler.insert(ItemResource.of(remainder), remainder.getCount(), transaction);
+                        if (overflowInserted >= remainder.getCount()) {
+                            remainder = ItemStack.EMPTY;
+                        } else {
+                            remainder = remainder.copyWithCount(remainder.getCount() - overflowInserted);
+                        }
+                    }
                 }
             }
+            transaction.commit();
+            return remainder;
         }
-        return remainder;
     }
 
     private static void setMode(Level level, BlockPos pos, OperatingState mode) {
@@ -230,10 +241,70 @@ public class BushHarvesterBlockEntity extends BlockEntity implements WorldlyCont
         }
     }
 
-    // Capability registration (NeoForge 1.20.2+ style)
+    // Capability registration (NeoForge transfer API)
 
     public static void registerCapabilities(RegisterCapabilitiesEvent event) {
-        event.registerBlockEntity(Capabilities.ItemHandler.BLOCK, Init.BUSH_HARVESTER_BLOCK_ENTITY.get(),
+        event.registerBlockEntity(Capabilities.Item.BLOCK, Init.BUSH_HARVESTER_BLOCK_ENTITY.get(),
                 (be, side) -> be.itemHandler);
+    }
+
+    /** Minimal {@link ResourceHandler} exposing the internal {@link NonNullList} as items. */
+    private final class InventoryResourceHandler implements ResourceHandler<ItemResource> {
+        @Override
+        public int size() {
+            return SLOTS;
+        }
+
+        @Override
+        public ItemResource getResource(int index) {
+            return ItemResource.of(items.get(index));
+        }
+
+        @Override
+        public long getAmountAsLong(int index) {
+            return items.get(index).getCount();
+        }
+
+        @Override
+        public long getCapacityAsLong(int index, ItemResource resource) {
+            return resource.isEmpty() ? 0 : Math.min(resource.getItem().getDefaultMaxStackSize(), getMaxStackSize());
+        }
+
+        @Override
+        public boolean isValid(int index, ItemResource resource) {
+            return !resource.isEmpty();
+        }
+
+        @Override
+        public int insert(int index, ItemResource resource, int amount, TransactionContext transaction) {
+            if (resource.isEmpty() || amount <= 0) return 0;
+            ItemStack existing = items.get(index);
+            int limit = Math.min(resource.getItem().getDefaultMaxStackSize(), getMaxStackSize());
+            if (existing.isEmpty()) {
+                int moved = Math.min(amount, limit);
+                items.set(index, resource.toStack(moved));
+                setChanged();
+                return moved;
+            }
+            if (!ItemStack.isSameItemSameComponents(existing, resource.toStack(1))) return 0;
+            int room = limit - existing.getCount();
+            if (room <= 0) return 0;
+            int moved = Math.min(amount, room);
+            existing.grow(moved);
+            setChanged();
+            return moved;
+        }
+
+        @Override
+        public int extract(int index, ItemResource resource, int amount, TransactionContext transaction) {
+            if (resource.isEmpty() || amount <= 0) return 0;
+            ItemStack existing = items.get(index);
+            if (existing.isEmpty() || !ItemStack.isSameItemSameComponents(existing, resource.toStack(1))) return 0;
+            int moved = Math.min(amount, existing.getCount());
+            existing.shrink(moved);
+            if (existing.isEmpty()) items.set(index, ItemStack.EMPTY);
+            setChanged();
+            return moved;
+        }
     }
 }

@@ -131,14 +131,14 @@ public abstract class AbstractModBushBlock extends BushBlock implements Bonemeal
         // plant can be harvested again immediately without regrowing from stage 0.
         level.setBlock(pos, state.setValue(HARVESTS, state.getValue(HARVESTS) + 1), 3);
         if (playSound) {
-            level.playSound(null, pos, profile().sound(), SoundSource.BLOCKS, 0.65F, 0.9F + level.random.nextFloat() * 0.2F);
+            level.playSound(null, pos, profile().sound(), SoundSource.BLOCKS, 0.65F, 0.9F + level.getRandom().nextFloat() * 0.2F);
         }
         level.sendParticles(profile().particle(), pos.getX() + 0.5, pos.getY() + 0.6, pos.getZ() + 0.5, 12, 0.25, 0.3, 0.25, 0.02);
     }
 
     public InteractionResult harvest(BlockState state, Level level, BlockPos pos, Player player, InteractionHand hand) {
         if (state.getValue(AGE) < MAX_AGE || isExhausted(state)) return InteractionResult.PASS;
-        if (!level.isClientSide) {
+        if (!level.isClientSide()) {
             ItemStack drop = harvestDrop(state);
             if (profile().tier < 3 && Config.ENABLE_FORTUNE_BONUS.get()) {
                 var fortuneHolder = level.registryAccess()
@@ -146,12 +146,12 @@ public abstract class AbstractModBushBlock extends BushBlock implements Bonemeal
                         .getOrThrow(net.minecraft.world.item.enchantment.Enchantments.FORTUNE);
                 int fortune = net.minecraft.world.item.enchantment.EnchantmentHelper.getItemEnchantmentLevel(
                         fortuneHolder, player.getItemInHand(hand));
-                if (fortune > 0 && level.random.nextInt(fortune + 1) > 0) drop.setCount(Math.min(3, drop.getCount() + 1));
+                if (fortune > 0 && level.getRandom().nextInt(fortune + 1) > 0) drop.setCount(Math.min(3, drop.getCount() + 1));
             }
             popResource(level, pos, drop);
             finishHarvest((ServerLevel) level, pos, state);
             int remaining = profile().harvestLimit() - state.getValue(HARVESTS) - 1;
-            player.displayClientMessage(net.minecraft.network.chat.Component.literal(profile().displayName
+            ((net.minecraft.server.level.ServerPlayer) player).sendSystemMessage(net.minecraft.network.chat.Component.literal(profile().displayName
                     + (remaining == 0 ? " is spent." : ": " + remaining + " harvests remaining.")), true);
             if (profile() == ResourcePlantProfile.EXPERIENCE) {
                 player.addEffect(new net.minecraft.world.effect.MobEffectInstance(net.minecraft.world.effect.MobEffects.NIGHT_VISION, 200));
@@ -159,7 +159,7 @@ public abstract class AbstractModBushBlock extends BushBlock implements Bonemeal
                 player.addEffect(new net.minecraft.world.effect.MobEffectInstance(net.minecraft.world.effect.MobEffects.REGENERATION, 60));
             }
         }
-        return level.isClientSide ? InteractionResult.SUCCESS : InteractionResult.SUCCESS_SERVER;
+        return level.isClientSide() ? InteractionResult.SUCCESS : InteractionResult.SUCCESS_SERVER;
     }
 
     @Override
@@ -197,7 +197,7 @@ public abstract class AbstractModBushBlock extends BushBlock implements Bonemeal
     }
 
     @Override
-    protected void entityInside(BlockState state, Level level, BlockPos pos, Entity entity, net.minecraft.world.entity.InsideBlockEffectApplier applier) {
+    protected void entityInside(BlockState state, Level level, BlockPos pos, Entity entity, net.minecraft.world.entity.InsideBlockEffectApplier applier, boolean isPrecise) {
         if (entity instanceof LivingEntity){
             entity.makeStuckInBlock(state, new Vec3((double)0.8F, 0.75D, (double)0.8F));
         }
@@ -211,7 +211,7 @@ public abstract class AbstractModBushBlock extends BushBlock implements Bonemeal
     //Abstract methods
 
     @Override
-    public abstract ItemStack getCloneItemStack(net.minecraft.world.level.LevelReader level, BlockPos pos, BlockState state, boolean includeData, Player player);
+    public abstract ItemStack getCloneItemStack(net.minecraft.world.level.LevelReader level, BlockPos pos, BlockState state, boolean includeData);
 
     public abstract ItemStack getItem(int ItemKey);
 

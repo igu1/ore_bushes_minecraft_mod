@@ -2,7 +2,6 @@ package me.ez.orebushes;
 
 import me.ez.orebushes.Common.Bushes.BushBlockItem;
 import me.ez.orebushes.Common.Block.BlockEntity.BushHarvesterBlockEntity;
-import me.ez.orebushes.Events.VillagerTradeHandler;
 import net.minecraft.client.gui.screens.MenuScreens;
 import net.minecraft.world.item.CreativeModeTabs;
 import net.minecraft.world.level.block.ComposterBlock;
@@ -32,13 +31,10 @@ public class Main
         Init.MENUS.register(modEventBus);
         PlantEffects.SOUNDS.register(modEventBus);
         PlantEffects.PARTICLES.register(modEventBus);
-        WorldGen.CONFIGURED_FEATURES.register(modEventBus);
-        WorldGen.PLACED_FEATURES.register(modEventBus);
         modEventBus.addListener(this::addCreative);
         modEventBus.addListener(BushHarvesterBlockEntity::registerCapabilities);
         modContainer.registerConfig(ModConfig.Type.COMMON, Config.SPEC);
         NeoForge.EVENT_BUS.register(this);
-        NeoForge.EVENT_BUS.register(VillagerTradeHandler.class);
     }
 
     /** Adds the seeds and nuggets to the vanilla creative tabs (1.19.3+ style). */

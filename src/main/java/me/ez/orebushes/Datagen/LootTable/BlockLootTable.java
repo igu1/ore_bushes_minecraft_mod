@@ -2,7 +2,7 @@ package me.ez.orebushes.Datagen.LootTable;
 
 import me.ez.orebushes.Init;
 import me.ez.orebushes.Common.Bushes.AbstractModBushBlock;
-import net.minecraft.advancements.critereon.StatePropertiesPredicate;
+import net.minecraft.advancements.criterion.StatePropertiesPredicate;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.data.loot.BlockLootSubProvider;
