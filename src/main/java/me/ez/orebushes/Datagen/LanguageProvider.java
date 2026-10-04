@@ -18,7 +18,9 @@ public class LanguageProvider extends net.neoforged.neoforge.common.data.Languag
             add("subtitles.orebushes." + profile.id + "_harvest", profile.displayName + " harvested");
         }
 
+        // The harvester is a BlockItem, so the item name key wins; set both.
         add(Init.BUSH_HARVESTER.get(), "Ore Harvester");
+        add("item.orebushes.bushharvester", "Ore Harvester");
         add("itemGroup.orebushes", "Ore Bushes");
     }
 }

@@ -24,7 +24,10 @@ public class BushBlockItem extends BlockItem {
         adder.accept(Component.literal(profile.conditions).withStyle(ChatFormatting.GRAY));
         adder.accept(Component.literal("Tier " + profile.tier + " • " + profile.harvestLimit() + " harvests, then spent")
                 .withStyle(ChatFormatting.GOLD));
-        adder.accept(Component.literal("Harvest when ripe. Breaking returns the seed.").withStyle(ChatFormatting.DARK_GRAY));
+        adder.accept(Component.literal("Harvest when ripe; needs its substrate in the right dimension.")
+                .withStyle(ChatFormatting.DARK_GRAY));
+        adder.accept(Component.literal("Breaking a living plant returns the seed; a spent plant is gone.")
+                .withStyle(ChatFormatting.DARK_GRAY));
         if (profile.tier > 1) adder.accept(Component.literal("Cannot be bone-mealed").withStyle(ChatFormatting.DARK_GRAY));
     }
 }

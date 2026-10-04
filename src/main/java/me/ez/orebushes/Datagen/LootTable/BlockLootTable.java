@@ -39,47 +39,54 @@ public class BlockLootTable extends BlockLootSubProvider {
 
     @Override
     protected void generate() {
-        addBushLootTable(Init.COAL_BUSH.get(), Items.COAL);
-        addBushLootTable(Init.IRON_BUSH.get(), Items.IRON_NUGGET);
-        addBushLootTable(Init.GOLD_BUSH.get(), Items.GOLD_NUGGET);
-        addBushLootTable(Init.EMERALD_BUSH.get(), Items.EMERALD);
-        addBushLootTable(Init.DIAMOND_BUSH.get(), Items.DIAMOND);
-        addBushLootTable(Init.REDSTONE_BUSH.get(), Items.REDSTONE);
-        addBushLootTable(Init.LAPIS_BUSH.get(), Items.LAPIS_LAZULI);
-        addBushLootTable(Init.COPPER_BUSH.get(), Items.COPPER_INGOT);
+        // Item + the count a ripe plant drops per harvest. Must match the bush's
+        // getDropItem(), because a ripe bush dropped on break yields the same.
+        bush(Init.COAL_BUSH.get(), Items.COAL, 1);
+        bush(Init.IRON_BUSH.get(), Items.RAW_IRON, 1);
+        bush(Init.GOLD_BUSH.get(), Items.RAW_GOLD, 1);
+        bush(Init.EMERALD_BUSH.get(), Items.EMERALD, 1);
+        bush(Init.DIAMOND_BUSH.get(), Items.DIAMOND, 1);
+        bush(Init.REDSTONE_BUSH.get(), Items.REDSTONE, 2);
+        bush(Init.LAPIS_BUSH.get(), Items.LAPIS_LAZULI, 1);
+        bush(Init.COPPER_BUSH.get(), Items.RAW_COPPER, 2);
 
-        addBushLootTable(Init.QUARTZ_BUSH.get(), Items.QUARTZ);
-        addBushLootTable(Init.GLOWSTONE_BUSH.get(), Items.GLOWSTONE_DUST);
-        addBushLootTable(Init.NETHERITE_BUSH.get(), Items.NETHERITE_INGOT);
+        bush(Init.QUARTZ_BUSH.get(), Items.QUARTZ, 2);
+        bush(Init.GLOWSTONE_BUSH.get(), Items.GLOWSTONE_DUST, 2);
+        bush(Init.NETHERITE_BUSH.get(), Items.NETHERITE_INGOT, 1);
 
-        addBushLootTable(Init.AMETHYST_BUSH.get(), Items.AMETHYST_SHARD);
-        addBushLootTable(Init.EXPERIENCE_BUSH.get(), Items.EXPERIENCE_BOTTLE, 3);
-        addBushLootTable(Init.ECHO_SHARD_BUSH.get(), Items.ECHO_SHARD);
-        addBushLootTable(Init.GOLDEN_APPLE_BUSH.get(), Items.GOLDEN_APPLE);
-        addBushLootTable(Init.SUGAR_BUSH.get(), Items.SUGAR);
+        bush(Init.AMETHYST_BUSH.get(), Items.AMETHYST_SHARD, 2);
+        bush(Init.EXPERIENCE_BUSH.get(), Items.EXPERIENCE_BOTTLE, 3);
+        bush(Init.ECHO_SHARD_BUSH.get(), Items.ECHO_SHARD, 2);
+        bush(Init.GOLDEN_APPLE_BUSH.get(), Items.GOLDEN_APPLE, 2);
+        bush(Init.SUGAR_BUSH.get(), Items.SUGAR, 2);
 
-        addBushLootTable(Init.ANCIENT_DEBRIS_BUSH.get(), Items.ANCIENT_DEBRIS);
-        addBushLootTable(Init.BLAZE_BUSH.get(), Items.BLAZE_ROD);
+        bush(Init.ANCIENT_DEBRIS_BUSH.get(), Items.ANCIENT_DEBRIS, 1);
+        bush(Init.BLAZE_BUSH.get(), Items.BLAZE_ROD, 1);
 
-        addBushLootTable(Init.ENDER_PEARL_BUSH.get(), Items.ENDER_PEARL);
-        addBushLootTable(Init.ENDER_EYE_BUSH.get(), Items.ENDER_EYE);
-        addBushLootTable(Init.CHORUS_BUSH.get(), Items.CHORUS_FRUIT);
-        addBushLootTable(Init.SHULKER_SHELL_BUSH.get(), Items.SHULKER_SHELL);
-        addBushLootTable(Init.DRAGON_BREATH_BUSH.get(), Items.DRAGON_BREATH);
-
+        bush(Init.ENDER_PEARL_BUSH.get(), Items.ENDER_PEARL, 2);
+        bush(Init.ENDER_EYE_BUSH.get(), Items.ENDER_EYE, 1);
+        bush(Init.CHORUS_BUSH.get(), Items.CHORUS_FRUIT, 2);
+        bush(Init.SHULKER_SHELL_BUSH.get(), Items.SHULKER_SHELL, 1);
+        bush(Init.DRAGON_BREATH_BUSH.get(), Items.DRAGON_BREATH, 1);
     }
 
-    private void addBushLootTable(BushBlock bushblock, ItemLike itemLike){
-        addBushLootTable(bushblock, itemLike, 1);
-    }
-
-    private void addBushLootTable(BushBlock bushblock, ItemLike itemLike, int ripeCount){
+    private void bush(BushBlock bushblock, ItemLike itemLike, int perHarvest) {
         AbstractModBushBlock plant = (AbstractModBushBlock) bushblock;
         LootTable.Builder table = LootTable.lootTable();
-        // Breaking always returns the starter seed, whatever the age or remaining harvests.
-        table.withPool(LootPool.lootPool().add(LootItem.lootTableItem(bushblock)));
-        // A ripe, non-spent plant also drops its resource. Pools stop at the
-        // default lifetime so a spent state never yields a resource.
+
+        // A not-yet-spent plant returns its starter seed when broken, so it can be
+        // relocated. Once spent (harvests == its lifetime limit) it drops NO seed,
+        // so a plant is a finite resource and cannot be farmed forever.
+        for (int harvests = 0; harvests < plant.profile().defaultHarvestLimit(); harvests++) {
+            table.withPool(LootPool.lootPool()
+                    .when(LootItemBlockStatePropertyCondition.hasBlockStateProperties(bushblock)
+                            .setProperties(StatePropertiesPredicate.Builder.properties()
+                                    .hasProperty(AbstractModBushBlock.HARVESTS, harvests)))
+                    .add(LootItem.lootTableItem(bushblock)));
+        }
+
+        // A ripe, non-spent plant also drops its resource. Pools stop at the default
+        // lifetime so a spent state never yields a resource.
         for (int harvests = 0; harvests < plant.profile().defaultHarvestLimit(); harvests++) {
             LootPool.Builder pool = LootPool.lootPool()
                     .when(LootItemBlockStatePropertyCondition.hasBlockStateProperties(bushblock)
@@ -87,9 +94,9 @@ public class BlockLootTable extends BlockLootSubProvider {
                                     .hasProperty(AbstractModBushBlock.AGE, 3)
                                     .hasProperty(AbstractModBushBlock.HARVESTS, harvests)))
                     .add(LootItem.lootTableItem(itemLike));
-            if (ripeCount > 1) {
+            if (perHarvest > 1) {
                 pool = pool.apply(SetItemCountFunction.setCount(
-                        net.minecraft.world.level.storage.loot.providers.number.ConstantValue.exactly(ripeCount)));
+                        net.minecraft.world.level.storage.loot.providers.number.ConstantValue.exactly(perHarvest)));
             }
             table.withPool(pool);
         }

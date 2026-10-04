@@ -19,11 +19,15 @@ public class BushHarvesterBlockItem extends BlockItem {
 
     @Override
     public void appendHoverText(ItemStack stack, TooltipContext context, TooltipDisplay display, java.util.function.Consumer<Component> adder, TooltipFlag flag) {
-        adder.accept(Component.literal("Right-click to open the 36-slot harvester storage.").withStyle(ChatFormatting.AQUA));
-        adder.accept(Component.literal("Fills its own storage, then any inventory above.").withStyle(ChatFormatting.GRAY));
-        adder.accept(Component.literal("Shows its harvesting radius while working. Redstone pauses.").withStyle(ChatFormatting.GRAY));
-        adder.accept(Component.literal("Blue idle • Green running • Red blocked • Amber paused").withStyle(ChatFormatting.DARK_GRAY));
-        adder.accept(Component.literal("Speed (block below): iron 30s, gold 20s, diamond 1s, default 40s.").withStyle(ChatFormatting.GRAY));
-        adder.accept(Component.literal("Range (2 below): iron 3m, gold 4m, diamond 8m, default 2m.").withStyle(ChatFormatting.GRAY));
+        adder.accept(Component.literal("Right-click: 36-slot storage; overflow goes to the inventory above.")
+                .withStyle(ChatFormatting.AQUA));
+        adder.accept(Component.literal("Shows its harvest radius while running. Redstone pauses it.")
+                .withStyle(ChatFormatting.GRAY));
+        adder.accept(Component.literal("Blue idle • Green running • Red blocked • Amber paused")
+                .withStyle(ChatFormatting.DARK_GRAY));
+        adder.accept(Component.literal("Speed (block below): iron 30s • gold 20s • diamond 1s • 40s default")
+                .withStyle(ChatFormatting.GRAY));
+        adder.accept(Component.literal("Range (2 below): iron 3 • gold 4 • diamond 8 • 2 default")
+                .withStyle(ChatFormatting.GRAY));
     }
 }

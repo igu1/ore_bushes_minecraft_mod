@@ -109,27 +109,29 @@ public abstract class AbstractModBushBlock extends BushBlock implements Bonemeal
         return canPlaceOn(level, level.getBlockState(pos.below()));
     }
 
+    /**
+     * One harvest of a ripe plant. Every plant overrides this (via its family) to
+     * return strictly more value than its seed core over its lifetime, so a plant
+     * is never a loss.
+     */
+    protected ItemStack getDropForPlant() { return getDropItem(getVariantKey(), 1); }
+
     public ItemStack harvestDrop(BlockState state) {
         if (state.getValue(AGE) != MAX_AGE || isExhausted(state)) return ItemStack.EMPTY;
         ItemStack drop = getDropForPlant();
-        int count = getDropCount();
-        drop.setCount(count);
-        var premium = getPremiumDrop();
-        if (!premium.isEmpty()) {
-            premium.setCount(premium.getCount() * count);
-            return premium;
-        }
+        if (drop.isEmpty()) return ItemStack.EMPTY;
+        drop.setCount(Math.max(1, drop.getCount()) * getDropCount());
         return drop;
     }
 
-    /**
-     * Some plants are a losing loop when they merely refund their own core
-     * (netherite, ancient debris, echo shard, ...). Those override this to return
-     * the upgraded result of one harvest; the base count still applies.
-     */
-    protected ItemStack getPremiumDrop() { return ItemStack.EMPTY; }
+    /** The variant key used by {@link #getDropItem(int, int)}; set by each plant family. */
+    protected abstract int getVariantKey();
 
-    /** Items given per hand harvest. Tier 3/4 never inflate rare resources. */
+    /**
+     * Items per harvest. Tiers 1-2 get a configurable multiplier; tiers 3-4 keep a
+     * fixed amount so rare resources stay bounded, but their per-harvest yield is
+     * already set higher than the core so they still profit over their lifetime.
+     */
     protected int getDropCount() {
         return profile().tier >= 3 ? 1 : Math.min(3,
                 Math.max(1, (int) Math.round((1 + Config.MATURE_BONUS.get()) * Config.AMOUNT_MULTIPLIER.get())));
@@ -138,8 +140,6 @@ public abstract class AbstractModBushBlock extends BushBlock implements Bonemeal
     /** What a ripe plant yields from the automated Ore Harvester. */
     public ItemStack machineDrop() { return harvestDrop(defaultBlockState().setValue(AGE, MAX_AGE)); }
 
-    protected abstract ItemStack getDropForPlant();
-
     public void finishHarvest(ServerLevel level, BlockPos pos, BlockState state) {
         finishHarvest(level, pos, state, true);
     }
@@ -147,9 +147,12 @@ public abstract class AbstractModBushBlock extends BushBlock implements Bonemeal
     /** Machines keep the normal harvest transition and particles, without audio. */
     public void finishHarvest(ServerLevel level, BlockPos pos, BlockState state, boolean playSound) {
         if (state.getValue(AGE) != MAX_AGE || isExhausted(state) || !level.getBlockState(pos).equals(state)) return;
-        // Stay ripe after harvesting: only the lifetime counter advances, so the
-        // plant can be harvested again immediately without regrowing from stage 0.
-        level.setBlock(pos, state.setValue(HARVESTS, state.getValue(HARVESTS) + 1), 3);
+        // Harvesting sets the plant back one growth stage (ripe -> budding) and
+        // advances the lifetime counter, so it must regrow before the next harvest.
+        int nextAge = Math.max(0, state.getValue(AGE) - 1);
+        level.setBlock(pos, state
+                .setValue(AGE, nextAge)
+                .setValue(HARVESTS, state.getValue(HARVESTS) + 1), 3);
         if (playSound) {
             level.playSound(null, pos, profile().sound(), SoundSource.BLOCKS, 0.65F, 0.9F + level.getRandom().nextFloat() * 0.2F);
         }

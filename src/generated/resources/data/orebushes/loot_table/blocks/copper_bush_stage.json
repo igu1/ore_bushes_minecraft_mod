@@ -8,6 +8,281 @@
   "pools": [
     {
       "bonus_rolls": 0.0,
+      "conditions": [
+        {
+          "block": "orebushes:copper_bush_stage",
+          "condition": "minecraft:block_state_property",
+          "properties": {
+            "harvests": "0"
+          }
+        }
+      ],
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "name": "orebushes:copper_bush"
+        }
+      ],
+      "rolls": 1.0
+    },
+    {
+      "bonus_rolls": 0.0,
+      "conditions": [
+        {
+          "block": "orebushes:copper_bush_stage",
+          "condition": "minecraft:block_state_property",
+          "properties": {
+            "harvests": "1"
+          }
+        }
+      ],
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "name": "orebushes:copper_bush"
+        }
+      ],
+      "rolls": 1.0
+    },
+    {
+      "bonus_rolls": 0.0,
+      "conditions": [
+        {
+          "block": "orebushes:copper_bush_stage",
+          "condition": "minecraft:block_state_property",
+          "properties": {
+            "harvests": "2"
+          }
+        }
+      ],
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "name": "orebushes:copper_bush"
+        }
+      ],
+      "rolls": 1.0
+    },
+    {
+      "bonus_rolls": 0.0,
+      "conditions": [
+        {
+          "block": "orebushes:copper_bush_stage",
+          "condition": "minecraft:block_state_property",
+          "properties": {
+            "harvests": "3"
+          }
+        }
+      ],
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "name": "orebushes:copper_bush"
+        }
+      ],
+      "rolls": 1.0
+    },
+    {
+      "bonus_rolls": 0.0,
+      "conditions": [
+        {
+          "block": "orebushes:copper_bush_stage",
+          "condition": "minecraft:block_state_property",
+          "properties": {
+            "harvests": "4"
+          }
+        }
+      ],
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "name": "orebushes:copper_bush"
+        }
+      ],
+      "rolls": 1.0
+    },
+    {
+      "bonus_rolls": 0.0,
+      "conditions": [
+        {
+          "block": "orebushes:copper_bush_stage",
+          "condition": "minecraft:block_state_property",
+          "properties": {
+            "harvests": "5"
+          }
+        }
+      ],
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "name": "orebushes:copper_bush"
+        }
+      ],
+      "rolls": 1.0
+    },
+    {
+      "bonus_rolls": 0.0,
+      "conditions": [
+        {
+          "block": "orebushes:copper_bush_stage",
+          "condition": "minecraft:block_state_property",
+          "properties": {
+            "harvests": "6"
+          }
+        }
+      ],
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "name": "orebushes:copper_bush"
+        }
+      ],
+      "rolls": 1.0
+    },
+    {
+      "bonus_rolls": 0.0,
+      "conditions": [
+        {
+          "block": "orebushes:copper_bush_stage",
+          "condition": "minecraft:block_state_property",
+          "properties": {
+            "harvests": "7"
+          }
+        }
+      ],
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "name": "orebushes:copper_bush"
+        }
+      ],
+      "rolls": 1.0
+    },
+    {
+      "bonus_rolls": 0.0,
+      "conditions": [
+        {
+          "block": "orebushes:copper_bush_stage",
+          "condition": "minecraft:block_state_property",
+          "properties": {
+            "harvests": "8"
+          }
+        }
+      ],
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "name": "orebushes:copper_bush"
+        }
+      ],
+      "rolls": 1.0
+    },
+    {
+      "bonus_rolls": 0.0,
+      "conditions": [
+        {
+          "block": "orebushes:copper_bush_stage",
+          "condition": "minecraft:block_state_property",
+          "properties": {
+            "harvests": "9"
+          }
+        }
+      ],
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "name": "orebushes:copper_bush"
+        }
+      ],
+      "rolls": 1.0
+    },
+    {
+      "bonus_rolls": 0.0,
+      "conditions": [
+        {
+          "block": "orebushes:copper_bush_stage",
+          "condition": "minecraft:block_state_property",
+          "properties": {
+            "harvests": "10"
+          }
+        }
+      ],
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "name": "orebushes:copper_bush"
+        }
+      ],
+      "rolls": 1.0
+    },
+    {
+      "bonus_rolls": 0.0,
+      "conditions": [
+        {
+          "block": "orebushes:copper_bush_stage",
+          "condition": "minecraft:block_state_property",
+          "properties": {
+            "harvests": "11"
+          }
+        }
+      ],
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "name": "orebushes:copper_bush"
+        }
+      ],
+      "rolls": 1.0
+    },
+    {
+      "bonus_rolls": 0.0,
+      "conditions": [
+        {
+          "block": "orebushes:copper_bush_stage",
+          "condition": "minecraft:block_state_property",
+          "properties": {
+            "harvests": "12"
+          }
+        }
+      ],
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "name": "orebushes:copper_bush"
+        }
+      ],
+      "rolls": 1.0
+    },
+    {
+      "bonus_rolls": 0.0,
+      "conditions": [
+        {
+          "block": "orebushes:copper_bush_stage",
+          "condition": "minecraft:block_state_property",
+          "properties": {
+            "harvests": "13"
+          }
+        }
+      ],
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "name": "orebushes:copper_bush"
+        }
+      ],
+      "rolls": 1.0
+    },
+    {
+      "bonus_rolls": 0.0,
+      "conditions": [
+        {
+          "block": "orebushes:copper_bush_stage",
+          "condition": "minecraft:block_state_property",
+          "properties": {
+            "harvests": "14"
+          }
+        }
+      ],
       "entries": [
         {
           "type": "minecraft:item",
@@ -31,7 +306,14 @@
       "entries": [
         {
           "type": "minecraft:item",
-          "name": "minecraft:copper_ingot"
+          "name": "minecraft:raw_copper"
+        }
+      ],
+      "functions": [
+        {
+          "add": false,
+          "count": 2.0,
+          "function": "minecraft:set_count"
         }
       ],
       "rolls": 1.0
@@ -51,7 +333,14 @@
       "entries": [
         {
           "type": "minecraft:item",
-          "name": "minecraft:copper_ingot"
+          "name": "minecraft:raw_copper"
+        }
+      ],
+      "functions": [
+        {
+          "add": false,
+          "count": 2.0,
+          "function": "minecraft:set_count"
         }
       ],
       "rolls": 1.0
@@ -71,7 +360,14 @@
       "entries": [
         {
           "type": "minecraft:item",
-          "name": "minecraft:copper_ingot"
+          "name": "minecraft:raw_copper"
+        }
+      ],
+      "functions": [
+        {
+          "add": false,
+          "count": 2.0,
+          "function": "minecraft:set_count"
         }
       ],
       "rolls": 1.0
@@ -91,7 +387,14 @@
       "entries": [
         {
           "type": "minecraft:item",
-          "name": "minecraft:copper_ingot"
+          "name": "minecraft:raw_copper"
+        }
+      ],
+      "functions": [
+        {
+          "add": false,
+          "count": 2.0,
+          "function": "minecraft:set_count"
         }
       ],
       "rolls": 1.0
@@ -111,7 +414,14 @@
       "entries": [
         {
           "type": "minecraft:item",
-          "name": "minecraft:copper_ingot"
+          "name": "minecraft:raw_copper"
+        }
+      ],
+      "functions": [
+        {
+          "add": false,
+          "count": 2.0,
+          "function": "minecraft:set_count"
         }
       ],
       "rolls": 1.0
@@ -131,7 +441,14 @@
       "entries": [
         {
           "type": "minecraft:item",
-          "name": "minecraft:copper_ingot"
+          "name": "minecraft:raw_copper"
+        }
+      ],
+      "functions": [
+        {
+          "add": false,
+          "count": 2.0,
+          "function": "minecraft:set_count"
         }
       ],
       "rolls": 1.0
@@ -151,7 +468,14 @@
       "entries": [
         {
           "type": "minecraft:item",
-          "name": "minecraft:copper_ingot"
+          "name": "minecraft:raw_copper"
+        }
+      ],
+      "functions": [
+        {
+          "add": false,
+          "count": 2.0,
+          "function": "minecraft:set_count"
         }
       ],
       "rolls": 1.0
@@ -171,7 +495,14 @@
       "entries": [
         {
           "type": "minecraft:item",
-          "name": "minecraft:copper_ingot"
+          "name": "minecraft:raw_copper"
+        }
+      ],
+      "functions": [
+        {
+          "add": false,
+          "count": 2.0,
+          "function": "minecraft:set_count"
         }
       ],
       "rolls": 1.0
@@ -191,7 +522,14 @@
       "entries": [
         {
           "type": "minecraft:item",
-          "name": "minecraft:copper_ingot"
+          "name": "minecraft:raw_copper"
+        }
+      ],
+      "functions": [
+        {
+          "add": false,
+          "count": 2.0,
+          "function": "minecraft:set_count"
         }
       ],
       "rolls": 1.0
@@ -211,7 +549,14 @@
       "entries": [
         {
           "type": "minecraft:item",
-          "name": "minecraft:copper_ingot"
+          "name": "minecraft:raw_copper"
+        }
+      ],
+      "functions": [
+        {
+          "add": false,
+          "count": 2.0,
+          "function": "minecraft:set_count"
         }
       ],
       "rolls": 1.0
@@ -231,7 +576,14 @@
       "entries": [
         {
           "type": "minecraft:item",
-          "name": "minecraft:copper_ingot"
+          "name": "minecraft:raw_copper"
+        }
+      ],
+      "functions": [
+        {
+          "add": false,
+          "count": 2.0,
+          "function": "minecraft:set_count"
         }
       ],
       "rolls": 1.0
@@ -251,7 +603,14 @@
       "entries": [
         {
           "type": "minecraft:item",
-          "name": "minecraft:copper_ingot"
+          "name": "minecraft:raw_copper"
+        }
+      ],
+      "functions": [
+        {
+          "add": false,
+          "count": 2.0,
+          "function": "minecraft:set_count"
         }
       ],
       "rolls": 1.0
@@ -271,7 +630,14 @@
       "entries": [
         {
           "type": "minecraft:item",
-          "name": "minecraft:copper_ingot"
+          "name": "minecraft:raw_copper"
+        }
+      ],
+      "functions": [
+        {
+          "add": false,
+          "count": 2.0,
+          "function": "minecraft:set_count"
         }
       ],
       "rolls": 1.0
@@ -291,7 +657,14 @@
       "entries": [
         {
           "type": "minecraft:item",
-          "name": "minecraft:copper_ingot"
+          "name": "minecraft:raw_copper"
+        }
+      ],
+      "functions": [
+        {
+          "add": false,
+          "count": 2.0,
+          "function": "minecraft:set_count"
         }
       ],
       "rolls": 1.0
@@ -311,7 +684,14 @@
       "entries": [
         {
           "type": "minecraft:item",
-          "name": "minecraft:copper_ingot"
+          "name": "minecraft:raw_copper"
+        }
+      ],
+      "functions": [
+        {
+          "add": false,
+          "count": 2.0,
+          "function": "minecraft:set_count"
         }
       ],
       "rolls": 1.0

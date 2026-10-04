@@ -8,6 +8,72 @@
   "pools": [
     {
       "bonus_rolls": 0.0,
+      "conditions": [
+        {
+          "block": "orebushes:golden_apple_bush_stage",
+          "condition": "minecraft:block_state_property",
+          "properties": {
+            "harvests": "0"
+          }
+        }
+      ],
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "name": "orebushes:golden_apple_bush"
+        }
+      ],
+      "rolls": 1.0
+    },
+    {
+      "bonus_rolls": 0.0,
+      "conditions": [
+        {
+          "block": "orebushes:golden_apple_bush_stage",
+          "condition": "minecraft:block_state_property",
+          "properties": {
+            "harvests": "1"
+          }
+        }
+      ],
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "name": "orebushes:golden_apple_bush"
+        }
+      ],
+      "rolls": 1.0
+    },
+    {
+      "bonus_rolls": 0.0,
+      "conditions": [
+        {
+          "block": "orebushes:golden_apple_bush_stage",
+          "condition": "minecraft:block_state_property",
+          "properties": {
+            "harvests": "2"
+          }
+        }
+      ],
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "name": "orebushes:golden_apple_bush"
+        }
+      ],
+      "rolls": 1.0
+    },
+    {
+      "bonus_rolls": 0.0,
+      "conditions": [
+        {
+          "block": "orebushes:golden_apple_bush_stage",
+          "condition": "minecraft:block_state_property",
+          "properties": {
+            "harvests": "3"
+          }
+        }
+      ],
       "entries": [
         {
           "type": "minecraft:item",
@@ -34,6 +100,13 @@
           "name": "minecraft:golden_apple"
         }
       ],
+      "functions": [
+        {
+          "add": false,
+          "count": 2.0,
+          "function": "minecraft:set_count"
+        }
+      ],
       "rolls": 1.0
     },
     {
@@ -52,6 +125,13 @@
         {
           "type": "minecraft:item",
           "name": "minecraft:golden_apple"
+        }
+      ],
+      "functions": [
+        {
+          "add": false,
+          "count": 2.0,
+          "function": "minecraft:set_count"
         }
       ],
       "rolls": 1.0
@@ -74,6 +154,13 @@
           "name": "minecraft:golden_apple"
         }
       ],
+      "functions": [
+        {
+          "add": false,
+          "count": 2.0,
+          "function": "minecraft:set_count"
+        }
+      ],
       "rolls": 1.0
     },
     {
@@ -92,6 +179,13 @@
         {
           "type": "minecraft:item",
           "name": "minecraft:golden_apple"
+        }
+      ],
+      "functions": [
+        {
+          "add": false,
+          "count": 2.0,
+          "function": "minecraft:set_count"
         }
       ],
       "rolls": 1.0

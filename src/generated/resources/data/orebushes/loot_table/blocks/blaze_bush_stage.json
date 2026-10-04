@@ -8,6 +8,110 @@
   "pools": [
     {
       "bonus_rolls": 0.0,
+      "conditions": [
+        {
+          "block": "orebushes:blaze_bush_stage",
+          "condition": "minecraft:block_state_property",
+          "properties": {
+            "harvests": "0"
+          }
+        }
+      ],
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "name": "orebushes:blaze_bush"
+        }
+      ],
+      "rolls": 1.0
+    },
+    {
+      "bonus_rolls": 0.0,
+      "conditions": [
+        {
+          "block": "orebushes:blaze_bush_stage",
+          "condition": "minecraft:block_state_property",
+          "properties": {
+            "harvests": "1"
+          }
+        }
+      ],
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "name": "orebushes:blaze_bush"
+        }
+      ],
+      "rolls": 1.0
+    },
+    {
+      "bonus_rolls": 0.0,
+      "conditions": [
+        {
+          "block": "orebushes:blaze_bush_stage",
+          "condition": "minecraft:block_state_property",
+          "properties": {
+            "harvests": "2"
+          }
+        }
+      ],
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "name": "orebushes:blaze_bush"
+        }
+      ],
+      "rolls": 1.0
+    },
+    {
+      "bonus_rolls": 0.0,
+      "conditions": [
+        {
+          "block": "orebushes:blaze_bush_stage",
+          "condition": "minecraft:block_state_property",
+          "properties": {
+            "harvests": "3"
+          }
+        }
+      ],
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "name": "orebushes:blaze_bush"
+        }
+      ],
+      "rolls": 1.0
+    },
+    {
+      "bonus_rolls": 0.0,
+      "conditions": [
+        {
+          "block": "orebushes:blaze_bush_stage",
+          "condition": "minecraft:block_state_property",
+          "properties": {
+            "harvests": "4"
+          }
+        }
+      ],
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "name": "orebushes:blaze_bush"
+        }
+      ],
+      "rolls": 1.0
+    },
+    {
+      "bonus_rolls": 0.0,
+      "conditions": [
+        {
+          "block": "orebushes:blaze_bush_stage",
+          "condition": "minecraft:block_state_property",
+          "properties": {
+            "harvests": "5"
+          }
+        }
+      ],
       "entries": [
         {
           "type": "minecraft:item",
