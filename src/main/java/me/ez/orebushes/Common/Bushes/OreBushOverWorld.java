@@ -65,6 +65,19 @@ public class OreBushOverWorld extends AbstractModBushBlock {
     @Override
     protected ItemStack getDropForPlant() { return getDropItem(getItemByKey, 1); }
 
+    /** Bushes whose core is a dead end yield their real treasure instead. */
+    @Override
+    protected ItemStack getPremiumDrop() {
+        return switch (getItemByKey) {
+            case 4 -> new ItemStack(Items.EMERALD);              // core: emerald block
+            case 7 -> new ItemStack(Items.DIAMOND);              // core: diamond block
+            case 10 -> new ItemStack(Items.EXPERIENCE_BOTTLE, 3); // core: glass bottle
+            case 11 -> new ItemStack(Items.ECHO_SHARD);          // core: echo shard — seed doubles it
+            case 12 -> new ItemStack(Items.GOLDEN_APPLE);        // core: golden apple — seed doubles it
+            default -> ItemStack.EMPTY;
+        };
+    }
+
     @Override
     public ItemStack getItem(int ItemKey) {
         HashMap<Integer, ItemStack> stackHashMap = new HashMap<>();

@@ -34,6 +34,13 @@
           "name": "minecraft:experience_bottle"
         }
       ],
+      "functions": [
+        {
+          "add": false,
+          "count": 3.0,
+          "function": "minecraft:set_count"
+        }
+      ],
       "rolls": 1.0
     },
     {
@@ -52,6 +59,13 @@
         {
           "type": "minecraft:item",
           "name": "minecraft:experience_bottle"
+        }
+      ],
+      "functions": [
+        {
+          "add": false,
+          "count": 3.0,
+          "function": "minecraft:set_count"
         }
       ],
       "rolls": 1.0
@@ -74,6 +88,13 @@
           "name": "minecraft:experience_bottle"
         }
       ],
+      "functions": [
+        {
+          "add": false,
+          "count": 3.0,
+          "function": "minecraft:set_count"
+        }
+      ],
       "rolls": 1.0
     },
     {
@@ -92,6 +113,13 @@
         {
           "type": "minecraft:item",
           "name": "minecraft:experience_bottle"
+        }
+      ],
+      "functions": [
+        {
+          "add": false,
+          "count": 3.0,
+          "function": "minecraft:set_count"
         }
       ],
       "rolls": 1.0
@@ -114,6 +142,13 @@
           "name": "minecraft:experience_bottle"
         }
       ],
+      "functions": [
+        {
+          "add": false,
+          "count": 3.0,
+          "function": "minecraft:set_count"
+        }
+      ],
       "rolls": 1.0
     },
     {
@@ -132,6 +167,13 @@
         {
           "type": "minecraft:item",
           "name": "minecraft:experience_bottle"
+        }
+      ],
+      "functions": [
+        {
+          "add": false,
+          "count": 3.0,
+          "function": "minecraft:set_count"
         }
       ],
       "rolls": 1.0

@@ -66,6 +66,17 @@ public class OreBushNether extends AbstractModBushBlock {
     @Override
     protected ItemStack getDropForPlant() { return getDropItem(getItemByKey, 1); }
 
+    /** Bushes whose core is a dead end yield their real treasure instead. */
+    @Override
+    protected ItemStack getPremiumDrop() {
+        return switch (getItemByKey) {
+            case 3 -> new ItemStack(Items.NETHERITE_INGOT); // core: netherite scrap
+            case 4 -> new ItemStack(Items.ANCIENT_DEBRIS);  // core: netherite scrap
+            case 2 -> new ItemStack(Items.GLOWSTONE_DUST);  // core: glowstone (seed) — 4 dust
+            default -> ItemStack.EMPTY;
+        };
+    }
+
     @Override
     public ItemStack getItem(int ItemKey) {
         HashMap<Integer, ItemStack> stackHashMap = new HashMap<>();
@@ -83,7 +94,7 @@ public class OreBushNether extends AbstractModBushBlock {
         HashMap<Integer, ItemStack> stackHashMap = new HashMap<>();
         stackHashMap.put(1, new ItemStack(Items.QUARTZ, amount));
         stackHashMap.put(2, new ItemStack(Items.GLOWSTONE_DUST, amount));
-        stackHashMap.put(3, new ItemStack(Items.NETHERITE_SCRAP, amount));
+        stackHashMap.put(3, new ItemStack(Items.NETHERITE_INGOT, amount));
         stackHashMap.put(4, new ItemStack(Items.ANCIENT_DEBRIS, amount));
         stackHashMap.put(5, new ItemStack(Items.BLAZE_ROD, amount));
         return stackHashMap.get(ItemKey);

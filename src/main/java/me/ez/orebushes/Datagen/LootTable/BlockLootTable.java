@@ -50,10 +50,10 @@ public class BlockLootTable extends BlockLootSubProvider {
 
         addBushLootTable(Init.QUARTZ_BUSH.get(), Items.QUARTZ);
         addBushLootTable(Init.GLOWSTONE_BUSH.get(), Items.GLOWSTONE_DUST);
-        addBushLootTable(Init.NETHERITE_BUSH.get(), Items.NETHERITE_SCRAP);
+        addBushLootTable(Init.NETHERITE_BUSH.get(), Items.NETHERITE_INGOT);
 
         addBushLootTable(Init.AMETHYST_BUSH.get(), Items.AMETHYST_SHARD);
-        addBushLootTable(Init.EXPERIENCE_BUSH.get(), Items.EXPERIENCE_BOTTLE);
+        addBushLootTable(Init.EXPERIENCE_BUSH.get(), Items.EXPERIENCE_BOTTLE, 3);
         addBushLootTable(Init.ECHO_SHARD_BUSH.get(), Items.ECHO_SHARD);
         addBushLootTable(Init.GOLDEN_APPLE_BUSH.get(), Items.GOLDEN_APPLE);
         addBushLootTable(Init.SUGAR_BUSH.get(), Items.SUGAR);
@@ -70,19 +70,28 @@ public class BlockLootTable extends BlockLootSubProvider {
     }
 
     private void addBushLootTable(BushBlock bushblock, ItemLike itemLike){
+        addBushLootTable(bushblock, itemLike, 1);
+    }
+
+    private void addBushLootTable(BushBlock bushblock, ItemLike itemLike, int ripeCount){
         AbstractModBushBlock plant = (AbstractModBushBlock) bushblock;
         LootTable.Builder table = LootTable.lootTable();
-        // Breaking returns the starter seed at any age or remaining harvest count.
+        // Breaking always returns the starter seed, whatever the age or remaining harvests.
         table.withPool(LootPool.lootPool().add(LootItem.lootTableItem(bushblock)));
-        // Ripe, non-spent plants additionally drop their resource. Pools stop at the
-        // default lifetime so a spent state (harvests == limit) never yields a resource.
+        // A ripe, non-spent plant also drops its resource. Pools stop at the
+        // default lifetime so a spent state never yields a resource.
         for (int harvests = 0; harvests < plant.profile().defaultHarvestLimit(); harvests++) {
-            table.withPool(LootPool.lootPool()
+            LootPool.Builder pool = LootPool.lootPool()
                     .when(LootItemBlockStatePropertyCondition.hasBlockStateProperties(bushblock)
                             .setProperties(StatePropertiesPredicate.Builder.properties()
                                     .hasProperty(AbstractModBushBlock.AGE, 3)
                                     .hasProperty(AbstractModBushBlock.HARVESTS, harvests)))
-                    .add(LootItem.lootTableItem(itemLike)));
+                    .add(LootItem.lootTableItem(itemLike));
+            if (ripeCount > 1) {
+                pool = pool.apply(SetItemCountFunction.setCount(
+                        net.minecraft.world.level.storage.loot.providers.number.ConstantValue.exactly(ripeCount)));
+            }
+            table.withPool(pool);
         }
         add(bushblock, applyExplosionDecay(bushblock, table));
     }

@@ -112,11 +112,31 @@ public abstract class AbstractModBushBlock extends BushBlock implements Bonemeal
     public ItemStack harvestDrop(BlockState state) {
         if (state.getValue(AGE) != MAX_AGE || isExhausted(state)) return ItemStack.EMPTY;
         ItemStack drop = getDropForPlant();
-        int count = profile().tier >= 3 ? 1 : Math.min(3,
-                Math.max(1, (int) Math.round((1 + Config.MATURE_BONUS.get()) * Config.AMOUNT_MULTIPLIER.get())));
+        int count = getDropCount();
         drop.setCount(count);
+        var premium = getPremiumDrop();
+        if (!premium.isEmpty()) {
+            premium.setCount(premium.getCount() * count);
+            return premium;
+        }
         return drop;
     }
+
+    /**
+     * Some plants are a losing loop when they merely refund their own core
+     * (netherite, ancient debris, echo shard, ...). Those override this to return
+     * the upgraded result of one harvest; the base count still applies.
+     */
+    protected ItemStack getPremiumDrop() { return ItemStack.EMPTY; }
+
+    /** Items given per hand harvest. Tier 3/4 never inflate rare resources. */
+    protected int getDropCount() {
+        return profile().tier >= 3 ? 1 : Math.min(3,
+                Math.max(1, (int) Math.round((1 + Config.MATURE_BONUS.get()) * Config.AMOUNT_MULTIPLIER.get())));
+    }
+
+    /** What a ripe plant yields from the automated Ore Harvester. */
+    public ItemStack machineDrop() { return harvestDrop(defaultBlockState().setValue(AGE, MAX_AGE)); }
 
     protected abstract ItemStack getDropForPlant();
 
@@ -151,8 +171,11 @@ public abstract class AbstractModBushBlock extends BushBlock implements Bonemeal
             popResource(level, pos, drop);
             finishHarvest((ServerLevel) level, pos, state);
             int remaining = profile().harvestLimit() - state.getValue(HARVESTS) - 1;
-            ((net.minecraft.server.level.ServerPlayer) player).sendSystemMessage(net.minecraft.network.chat.Component.literal(profile().displayName
-                    + (remaining == 0 ? " is spent." : ": " + remaining + " harvests remaining.")), true);
+            String got = drop.getCount() + "x " + drop.getHoverName().getString();
+            ((net.minecraft.server.level.ServerPlayer) player).sendSystemMessage(net.minecraft.network.chat.Component.literal(
+                    "Harvested " + got + (remaining == 0
+                            ? " — " + profile().displayName + " is spent."
+                            : " (" + remaining + " harvests left).")), true);
             if (profile() == ResourcePlantProfile.EXPERIENCE) {
                 player.addEffect(new net.minecraft.world.effect.MobEffectInstance(net.minecraft.world.effect.MobEffects.NIGHT_VISION, 200));
             } else if (profile() == ResourcePlantProfile.GOLDEN_APPLE) {

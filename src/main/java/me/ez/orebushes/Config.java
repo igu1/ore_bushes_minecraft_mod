@@ -73,7 +73,7 @@ public class Config {
                 .defineInRange("amountMultiplier", 1.0D, 0.1D, 10.0D);
         MATURE_BONUS = builder
                 .comment("Extra items dropped when harvesting a fully grown (age 3) bush")
-                .defineInRange("matureBonus", 1, 0, 16);
+                .defineInRange("matureBonus", 0, 0, 16);
         HARVESTS_TIER_1 = builder
                 .comment("Lifetime harvests for tier 1 plants (max 15)")
                 .defineInRange("harvestsTier1", 15, 1, 15);
