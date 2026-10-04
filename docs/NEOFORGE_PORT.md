@@ -1,7 +1,7 @@
 # NeoForge 1.21.8 port
 
 Status: **ported, building and verified.** `./gradlew :1.21.8:buildAndCollect`
-produces `builds/1.21.8-neoforge/orebushes-2.0.0+1.21.8.jar`.
+produces `builds/1.21.8-neoforge/orebushes-3.0+1.21.8.jar`.
 
 Verified end to end: `:1.21.8:runClient` reaches the main menu with zero missing
 block/item models and no `@OnlyIn` warning, and `:1.21.8:runServer` reaches
