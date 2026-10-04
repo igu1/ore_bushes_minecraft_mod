@@ -1,0 +1,13 @@
+# Structured properties shared by the Stonecutter build scripts.
+# See https://stonecutter.kikugie.dev/wiki/config/properties
+mod.id = "orebushes"
+mod.name = "Ore Bushes"
+mod.group = "me.ez.orebushes"
+mod.version = "2.5"
+
+["1.21.1"]
+# Mod compatibility range used in the mod metadata.
+mod.mc_compat = "[1.21, 1.21.1]"
+mod.mc_releases = ["1.21", "1.21.1"]
+# NeoForge version for Minecraft 1.21.1.
+deps.neo_loader = "21.1.251"
