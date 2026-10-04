@@ -42,15 +42,15 @@ public class BlockLootTable extends BlockLootSubProvider {
         addBushLootTable(Init.COAL_BUSH.get(), Items.COAL);
         addBushLootTable(Init.IRON_BUSH.get(), Items.IRON_NUGGET);
         addBushLootTable(Init.GOLD_BUSH.get(), Items.GOLD_NUGGET);
-        addBushLootTable(Init.EMERALD_BUSH.get(), Init.EMERALD_NUGGET.get());
-        addBushLootTable(Init.DIAMOND_BUSH.get(), Init.DIAMOND_NUGGET.get());
+        addBushLootTable(Init.EMERALD_BUSH.get(), Items.EMERALD);
+        addBushLootTable(Init.DIAMOND_BUSH.get(), Items.DIAMOND);
         addBushLootTable(Init.REDSTONE_BUSH.get(), Items.REDSTONE);
         addBushLootTable(Init.LAPIS_BUSH.get(), Items.LAPIS_LAZULI);
-        addBushLootTable(Init.COPPER_BUSH.get(), Init.COPPER_NUGGET.get());
+        addBushLootTable(Init.COPPER_BUSH.get(), Items.COPPER_INGOT);
 
         addBushLootTable(Init.QUARTZ_BUSH.get(), Items.QUARTZ);
         addBushLootTable(Init.GLOWSTONE_BUSH.get(), Items.GLOWSTONE_DUST);
-        addBushLootTable(Init.NETHERITE_BUSH.get(), Init.NETHERITE_NUGGET.get());
+        addBushLootTable(Init.NETHERITE_BUSH.get(), Items.NETHERITE_SCRAP);
 
         addBushLootTable(Init.AMETHYST_BUSH.get(), Items.AMETHYST_SHARD);
         addBushLootTable(Init.EXPERIENCE_BUSH.get(), Items.EXPERIENCE_BOTTLE);

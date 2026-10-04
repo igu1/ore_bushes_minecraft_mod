@@ -19,14 +19,6 @@ public class LanguageProvider extends net.neoforged.neoforge.common.data.Languag
         }
 
         add(Init.BUSH_HARVESTER.get(), "Ore Harvester");
-
-
-        add(Init.EMERALD_NUGGET.get(), "Emerald Nugget");
-        add(Init.DIAMOND_NUGGET.get(), "Diamond Nugget");
-        add(Init.NETHERITE_NUGGET.get(), "Netherite Nugget");
-        add(Init.COPPER_NUGGET.get(), "Copper Nugget");
-
-
-
+        add("itemGroup.orebushes", "Ore Bushes");
     }
 }

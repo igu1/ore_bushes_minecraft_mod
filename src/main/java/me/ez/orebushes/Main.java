@@ -28,6 +28,7 @@ public class Main
         Init.BLOCKS.register(modEventBus);
         Init.BLOCK_ENTITY.register(modEventBus);
         Init.MENUS.register(modEventBus);
+        Init.CREATIVE_TABS.register(modEventBus);
         Init.ITEMS.register(modEventBus);
         PlantEffects.SOUNDS.register(modEventBus);
         PlantEffects.PARTICLES.register(modEventBus);
@@ -36,14 +37,8 @@ public class Main
         modContainer.registerConfig(ModConfig.Type.COMMON, Config.SPEC);
     }
 
-    /** Adds the seeds and nuggets to the vanilla creative tabs (1.19.3+ style). */
+    /** Adds the seeds and harvester to the vanilla creative tabs (1.19.3+ style). */
     private void addCreative(BuildCreativeModeTabContentsEvent event) {
-        if (event.getTabKey() == CreativeModeTabs.INGREDIENTS) {
-            event.accept(Init.EMERALD_NUGGET.get());
-            event.accept(Init.DIAMOND_NUGGET.get());
-            event.accept(Init.NETHERITE_NUGGET.get());
-            event.accept(Init.COPPER_NUGGET.get());
-        }
         if (event.getTabKey() == CreativeModeTabs.NATURAL_BLOCKS) {
             Init.BUSHES.getEntries().forEach(h -> event.accept(h.get()));
         }

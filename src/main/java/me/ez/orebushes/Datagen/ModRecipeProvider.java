@@ -34,35 +34,6 @@ public class ModRecipeProvider extends RecipeProvider {
 
         //Items
 
-        ShapelessRecipeBuilder.shapeless(items, RecipeCategory.MISC, Items.DIAMOND)
-                .requires(Init.DIAMOND_NUGGET.get(), 9)
-                .unlockedBy("has_diamond_nugget", has(Init.DIAMOND_NUGGET.get())).save(output);
-
-        ShapelessRecipeBuilder.shapeless(items, RecipeCategory.MISC, Items.NETHERITE_INGOT)
-                .requires(Init.NETHERITE_NUGGET.get(), 9)
-                .unlockedBy("has_netherite_nugget", has(Init.NETHERITE_NUGGET.get())).save(output);
-
-        ShapelessRecipeBuilder.shapeless(items, RecipeCategory.MISC, Items.COPPER_INGOT)
-                .requires(Init.COPPER_NUGGET.get(), 9)
-                .unlockedBy("has_copper_nugget", has(Init.COPPER_NUGGET.get())).save(output);
-
-        ShapelessRecipeBuilder.shapeless(items, RecipeCategory.MISC, Items.EMERALD)
-                .requires(Init.EMERALD_NUGGET.get(), 9)
-                .unlockedBy("has_emerald_nugget", has(Items.EMERALD)).save(output);
-
-        //Ingots To Nuggets
-        ShapelessRecipeBuilder.shapeless(items, RecipeCategory.MISC, Init.EMERALD_NUGGET.get(), 9)
-                .requires(Items.EMERALD).unlockedBy("has_emerald", has(Items.EMERALD)).save(output);
-
-        ShapelessRecipeBuilder.shapeless(items, RecipeCategory.MISC, Init.DIAMOND_NUGGET.get(), 9)
-                .requires(Items.DIAMOND).unlockedBy("has_diamond", has(Items.DIAMOND)).save(output);
-
-        ShapelessRecipeBuilder.shapeless(items, RecipeCategory.MISC, Init.COPPER_NUGGET.get(), 9)
-                .requires(Items.COPPER_INGOT).unlockedBy("has_copper_ingot", has(Items.DIAMOND)).save(output);
-
-        ShapelessRecipeBuilder.shapeless(items, RecipeCategory.MISC, Init.NETHERITE_NUGGET.get(), 9)
-                .requires(Items.NETHERITE_INGOT).unlockedBy("has_netherite_ingot", has(Items.NETHERITE_INGOT)).save(output);
-
         bushsSeedRecipeProvider();
     }
 

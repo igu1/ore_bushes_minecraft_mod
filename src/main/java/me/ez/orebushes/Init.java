@@ -9,7 +9,10 @@ import me.ez.orebushes.Common.Bushes.OreBushEnd;
 import me.ez.orebushes.Common.Bushes.OreBushNether;
 import me.ez.orebushes.Common.Bushes.OreBushOverWorld;
 import net.minecraft.core.registries.Registries;
+import net.minecraft.network.chat.Component;
+import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.Item;
+import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.inventory.MenuType;
@@ -66,16 +69,6 @@ public class Init {
     private static DeferredItem<BushBlockItem> bushItem(String name, Supplier<? extends Block> block) {
         return ITEMS.registerItem(name, props -> new BushBlockItem(block.get(), props), Item.Properties::new);
     }
-
-    //Drops
-    public static final DeferredItem<Item> EMERALD_NUGGET = ITEMS.registerSimpleItem("emerald_nugget");
-
-    public static final DeferredItem<Item> DIAMOND_NUGGET = ITEMS.registerSimpleItem("diamond_nugget");
-
-    public static final DeferredItem<Item> NETHERITE_NUGGET = ITEMS.registerSimpleItem("netherite_nugget");
-
-    public static final DeferredItem<Item> COPPER_NUGGET = ITEMS.registerSimpleItem("copper_nugget");
-
 
     //--------------------------------------------------------------------------------
 
@@ -146,5 +139,21 @@ public class Init {
     public static final DeferredRegister<MenuType<?>> MENUS = DeferredRegister.create(Registries.MENU, Main.MOD_ID);
     public static final DeferredHolder<MenuType<?>, MenuType<BushHarvesterMenu>> BUSH_HARVESTER_MENU =
             MENUS.register("bushharvester", () -> IMenuTypeExtension.create(BushHarvesterMenu::new));
+
+    public static final DeferredRegister<CreativeModeTab> CREATIVE_TABS = DeferredRegister.create(Registries.CREATIVE_MODE_TAB, Main.MOD_ID);
+    public static final DeferredHolder<CreativeModeTab, CreativeModeTab> ORE_BUSHES_TAB = CREATIVE_TABS.register("ore_bushes",
+            () -> CreativeModeTab.builder()
+                    .title(Component.translatable("itemGroup.orebushes"))
+                    .icon(() -> new ItemStack(DIAMOND_BUSH_ITEM.get()))
+                    .displayItems(Init::addTabContents)
+                    .build());
+
+    /** Fills the Ore Bushes tab with the harvester and every seed. */
+    private static void addTabContents(CreativeModeTab.ItemDisplayParameters parameters, CreativeModeTab.Output output) {
+        output.accept(BUSH_HARVESTER_BLOCK_ITEM.get());
+        ITEMS.getEntries().forEach(holder -> {
+            if (holder.get() instanceof BushBlockItem) output.accept(holder.get());
+        });
+    }
 
 }

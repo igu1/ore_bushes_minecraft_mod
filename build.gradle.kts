@@ -52,6 +52,33 @@ tasks {
         dependsOn("stonecutterGenerate")
     }
 
+    // At runtime (from a jar) ${file.jarVersion} resolves to Implementation-Version.
+    // In a dev run FML reads the manifest from the resources folder instead, so
+    // processResources writes one; otherwise the Mod List shows "0.0NONE".
+    jar {
+        manifest {
+            attributes("Implementation-Version" to project.version)
+        }
+    }
+
+    named<ProcessResources>("processResources") {
+        val manifestFile = layout.buildDirectory.file("resources/main/META-INF/MANIFEST.MF")
+        val ver = project.version.toString()
+        doLast {
+            val f = manifestFile.get().asFile
+            f.parentFile.mkdirs()
+            f.writeText("Manifest-Version: 1.0\nImplementation-Version: $ver\n")
+        }
+    }
+
+    // The runs read resources from the projects folder, so make sure processResources
+    // runs before they start.
+    listOf("clientData", "client", "server").forEach { runName ->
+        named("prepare${runName.replaceFirstChar { it.uppercase() }}Run") {
+            dependsOn("processResources")
+        }
+    }
+
     register<Copy>("buildAndCollect") {
         group = "build"
         description = "Builds the NeoForge 26.1.2 jar and copies it into builds/26.1.2-neoforge/"

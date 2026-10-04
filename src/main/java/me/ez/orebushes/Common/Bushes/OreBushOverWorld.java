@@ -90,11 +90,11 @@ public class OreBushOverWorld extends AbstractModBushBlock {
         stackHashMap.put(1, Items.COAL.getDefaultInstance());
         stackHashMap.put(2, Items.IRON_NUGGET.getDefaultInstance());
         stackHashMap.put(3, Items.GOLD_NUGGET.getDefaultInstance());
-        stackHashMap.put(4, Init.EMERALD_NUGGET.get().getDefaultInstance());
+        stackHashMap.put(4, Items.EMERALD.getDefaultInstance());
         stackHashMap.put(5, Items.REDSTONE.getDefaultInstance());
         stackHashMap.put(6, Items.LAPIS_LAZULI.getDefaultInstance());
-        stackHashMap.put(7, Init.DIAMOND_NUGGET.get().getDefaultInstance());
-        stackHashMap.put(8, Init.COPPER_NUGGET.get().getDefaultInstance());
+        stackHashMap.put(7, Items.DIAMOND.getDefaultInstance());
+        stackHashMap.put(8, Items.COPPER_INGOT.getDefaultInstance());
         stackHashMap.put(9, Items.AMETHYST_SHARD.getDefaultInstance());
         stackHashMap.put(10, Items.EXPERIENCE_BOTTLE.getDefaultInstance());
         stackHashMap.put(11, Items.ECHO_SHARD.getDefaultInstance());

@@ -3,7 +3,7 @@
 mod.id = "orebushes"
 mod.name = "Ore Bushes"
 mod.group = "me.ez.orebushes"
-mod.version = "2.5"
+mod.version = "2.0.0"
 
 ["26.1.2"]
 # Mod compatibility range used in the mod metadata.
