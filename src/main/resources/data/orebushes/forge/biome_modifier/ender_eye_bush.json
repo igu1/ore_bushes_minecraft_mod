@@ -1,6 +1,0 @@
-{
-  "type": "forge:add_features",
-  "biomes": "#minecraft:is_end",
-  "features": "orebushes:ender_eye_bush_placed",
-  "step": "vegetal_decoration"
-}
