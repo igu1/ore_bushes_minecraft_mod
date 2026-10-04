@@ -1,11 +1,11 @@
 {
   "parent": "minecraft:recipes/root",
   "criteria": {
-    "has_block": {
+    "has_core": {
       "conditions": {
         "items": [
           {
-            "items": "minecraft:lapis_block"
+            "items": "minecraft:lapis_lazuli"
           }
         ]
       },
@@ -21,7 +21,7 @@
   "requirements": [
     [
       "has_the_recipe",
-      "has_block"
+      "has_core"
     ]
   ],
   "rewards": {

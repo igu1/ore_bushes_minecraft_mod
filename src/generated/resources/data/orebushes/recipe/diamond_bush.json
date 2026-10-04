@@ -2,16 +2,16 @@
   "type": "minecraft:crafting_shaped",
   "category": "misc",
   "key": {
-    "B": "minecraft:diamond_block",
+    "B": "minecraft:diamond",
+    "C": "minecraft:ender_pearl",
     "S": "minecraft:wheat_seeds"
   },
   "pattern": [
-    " B ",
-    " S ",
-    " B "
+    " C ",
+    "SBS",
+    " C "
   ],
   "result": {
-    "count": 2,
     "id": "orebushes:diamond_bush"
   }
 }

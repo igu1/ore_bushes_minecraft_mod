@@ -37,38 +37,65 @@ public class ModRecipeProvider extends RecipeProvider {
         bushsSeedRecipeProvider();
     }
 
-    /** Shape " B " / "SBS" / " B " where B is the resource block and S the starter seed. */
+    /**
+     * Seed recipe: shape " C " / "SBS" / " C ".
+     *
+     * <ul>
+     *   <li>{@code C} — a non-refundable rarity catalyst that scales with tier
+     *       (bone meal → amethyst shard → ender pearl → echo shard). You never get
+     *       it back, so rarer plants cost more to start.</li>
+     *   <li>{@code S} — the world root (wheat seeds / nether wart / chorus flower).</li>
+     *   <li>{@code B} — the resource itself, one item. Requiring the resource means
+     *       a bush can only sustain a resource you have already obtained, never
+     *       shortcut you to it.</li>
+     * </ul>
+     * Yields one seed: the plant then returns its seed when broken and keeps producing
+     * until its lifetime limit, so the catalyst is the only true cost.
+     */
     private void bushsSeedRecipeProvider() {
         for (ResourcePlantProfile profile : ResourcePlantProfile.values()) {
-            Item block = resourceBlock(profile);
+            Item core = resourceCore(profile);
             Item root = rootSeed(profile);
-            if (block == null || root == null) continue;
+            Item catalyst = catalyst(profile);
+            if (core == null || root == null || catalyst == null) continue;
             me.ez.orebushes.Common.Bushes.BushBlockItem seed = seedItem(profile);
-            ShapedRecipeBuilder.shaped(items, RecipeCategory.MISC, seed, 2)
-                    .define('B', block)
+            ShapedRecipeBuilder.shaped(items, RecipeCategory.MISC, seed, 1)
+                    .define('B', core)
                     .define('S', root)
-                    .pattern(" B ")
-                    .pattern(" S ")
-                    .pattern(" B ")
-                    .unlockedBy("has_block", has(block))
+                    .define('C', catalyst)
+                    .pattern(" C ")
+                    .pattern("SBS")
+                    .pattern(" C ")
+                    .unlockedBy("has_core", has(core))
                     .save(output);
         }
     }
 
-    private static Item resourceBlock(ResourcePlantProfile profile) {
+    /** Non-refundable progression catalyst, one tier rarer for each plant tier. */
+    private static Item catalyst(ResourcePlantProfile profile) {
+        return switch (profile.tier) {
+            case 1 -> Items.BONE_MEAL;
+            case 2 -> Items.AMETHYST_SHARD;
+            case 3 -> Items.ENDER_PEARL;
+            default -> Items.ECHO_SHARD;
+        };
+    }
+
+    /** The resource the plant produces; you must already own it to craft the seed. */
+    private static Item resourceCore(ResourcePlantProfile profile) {
         return switch (profile) {
-            case COAL -> Items.COAL_BLOCK;
-            case IRON -> Items.IRON_BLOCK;
-            case GOLD -> Items.GOLD_BLOCK;
-            case EMERALD -> Items.EMERALD_BLOCK;
-            case DIAMOND -> Items.DIAMOND_BLOCK;
-            case REDSTONE -> Items.REDSTONE_BLOCK;
-            case LAPIS -> Items.LAPIS_BLOCK;
-            case COPPER -> Items.COPPER_BLOCK;
-            case NETHERITE -> Items.NETHERITE_BLOCK;
-            case GLOWSTONE -> Items.GLOWSTONE;
-            case QUARTZ -> Items.QUARTZ_BLOCK;
-            case AMETHYST -> Items.AMETHYST_BLOCK;
+            case COAL -> Items.COAL;
+            case IRON -> Items.RAW_IRON;
+            case GOLD -> Items.RAW_GOLD;
+            case EMERALD -> Items.EMERALD;
+            case DIAMOND -> Items.DIAMOND;
+            case REDSTONE -> Items.REDSTONE;
+            case LAPIS -> Items.LAPIS_LAZULI;
+            case COPPER -> Items.RAW_COPPER;
+            case NETHERITE -> Items.NETHERITE_SCRAP;
+            case GLOWSTONE -> Items.GLOWSTONE_DUST;
+            case QUARTZ -> Items.QUARTZ;
+            case AMETHYST -> Items.AMETHYST_SHARD;
             case EXPERIENCE -> Items.EXPERIENCE_BOTTLE;
             case ECHO_SHARD -> Items.ECHO_SHARD;
             case GOLDEN_APPLE -> Items.GOLDEN_APPLE;

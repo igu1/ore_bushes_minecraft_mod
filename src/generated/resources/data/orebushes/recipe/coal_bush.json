@@ -2,16 +2,16 @@
   "type": "minecraft:crafting_shaped",
   "category": "misc",
   "key": {
-    "B": "minecraft:coal_block",
+    "B": "minecraft:coal",
+    "C": "minecraft:bone_meal",
     "S": "minecraft:wheat_seeds"
   },
   "pattern": [
-    " B ",
-    " S ",
-    " B "
+    " C ",
+    "SBS",
+    " C "
   ],
   "result": {
-    "count": 2,
     "id": "orebushes:coal_bush"
   }
 }

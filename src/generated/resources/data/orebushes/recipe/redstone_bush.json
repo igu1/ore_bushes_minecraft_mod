@@ -2,16 +2,16 @@
   "type": "minecraft:crafting_shaped",
   "category": "misc",
   "key": {
-    "B": "minecraft:redstone_block",
+    "B": "minecraft:redstone",
+    "C": "minecraft:amethyst_shard",
     "S": "minecraft:wheat_seeds"
   },
   "pattern": [
-    " B ",
-    " S ",
-    " B "
+    " C ",
+    "SBS",
+    " C "
   ],
   "result": {
-    "count": 2,
     "id": "orebushes:redstone_bush"
   }
 }

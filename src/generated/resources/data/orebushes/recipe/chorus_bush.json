@@ -3,15 +3,15 @@
   "category": "misc",
   "key": {
     "B": "minecraft:chorus_fruit",
+    "C": "minecraft:amethyst_shard",
     "S": "minecraft:chorus_flower"
   },
   "pattern": [
-    " B ",
-    " S ",
-    " B "
+    " C ",
+    "SBS",
+    " C "
   ],
   "result": {
-    "count": 2,
     "id": "orebushes:chorus_bush"
   }
 }

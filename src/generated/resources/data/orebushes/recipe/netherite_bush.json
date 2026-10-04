@@ -2,16 +2,16 @@
   "type": "minecraft:crafting_shaped",
   "category": "misc",
   "key": {
-    "B": "minecraft:netherite_block",
+    "B": "minecraft:netherite_scrap",
+    "C": "minecraft:echo_shard",
     "S": "minecraft:nether_wart"
   },
   "pattern": [
-    " B ",
-    " S ",
-    " B "
+    " C ",
+    "SBS",
+    " C "
   ],
   "result": {
-    "count": 2,
     "id": "orebushes:netherite_bush"
   }
 }

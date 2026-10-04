@@ -3,15 +3,15 @@
   "category": "misc",
   "key": {
     "B": "minecraft:golden_apple",
+    "C": "minecraft:echo_shard",
     "S": "minecraft:wheat_seeds"
   },
   "pattern": [
-    " B ",
-    " S ",
-    " B "
+    " C ",
+    "SBS",
+    " C "
   ],
   "result": {
-    "count": 2,
     "id": "orebushes:golden_apple_bush"
   }
 }
