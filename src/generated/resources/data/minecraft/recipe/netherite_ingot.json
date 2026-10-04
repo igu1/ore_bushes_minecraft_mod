@@ -1,0 +1,18 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "ingredients": [
+    "orebushes:netherite_nugget",
+    "orebushes:netherite_nugget",
+    "orebushes:netherite_nugget",
+    "orebushes:netherite_nugget",
+    "orebushes:netherite_nugget",
+    "orebushes:netherite_nugget",
+    "orebushes:netherite_nugget",
+    "orebushes:netherite_nugget",
+    "orebushes:netherite_nugget"
+  ],
+  "result": {
+    "id": "minecraft:netherite_ingot"
+  }
+}

@@ -14,8 +14,8 @@ import java.util.List;
 
 public class BushBlockItem extends BlockItem {
 
-    public BushBlockItem(Block block) {
-        super(block, new Item.Properties());
+    public BushBlockItem(Block block, Item.Properties properties) {
+        super(block, properties);
     }
 
     @Override

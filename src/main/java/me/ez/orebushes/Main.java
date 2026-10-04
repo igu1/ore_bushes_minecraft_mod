@@ -13,7 +13,6 @@ import net.neoforged.fml.config.ModConfig;
 import net.neoforged.fml.event.lifecycle.FMLClientSetupEvent;
 import net.neoforged.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.neoforged.fml.common.EventBusSubscriber;
-import net.neoforged.neoforge.common.NeoForge;
 import net.neoforged.neoforge.event.BuildCreativeModeTabContentsEvent;
 
 @Mod(Main.MOD_ID)
@@ -24,17 +23,17 @@ public class Main
 
     public Main(IEventBus modEventBus, ModContainer modContainer)
     {
-        Init.ITEMS.register(modEventBus);
+        // Blocks must register before items: the seed items wrap block DeferredHolders.
         Init.BUSHES.register(modEventBus);
         Init.BLOCKS.register(modEventBus);
         Init.BLOCK_ENTITY.register(modEventBus);
         Init.MENUS.register(modEventBus);
+        Init.ITEMS.register(modEventBus);
         PlantEffects.SOUNDS.register(modEventBus);
         PlantEffects.PARTICLES.register(modEventBus);
         modEventBus.addListener(this::addCreative);
         modEventBus.addListener(BushHarvesterBlockEntity::registerCapabilities);
         modContainer.registerConfig(ModConfig.Type.COMMON, Config.SPEC);
-        NeoForge.EVENT_BUS.register(this);
     }
 
     /** Adds the seeds and nuggets to the vanilla creative tabs (1.19.3+ style). */

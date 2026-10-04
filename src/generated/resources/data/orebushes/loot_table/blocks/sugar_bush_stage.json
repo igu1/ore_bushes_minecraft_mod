@@ -1,0 +1,321 @@
+{
+  "type": "minecraft:block",
+  "functions": [
+    {
+      "function": "minecraft:explosion_decay"
+    }
+  ],
+  "pools": [
+    {
+      "bonus_rolls": 0.0,
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "name": "orebushes:sugar_bush"
+        }
+      ],
+      "rolls": 1.0
+    },
+    {
+      "bonus_rolls": 0.0,
+      "conditions": [
+        {
+          "block": "orebushes:sugar_bush_stage",
+          "condition": "minecraft:block_state_property",
+          "properties": {
+            "age": "3",
+            "harvests": "0"
+          }
+        }
+      ],
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "name": "minecraft:sugar"
+        }
+      ],
+      "rolls": 1.0
+    },
+    {
+      "bonus_rolls": 0.0,
+      "conditions": [
+        {
+          "block": "orebushes:sugar_bush_stage",
+          "condition": "minecraft:block_state_property",
+          "properties": {
+            "age": "3",
+            "harvests": "1"
+          }
+        }
+      ],
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "name": "minecraft:sugar"
+        }
+      ],
+      "rolls": 1.0
+    },
+    {
+      "bonus_rolls": 0.0,
+      "conditions": [
+        {
+          "block": "orebushes:sugar_bush_stage",
+          "condition": "minecraft:block_state_property",
+          "properties": {
+            "age": "3",
+            "harvests": "2"
+          }
+        }
+      ],
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "name": "minecraft:sugar"
+        }
+      ],
+      "rolls": 1.0
+    },
+    {
+      "bonus_rolls": 0.0,
+      "conditions": [
+        {
+          "block": "orebushes:sugar_bush_stage",
+          "condition": "minecraft:block_state_property",
+          "properties": {
+            "age": "3",
+            "harvests": "3"
+          }
+        }
+      ],
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "name": "minecraft:sugar"
+        }
+      ],
+      "rolls": 1.0
+    },
+    {
+      "bonus_rolls": 0.0,
+      "conditions": [
+        {
+          "block": "orebushes:sugar_bush_stage",
+          "condition": "minecraft:block_state_property",
+          "properties": {
+            "age": "3",
+            "harvests": "4"
+          }
+        }
+      ],
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "name": "minecraft:sugar"
+        }
+      ],
+      "rolls": 1.0
+    },
+    {
+      "bonus_rolls": 0.0,
+      "conditions": [
+        {
+          "block": "orebushes:sugar_bush_stage",
+          "condition": "minecraft:block_state_property",
+          "properties": {
+            "age": "3",
+            "harvests": "5"
+          }
+        }
+      ],
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "name": "minecraft:sugar"
+        }
+      ],
+      "rolls": 1.0
+    },
+    {
+      "bonus_rolls": 0.0,
+      "conditions": [
+        {
+          "block": "orebushes:sugar_bush_stage",
+          "condition": "minecraft:block_state_property",
+          "properties": {
+            "age": "3",
+            "harvests": "6"
+          }
+        }
+      ],
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "name": "minecraft:sugar"
+        }
+      ],
+      "rolls": 1.0
+    },
+    {
+      "bonus_rolls": 0.0,
+      "conditions": [
+        {
+          "block": "orebushes:sugar_bush_stage",
+          "condition": "minecraft:block_state_property",
+          "properties": {
+            "age": "3",
+            "harvests": "7"
+          }
+        }
+      ],
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "name": "minecraft:sugar"
+        }
+      ],
+      "rolls": 1.0
+    },
+    {
+      "bonus_rolls": 0.0,
+      "conditions": [
+        {
+          "block": "orebushes:sugar_bush_stage",
+          "condition": "minecraft:block_state_property",
+          "properties": {
+            "age": "3",
+            "harvests": "8"
+          }
+        }
+      ],
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "name": "minecraft:sugar"
+        }
+      ],
+      "rolls": 1.0
+    },
+    {
+      "bonus_rolls": 0.0,
+      "conditions": [
+        {
+          "block": "orebushes:sugar_bush_stage",
+          "condition": "minecraft:block_state_property",
+          "properties": {
+            "age": "3",
+            "harvests": "9"
+          }
+        }
+      ],
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "name": "minecraft:sugar"
+        }
+      ],
+      "rolls": 1.0
+    },
+    {
+      "bonus_rolls": 0.0,
+      "conditions": [
+        {
+          "block": "orebushes:sugar_bush_stage",
+          "condition": "minecraft:block_state_property",
+          "properties": {
+            "age": "3",
+            "harvests": "10"
+          }
+        }
+      ],
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "name": "minecraft:sugar"
+        }
+      ],
+      "rolls": 1.0
+    },
+    {
+      "bonus_rolls": 0.0,
+      "conditions": [
+        {
+          "block": "orebushes:sugar_bush_stage",
+          "condition": "minecraft:block_state_property",
+          "properties": {
+            "age": "3",
+            "harvests": "11"
+          }
+        }
+      ],
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "name": "minecraft:sugar"
+        }
+      ],
+      "rolls": 1.0
+    },
+    {
+      "bonus_rolls": 0.0,
+      "conditions": [
+        {
+          "block": "orebushes:sugar_bush_stage",
+          "condition": "minecraft:block_state_property",
+          "properties": {
+            "age": "3",
+            "harvests": "12"
+          }
+        }
+      ],
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "name": "minecraft:sugar"
+        }
+      ],
+      "rolls": 1.0
+    },
+    {
+      "bonus_rolls": 0.0,
+      "conditions": [
+        {
+          "block": "orebushes:sugar_bush_stage",
+          "condition": "minecraft:block_state_property",
+          "properties": {
+            "age": "3",
+            "harvests": "13"
+          }
+        }
+      ],
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "name": "minecraft:sugar"
+        }
+      ],
+      "rolls": 1.0
+    },
+    {
+      "bonus_rolls": 0.0,
+      "conditions": [
+        {
+          "block": "orebushes:sugar_bush_stage",
+          "condition": "minecraft:block_state_property",
+          "properties": {
+            "age": "3",
+            "harvests": "14"
+          }
+        }
+      ],
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "name": "minecraft:sugar"
+        }
+      ],
+      "rolls": 1.0
+    }
+  ],
+  "random_sequence": "orebushes:blocks/sugar_bush_stage"
+}

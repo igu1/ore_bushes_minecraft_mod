@@ -27,10 +27,20 @@ public class OreBushEnd extends AbstractModBushBlock {
 
     private final int getItemByKey;
 
-    public OreBushEnd(int CloneItemKey) {
-        super(BlockBehaviour.Properties.ofFullCopy(Blocks.SWEET_BERRY_BUSH).lightLevel(state ->
-                state.getValue(AGE) == 3 && state.getValue(HARVESTS) < 4 && CloneItemKey == 5 ? 6 : 0));
+    public OreBushEnd(BlockBehaviour.Properties properties, int CloneItemKey) {
+        super(properties);
         this.getItemByKey = CloneItemKey;
+    }
+
+    /** Base properties for a variant; the deferred register applies the block id. */
+    public static BlockBehaviour.Properties createProperties(int CloneItemKey) {
+        return BlockBehaviour.Properties.ofFullCopy(Blocks.SWEET_BERRY_BUSH).lightLevel(state ->
+                state.getValue(AGE) == 3 && state.getValue(HARVESTS) < 4 && CloneItemKey == 5 ? 6 : 0);
+    }
+
+    /** Constructor used by {@link #codec()} when decoding a block definition. */
+    public OreBushEnd(int CloneItemKey) {
+        this(createProperties(CloneItemKey), CloneItemKey);
     }
 
     @Override

@@ -1,0 +1,18 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "ingredients": [
+    "orebushes:copper_nugget",
+    "orebushes:copper_nugget",
+    "orebushes:copper_nugget",
+    "orebushes:copper_nugget",
+    "orebushes:copper_nugget",
+    "orebushes:copper_nugget",
+    "orebushes:copper_nugget",
+    "orebushes:copper_nugget",
+    "orebushes:copper_nugget"
+  ],
+  "result": {
+    "id": "minecraft:copper_ingot"
+  }
+}

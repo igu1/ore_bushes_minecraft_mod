@@ -27,11 +27,21 @@ public class OreBushOverWorld extends AbstractModBushBlock {
 
     private final int getItemByKey;
 
-    public OreBushOverWorld(int CloneItemKey) {
-        super(BlockBehaviour.Properties.ofFullCopy(Blocks.SWEET_BERRY_BUSH).lightLevel(state ->
-                state.getValue(AGE) == 3 && state.getValue(HARVESTS) < (CloneItemKey == 10 ? 6 : 10)
-                        && (CloneItemKey == 5 || CloneItemKey == 9 || CloneItemKey == 10) ? 4 : 0));
+    public OreBushOverWorld(BlockBehaviour.Properties properties, int CloneItemKey) {
+        super(properties);
         this.getItemByKey = CloneItemKey;
+    }
+
+    /** Base properties for a variant; the deferred register applies the block id. */
+    public static BlockBehaviour.Properties createProperties(int CloneItemKey) {
+        return BlockBehaviour.Properties.ofFullCopy(Blocks.SWEET_BERRY_BUSH).lightLevel(state ->
+                state.getValue(AGE) == 3 && state.getValue(HARVESTS) < (CloneItemKey == 10 ? 6 : 10)
+                        && (CloneItemKey == 5 || CloneItemKey == 9 || CloneItemKey == 10) ? 4 : 0);
+    }
+
+    /** Constructor used by {@link #codec()} when decoding a block definition. */
+    public OreBushOverWorld(int CloneItemKey) {
+        this(createProperties(CloneItemKey), CloneItemKey);
     }
 
     @Override

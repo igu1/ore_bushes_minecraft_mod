@@ -27,11 +27,21 @@ public class OreBushNether extends AbstractModBushBlock {
 
     private final int getItemByKey;
 
-    public OreBushNether(int CloneItemKey) {
-        super(BlockBehaviour.Properties.ofFullCopy(Blocks.SWEET_BERRY_BUSH).lightLevel(state ->
-                state.getValue(AGE) == 3 && state.getValue(HARVESTS) < (CloneItemKey == 2 ? 10 : 6)
-                        && (CloneItemKey == 2 || CloneItemKey == 5) ? 8 : 0));
+    public OreBushNether(BlockBehaviour.Properties properties, int CloneItemKey) {
+        super(properties);
         this.getItemByKey = CloneItemKey;
+    }
+
+    /** Base properties for a variant; the deferred register applies the block id. */
+    public static BlockBehaviour.Properties createProperties(int CloneItemKey) {
+        return BlockBehaviour.Properties.ofFullCopy(Blocks.SWEET_BERRY_BUSH).lightLevel(state ->
+                state.getValue(AGE) == 3 && state.getValue(HARVESTS) < (CloneItemKey == 2 ? 10 : 6)
+                        && (CloneItemKey == 2 || CloneItemKey == 5) ? 8 : 0);
+    }
+
+    /** Constructor used by {@link #codec()} when decoding a block definition. */
+    public OreBushNether(int CloneItemKey) {
+        this(createProperties(CloneItemKey), CloneItemKey);
     }
 
     @Override

@@ -1,0 +1,17 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "B": "minecraft:quartz_block",
+    "S": "minecraft:nether_wart"
+  },
+  "pattern": [
+    " B ",
+    " S ",
+    " B "
+  ],
+  "result": {
+    "count": 2,
+    "id": "orebushes:quartz_bush"
+  }
+}

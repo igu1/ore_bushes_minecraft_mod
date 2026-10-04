@@ -13,8 +13,8 @@ import java.util.List;
 
 public class BushHarvesterBlockItem extends BlockItem {
 
-    public BushHarvesterBlockItem() {
-        super(Init.BUSH_HARVESTER.get(), new Item.Properties());
+    public BushHarvesterBlockItem(Item.Properties properties) {
+        super(Init.BUSH_HARVESTER.get(), properties);
     }
 
     @Override

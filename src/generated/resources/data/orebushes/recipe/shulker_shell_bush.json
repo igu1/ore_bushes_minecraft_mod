@@ -1,0 +1,17 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "B": "minecraft:shulker_shell",
+    "S": "minecraft:chorus_flower"
+  },
+  "pattern": [
+    " B ",
+    " S ",
+    " B "
+  ],
+  "result": {
+    "count": 2,
+    "id": "orebushes:shulker_shell_bush"
+  }
+}

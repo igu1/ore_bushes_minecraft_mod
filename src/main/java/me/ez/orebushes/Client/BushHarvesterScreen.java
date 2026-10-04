@@ -8,11 +8,8 @@ import net.minecraft.client.renderer.RenderPipelines;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.Identifier;
 import net.minecraft.world.entity.player.Inventory;
-import net.neoforged.api.distmarker.Dist;
-import net.neoforged.api.distmarker.OnlyIn;
 
 /** Ore Harvester themed screen: fully graphical, no text labels. */
-@OnlyIn(Dist.CLIENT)
 public class BushHarvesterScreen extends AbstractContainerScreen<BushHarvesterMenu> {
 
     private static final Identifier TEXTURE =

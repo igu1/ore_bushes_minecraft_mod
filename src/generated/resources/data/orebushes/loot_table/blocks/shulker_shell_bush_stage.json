@@ -1,0 +1,101 @@
+{
+  "type": "minecraft:block",
+  "functions": [
+    {
+      "function": "minecraft:explosion_decay"
+    }
+  ],
+  "pools": [
+    {
+      "bonus_rolls": 0.0,
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "name": "orebushes:shulker_shell_bush"
+        }
+      ],
+      "rolls": 1.0
+    },
+    {
+      "bonus_rolls": 0.0,
+      "conditions": [
+        {
+          "block": "orebushes:shulker_shell_bush_stage",
+          "condition": "minecraft:block_state_property",
+          "properties": {
+            "age": "3",
+            "harvests": "0"
+          }
+        }
+      ],
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "name": "minecraft:shulker_shell"
+        }
+      ],
+      "rolls": 1.0
+    },
+    {
+      "bonus_rolls": 0.0,
+      "conditions": [
+        {
+          "block": "orebushes:shulker_shell_bush_stage",
+          "condition": "minecraft:block_state_property",
+          "properties": {
+            "age": "3",
+            "harvests": "1"
+          }
+        }
+      ],
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "name": "minecraft:shulker_shell"
+        }
+      ],
+      "rolls": 1.0
+    },
+    {
+      "bonus_rolls": 0.0,
+      "conditions": [
+        {
+          "block": "orebushes:shulker_shell_bush_stage",
+          "condition": "minecraft:block_state_property",
+          "properties": {
+            "age": "3",
+            "harvests": "2"
+          }
+        }
+      ],
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "name": "minecraft:shulker_shell"
+        }
+      ],
+      "rolls": 1.0
+    },
+    {
+      "bonus_rolls": 0.0,
+      "conditions": [
+        {
+          "block": "orebushes:shulker_shell_bush_stage",
+          "condition": "minecraft:block_state_property",
+          "properties": {
+            "age": "3",
+            "harvests": "3"
+          }
+        }
+      ],
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "name": "minecraft:shulker_shell"
+        }
+      ],
+      "rolls": 1.0
+    }
+  ],
+  "random_sequence": "orebushes:blocks/shulker_shell_bush_stage"
+}
