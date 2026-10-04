@@ -1,7 +1,7 @@
 # NeoForge 26.1.2 port
 
 Status: **ported and building.** `./gradlew :26.1.2:buildAndCollect` produces
-`builds/26.1.2-neoforge/orebushes-2.5+26.1.2.jar`.
+`builds/26.1.2-neoforge/orebushes-3.0+26.1.2.jar`.
 
 > Requires **Java 25** (Minecraft 26.1 ships Java 25). The toolchain is resolved
 > automatically; set `JAVA_HOME=/usr/lib/jvm/java-25-openjdk-amd64` if needed.
