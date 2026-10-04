@@ -34,8 +34,6 @@ public class Main
         Init.ITEMS.register(modEventBus);
         PlantEffects.SOUNDS.register(modEventBus);
         PlantEffects.PARTICLES.register(modEventBus);
-        WorldGen.CONFIGURED_FEATURES.register(modEventBus);
-        WorldGen.PLACED_FEATURES.register(modEventBus);
         modEventBus.addListener(this::addCreative);
         modEventBus.addListener(BushHarvesterBlockEntity::registerCapabilities);
         modContainer.registerConfig(ModConfig.Type.COMMON, Config.SPEC);
