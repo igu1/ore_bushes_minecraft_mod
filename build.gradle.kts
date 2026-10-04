@@ -5,9 +5,9 @@ plugins {
 version = "${property("mod.version")}+${sc.current.version}"
 base.archivesName = property("mod.id") as String
 
-// Minecraft 1.21.x runs on Java 21.
+// Minecraft 26.1.x ships Java 25 to end users, so mods target Java 25.
 java {
-    toolchain.languageVersion = JavaLanguageVersion.of(21)
+    toolchain.languageVersion = JavaLanguageVersion.of(25)
     withSourcesJar()
 }
 
@@ -45,12 +45,12 @@ tasks {
 
     register<Copy>("buildAndCollect") {
         group = "build"
-        description = "Builds the NeoForge 1.21.8 jar and copies it into builds/1.21.8-neoforge/"
+        description = "Builds the NeoForge 26.1.2 jar and copies it into builds/26.1.2-neoforge/"
         from(layout.buildDirectory.dir("libs")) {
             include("*.jar")
             exclude("*-sources.jar", "*-dev.jar")
         }
-        into(rootProject.file("builds/1.21.8-neoforge"))
+        into(rootProject.file("builds/26.1.2-neoforge"))
         dependsOn("build")
     }
 }
